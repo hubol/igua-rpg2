@@ -31,11 +31,10 @@ export function scnNewBalltownArmorer() {
 }
 
 function enrichFishmonger(lvl: LvlType.NewBalltownArmorer) {
-    const { deliveries } = Rpg.flags.newBalltown.fishmonger;
-
+    const fishQuest = Rpg.quest("FishDelivery.Armorer");
     const fishObj = objFish.forArmorer().at(lvl.FishMarker).zIndexed(ZIndex.Entities);
 
-    if (deliveries.armorer === "delivered") {
+    if (fishQuest.everCompleted) {
         fishObj.show();
         lvl.IguanaNpc.at(lvl.Fishmonger);
     }
@@ -44,7 +43,7 @@ function enrichFishmonger(lvl: LvlType.NewBalltownArmorer) {
         obj.attributes = TerrainAttributes.Decorative
     );
 
-    if (deliveries.armorer !== "arrived") {
+    if (fishQuest.flags.position !== "arrived") {
         lvl.Fishmonger.destroy();
         return;
     }
@@ -108,16 +107,18 @@ function enrichFishmonger(lvl: LvlType.NewBalltownArmorer) {
 
         Cutscene.setCurrentSpeaker(lvl.IguanaNpc);
         yield* show("Happy...! Happy...! Happy...!", "Thank you so much for arranging the delivery of the fish.");
-        yield* DramaQuests.complete("NewBalltown.Armorer.ReceivedFish");
+        yield* DramaQuests.complete(fishQuest);
         yield* show("You are cool.");
 
-        deliveries.armorer = "delivered";
+        fishQuest.flags.position = null;
     });
 }
 
 function enrichArmorer(lvl: LvlType.NewBalltownArmorer) {
+    const fishQuest = Rpg.quest("FishDelivery.Armorer");
+
     lvl.IguanaNpc.mixin(mxnCutscene, function* () {
-        const delivered = Rpg.flags.newBalltown.fishmonger.deliveries.armorer === "delivered";
+        const delivered = fishQuest.everCompleted;
 
         if (delivered) {
             yield* show("Fishy, fishy...");
@@ -133,7 +134,7 @@ function enrichArmorer(lvl: LvlType.NewBalltownArmorer) {
                 return;
             }
 
-            if (Rpg.flags.newBalltown.armorer.toldPlayerAboutDesireForFish) {
+            if (fishQuest.flags.toldPlayerAboutDesire) {
                 yield* show("It looks nice with the water in it.", "But it would look spectacular with a fish.");
             }
             else {
@@ -142,7 +143,7 @@ function enrichArmorer(lvl: LvlType.NewBalltownArmorer) {
                 yield* show(
                     "Believe me, there's a whole lot more where that came from if you can get me a fish to live in the aquarium!",
                 );
-                Rpg.flags.newBalltown.armorer.toldPlayerAboutDesireForFish = true;
+                fishQuest.flags.toldPlayerAboutDesire = true;
             }
         }
         else if (result === 2) {

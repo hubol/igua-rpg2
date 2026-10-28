@@ -39,36 +39,53 @@ function enrichAquarium(lvl: LvlType.NewBalltownFishmonger) {
 
 function enrichFishmonger(lvl: LvlType.NewBalltownFishmonger) {
     const { fishObjs } = enrichAquarium(lvl);
-    const { deliveries } = Rpg.flags.newBalltown.fishmonger;
 
     const desiredEquipmentId: DataEquipment.Id = "FishFood";
 
     const rpgQuest = {
         homunuculus: Rpg.quest("FishDelivery.HomunculusWater"),
         ringer: Rpg.quest("FishDelivery.Ringer"),
+        armorer: Rpg.quest("FishDelivery.Armorer"),
     };
 
-    function getFishState(quest: RpgQuest<"FishDelivery.HomunculusWater" | "FishDelivery.Ringer">) {
-        const isHere = !Rpg.inventory.has(quest.data.items.fishKeyItem) && !quest.everCompleted;
+    type RpgFishQuest =
+        | RpgQuest<"FishDelivery.HomunculusWater">
+        | RpgQuest<"FishDelivery.Ringer">
+        | RpgQuest<"FishDelivery.Armorer">;
+
+    function isAssistedDeliveryQuest(quest: RpgFishQuest): quest is RpgQuest<"FishDelivery.Armorer"> {
+        return "position" in quest.flags;
+    }
+
+    function getState(quest: RpgFishQuest) {
+        const isFishHere =
+            (isAssistedDeliveryQuest(quest) ? !quest.flags.position : !Rpg.inventory.has(quest.data.items.fishKeyItem))
+            && !quest.everCompleted;
+
+        const isFishmongerHere = isAssistedDeliveryQuest(quest)
+            ? (quest.flags.position === null || quest.everCompleted)
+            : true;
+
         return {
-            isHere,
-            canBeTakenForDelivery: isHere && quest.flags.toldPlayerAboutDesire,
+            isFishHere,
+            isFishmongerHere,
+            canFishBeTakenForDelivery: isFishHere && quest.flags.toldPlayerAboutDesire,
         };
     }
 
-    if (deliveries.armorer) {
+    if (!getState(rpgQuest.armorer).isFishHere) {
         fishObjs[0].destroy();
     }
 
-    if (!getFishState(rpgQuest.ringer).isHere) {
+    if (!getState(rpgQuest.ringer).isFishHere) {
         fishObjs[1].destroy();
     }
 
-    if (!getFishState(rpgQuest.homunuculus).isHere) {
+    if (!getState(rpgQuest.homunuculus).isFishHere) {
         fishObjs[2].destroy();
     }
 
-    if (deliveries.armorer && deliveries.armorer !== "delivered") {
+    if (Object.values(rpgQuest).some(quest => !getState(quest).isFishmongerHere)) {
         lvl.Fishmonger.destroy();
         return;
     }
@@ -92,14 +109,13 @@ function enrichFishmonger(lvl: LvlType.NewBalltownFishmonger) {
         else if (result === 1) {
             const fishRecipient = yield* ask(
                 "You want a fish delivered? That's great! Who wants a fish?",
-                Rpg.flags.newBalltown.armorer.toldPlayerAboutDesireForFish
-                    && !deliveries.armorer
+                getState(rpgQuest.armorer).canFishBeTakenForDelivery
                     ? DataNpcPersona.manifest.NewBalltownArmorer.name
                     : null,
-                getFishState(rpgQuest.ringer).canBeTakenForDelivery
+                getState(rpgQuest.ringer).canFishBeTakenForDelivery
                     ? DataNpcPersona.manifest.CloudHouseRinger.name
                     : null,
-                getFishState(rpgQuest.homunuculus).canBeTakenForDelivery
+                getState(rpgQuest.homunuculus).canFishBeTakenForDelivery
                     ? DataHomunculus.manifest.Water.name
                     : null,
                 "I don't know",
@@ -151,7 +167,7 @@ function enrichFishmonger(lvl: LvlType.NewBalltownFishmonger) {
                     yield* show("See you outside!");
                     yield* lvl.Fishmonger.walkTo(lvl.Door.x + 30);
                     DramaMisc.departRoomViaDoor(lvl.Fishmonger);
-                    Rpg.flags.newBalltown.fishmonger.deliveries.armorer = "ready";
+                    rpgQuest.armorer.flags.position = "outside";
                 }
                 else {
                     yield* show("Okay, let me know when you are ready!");

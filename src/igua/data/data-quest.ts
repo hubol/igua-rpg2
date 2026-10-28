@@ -11,15 +11,6 @@ export namespace DataQuest {
     export const { manifest, getById } = DataLib.create(
         "DataQuest",
         {
-            "NewBalltown.Armorer.ReceivedFish": {
-                items: null,
-                flags: null,
-                reward: {
-                    countCompletions: "once",
-                    kind: "single",
-                    drop: { kind: "potion", id: "AttributeStrengthUp" },
-                },
-            },
             "NewBalltown.Fanatic.FruitDelivery": {
                 items: null,
                 flags: {
@@ -415,6 +406,18 @@ export namespace DataQuest {
                         { kind: "key_item", id: "StaffForest" },
                         { kind: "key_item", id: "StaffWater" },
                     ],
+                },
+            },
+            "FishDelivery.Armorer": {
+                items: null,
+                flags: {
+                    position: Null<"outside" | "arrived">(),
+                    toldPlayerAboutDesire: false,
+                },
+                reward: {
+                    countCompletions: "once",
+                    kind: "single",
+                    drop: { kind: "potion", id: "AttributeStrengthUp" },
                 },
             },
             "FishDelivery.Ringer": {

@@ -78,14 +78,8 @@ export function getInitialRpgProgress() {
                 approvedForTeachingBy: Null<DataNpcPersona.Id>(),
             },
             newBalltown: {
-                armorer: {
-                    toldPlayerAboutDesireForFish: false,
-                },
                 fishmonger: {
                     deliveredEquipmentsCount: 0,
-                    deliveries: {
-                        armorer: Null<"ready" | "arrived" | "delivered">(),
-                    },
                 },
             },
             outskirts: {

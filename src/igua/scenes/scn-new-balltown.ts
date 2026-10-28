@@ -325,14 +325,14 @@ That's worth ${count} credit(s). Do you want to deposit them?`)
 
 function enrichFishmongerDeliveryToArmorer(lvl: LvlType.NewBalltown) {
     const expectedCheckpointName: keyof LvlType.NewBalltown = "fromFishmonger";
-    const { deliveries } = Rpg.flags.newBalltown.fishmonger;
+    const fishQuest = Rpg.quest("FishDelivery.Armorer");
 
     if (
-        deliveries.armorer !== "ready"
+        fishQuest.flags.position !== "outside"
         || Rpg.character.position.checkpointName !== expectedCheckpointName
     ) {
-        if (deliveries.armorer === "ready") {
-            deliveries.armorer = null;
+        if (fishQuest.flags.position === "outside") {
+            fishQuest.flags.position = null;
         }
         lvl.Fishmonger.destroy();
         return;
@@ -424,7 +424,7 @@ function enrichFishmongerDeliveryToArmorer(lvl: LvlType.NewBalltown) {
             yield* self.walkTo(lvl.ArmorerDoor.x);
             Cutscene.play(function* () {
                 yield* show("I made it!", "See you inside");
-                deliveries.armorer = "arrived";
+                fishQuest.flags.position = "arrived";
                 DramaMisc.departRoomViaDoor(self);
             }, { speaker: lvl.Fishmonger, camera: { start: "pan_to_speaker" } });
         }).show();
@@ -467,7 +467,7 @@ function enrichFishmongerDeliveryToArmorer(lvl: LvlType.NewBalltown) {
                 yield sleep(500);
                 DramaMisc.departRoomViaDoor(lvl.Fishmonger);
 
-                deliveries.armorer = null;
+                fishQuest.flags.position = null;
             }, { speaker: lvl.Fishmonger, camera: { start: "pan_to_speaker" } });
         });
     }, { speaker: lvl.Fishmonger });
