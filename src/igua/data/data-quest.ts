@@ -1,4 +1,5 @@
 import { Integer } from "../../lib/math/number-alias-types";
+import { Check } from "../../lib/types/check";
 import { Null } from "../../lib/types/null";
 import { RpgEconomy } from "../rpg/rpg-economy";
 import { RpgFoodOrder } from "../rpg/rpg-food-order";
@@ -11,6 +12,7 @@ export namespace DataQuest {
         "DataQuest",
         {
             "NewBalltown.Armorer.ReceivedFish": {
+                items: null,
                 flags: null,
                 reward: {
                     countCompletions: "once",
@@ -19,6 +21,7 @@ export namespace DataQuest {
                 },
             },
             "NewBalltown.Fanatic.FruitDelivery": {
+                items: null,
                 flags: {
                     preferredFruitPocketId: Null<RpgPocket.Item>(),
                 },
@@ -36,6 +39,7 @@ export namespace DataQuest {
                 },
             },
             "NewBalltown.Homeowner.EnemyPresenceCleared": {
+                items: null,
                 flags: null,
                 reward: {
                     countCompletions: "once",
@@ -44,6 +48,7 @@ export namespace DataQuest {
                 },
             },
             "NewBalltown.RisingFace": {
+                items: null,
                 flags: null,
                 reward: {
                     countCompletions: "once",
@@ -52,6 +57,7 @@ export namespace DataQuest {
                 },
             },
             "NewBalltown.Tunneler.ReceivedOrder": {
+                items: null,
                 flags: {
                     foodOrder: Null<{ seed: Integer; difficulty: RpgFoodOrder.Difficulty }>(),
                 },
@@ -68,6 +74,7 @@ export namespace DataQuest {
                 },
             },
             "StrangeMarket.Restaurant.EnemyPresenceCleared": {
+                items: null,
                 flags: null,
                 reward: {
                     kind: "nothing",
@@ -75,6 +82,7 @@ export namespace DataQuest {
                 },
             },
             BeetGod: {
+                items: null,
                 flags: null,
                 reward: {
                     kind: "in_order",
@@ -89,6 +97,7 @@ export namespace DataQuest {
                 },
             },
             WheatGod: {
+                items: null,
                 flags: null,
                 reward: {
                     kind: "in_order",
@@ -103,6 +112,7 @@ export namespace DataQuest {
                 },
             },
             GreatTower: {
+                items: null,
                 flags: null,
                 reward: {
                     kind: "in_order",
@@ -118,6 +128,7 @@ export namespace DataQuest {
                 },
             },
             "GreatTower.EnemyHearts": {
+                items: null,
                 flags: null,
                 reward: {
                     countCompletions: "once",
@@ -126,6 +137,7 @@ export namespace DataQuest {
                 },
             },
             "GreatTower.EfficientHome.Ringer.ReceivedFish": {
+                items: null,
                 flags: null,
                 reward: {
                     kind: "nothing",
@@ -133,6 +145,7 @@ export namespace DataQuest {
                 },
             },
             "GreatTower.EfficientHome.NeatFreak.DidntWearEquipment": {
+                items: null,
                 flags: null,
                 reward: {
                     countCompletions: "once",
@@ -141,6 +154,7 @@ export namespace DataQuest {
                 },
             },
             "GreatTower.EfficientHome.Snail.Defeated": {
+                items: null,
                 flags: null,
                 reward: {
                     countCompletions: "once",
@@ -149,6 +163,7 @@ export namespace DataQuest {
                 },
             },
             "GreatTower.Balcony.Fisherman.Appeased": {
+                items: null,
                 flags: null,
                 reward: {
                     countCompletions: "once",
@@ -157,6 +172,7 @@ export namespace DataQuest {
                 },
             },
             "DarkEvilHole.Rescue": {
+                items: null,
                 flags: null,
                 reward: {
                     kind: "repeat",
@@ -164,6 +180,7 @@ export namespace DataQuest {
                 },
             },
             SimpleSecretHappy: {
+                items: null,
                 flags: null,
                 reward: {
                     countCompletions: "once",
@@ -172,6 +189,7 @@ export namespace DataQuest {
                 },
             },
             "RaceTrack.WonRace": {
+                items: null,
                 flags: null,
                 reward: {
                     kind: "repeat",
@@ -179,6 +197,7 @@ export namespace DataQuest {
                 },
             },
             "RaceTrack.MysteriousIguana": {
+                items: null,
                 flags: null,
                 reward: {
                     countCompletions: "once",
@@ -187,6 +206,7 @@ export namespace DataQuest {
                 },
             },
             "ErrorRecoveryRoom.Hubol": {
+                items: null,
                 flags: null,
                 reward: {
                     kind: "repeat",
@@ -194,6 +214,7 @@ export namespace DataQuest {
                 },
             },
             "VaseInhabitant.Saved": {
+                items: null,
                 flags: null,
                 reward: {
                     countCompletions: "once",
@@ -202,6 +223,7 @@ export namespace DataQuest {
                 },
             },
             "VaseInhabitant.CombinedCactusFruits": {
+                items: null,
                 flags: null,
                 reward: {
                     kind: "repeat",
@@ -209,6 +231,7 @@ export namespace DataQuest {
                 },
             },
             "Grotto.PocketTeacher.ReceivedManyPocketItems": {
+                items: null,
                 flags: null,
                 reward: {
                     countCompletions: "once",
@@ -217,6 +240,7 @@ export namespace DataQuest {
                 },
             },
             "Grotto.QuestTeacher.GuessedSongsCorrectly": {
+                items: null,
                 flags: null,
                 reward: {
                     countCompletions: "once",
@@ -225,6 +249,7 @@ export namespace DataQuest {
                 },
             },
             "FallenBot.PerfectScore": {
+                items: null,
                 flags: null,
                 reward: {
                     countCompletions: "always",
@@ -233,6 +258,7 @@ export namespace DataQuest {
                 },
             },
             "SuggestiveCavern.SimpleBot.Hair": {
+                items: null,
                 flags: null,
                 reward: {
                     kind: "in_order",
@@ -247,6 +273,7 @@ export namespace DataQuest {
                 },
             },
             "MishaHouse.DestroyedComputer": {
+                items: null,
                 flags: null,
                 reward: {
                     countCompletions: "once",
@@ -255,6 +282,7 @@ export namespace DataQuest {
                 },
             },
             "MishaHouse.WarmedWaterHeater": {
+                items: null,
                 flags: {
                     pilotFlameLit: false,
                 },
@@ -265,6 +293,7 @@ export namespace DataQuest {
                 },
             },
             "MishaHouse.Birthday": {
+                items: null,
                 flags: {
                     readCalendar: false,
                     spokeWithBaker: false,
@@ -278,6 +307,7 @@ export namespace DataQuest {
                 },
             },
             "MountFlop.Flower": {
+                items: null,
                 flags: null,
                 reward: {
                     countCompletions: "once",
@@ -286,6 +316,7 @@ export namespace DataQuest {
                 },
             },
             "MountFlop.Boxer": {
+                items: null,
                 flags: null,
                 reward: {
                     kind: "in_order",
@@ -299,6 +330,7 @@ export namespace DataQuest {
                 },
             },
             "MountFlop.Cloud": {
+                items: null,
                 flags: null,
                 reward: {
                     countCompletions: "once",
@@ -307,6 +339,7 @@ export namespace DataQuest {
                 },
             },
             "PlateauIndustry.SoupMaker.AteSoup": {
+                items: null,
                 flags: {
                     removedOutOfOrderSign: false,
                 },
@@ -316,6 +349,7 @@ export namespace DataQuest {
                 },
             },
             "FoodSafetyDeparment.MetalDiscovered": {
+                items: null,
                 flags: null,
                 reward: {
                     kind: "in_order",
@@ -329,6 +363,7 @@ export namespace DataQuest {
                 },
             },
             "IntelligenceTower.DefeatMidboss0": {
+                items: null,
                 flags: null,
                 reward: {
                     kind: "single",
@@ -337,6 +372,7 @@ export namespace DataQuest {
                 },
             },
             "OhioUniversity.Bouncer.ReachedTop": {
+                items: null,
                 flags: {
                     y: Null<Integer>(),
                 },
@@ -346,6 +382,7 @@ export namespace DataQuest {
                 },
             },
             "SinSwamp.FunHouse": {
+                items: null,
                 flags: null,
                 reward: {
                     kind: "single",
@@ -354,6 +391,7 @@ export namespace DataQuest {
                 },
             },
             "DungeonBones.Researcher": {
+                items: null,
                 flags: {
                     toldPlayer: false,
                 },
@@ -364,6 +402,7 @@ export namespace DataQuest {
                 },
             },
             "Indiana.HallOfDoors": {
+                items: null,
                 flags: null,
                 reward: {
                     kind: "single",
@@ -375,6 +414,7 @@ export namespace DataQuest {
                 },
             },
             "Ohio.HallOfDoors": {
+                items: null,
                 flags: null,
                 reward: {
                     kind: "single",
@@ -385,20 +425,38 @@ export namespace DataQuest {
                     ],
                 },
             },
+            "FishDelivery.HomunculusWater": {
+                items: {
+                    fishKeyItem: { kind: "key_item", id: "HomunculusWaterFish" },
+                },
+                flags: {
+                    toldPlayerAboutDesire: false,
+                },
+                reward: {
+                    kind: "single",
+                    countCompletions: "once",
+                    // TODO something nice
+                    drop: [],
+                },
+            },
             __Fallback__: {
+                items: null,
                 flags: null,
                 reward: {
                     kind: "nothing",
                     countCompletions: "once",
                 },
             },
-        } satisfies Record<string, Model<unknown>>,
+        } satisfies Record<string, Model<unknown, ItemsManifest>>,
     );
 
-    export interface Model<TFlags> {
+    export interface Model<TFlags, TItems extends ItemsManifest> {
+        items: TItems;
         flags: TFlags | null;
         reward: Reward;
     }
+
+    type ItemsManifest = Record<string, RpgInventory.Item> | null;
 
     export namespace Reward {
         export type Drop = Drop.Type | Drop.Type[];
@@ -468,4 +526,6 @@ export namespace DataQuest {
 
     export type Id = DataLib.Id<typeof manifest>;
     export type Flags<TId> = TId extends Id ? typeof manifest[TId]["flags"] : never;
+    export type Items<TId> = TId extends Id ? Readonly<typeof manifest[TId]["items"]> : null;
+    export type ItemId<TId> = keyof Items<TId>;
 }

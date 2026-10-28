@@ -6,6 +6,7 @@ import { sleep } from "../../lib/game-engine/routines/sleep";
 import { range } from "../../lib/range";
 import { Jukebox } from "../core/igua-audio";
 import { DataEquipment } from "../data/data-equipment";
+import { DataHomunculus } from "../data/data-homunculus";
 import { DataNpcPersona } from "../data/data-npc-persona";
 import { DramaInventory } from "../drama/drama-inventory";
 import { DramaMisc } from "../drama/drama-misc";
@@ -26,9 +27,7 @@ function enrichAquarium(lvl: LvlType.NewBalltownFishmonger) {
     const fishObjs = [
         objFish.forArmorer().at(lvl.Fish0).show(),
         objFish.forRinger().at(lvl.Fish1).show(),
-        ...[lvl.Fish2].map(markerObj =>
-            objFish(markerObj.x * 9999 + markerObj.y * 8888 + 800_903).at(markerObj).show()
-        ),
+        objFish.forHomunculusWater().at(lvl.Fish2).show(),
     ];
 
     lvl.WaterLineTop.mixin(mxnBoilPivot);
@@ -43,12 +42,20 @@ function enrichFishmonger(lvl: LvlType.NewBalltownFishmonger) {
 
     const desiredEquipmentId: DataEquipment.Id = "FishFood";
 
+    const rpgQuest = {
+        homunuculus: Rpg.quest("FishDelivery.HomunculusWater"),
+    };
+
     if (deliveries.armorer) {
         fishObjs[0].destroy();
     }
 
     if (deliveries.ringer) {
         fishObjs[1].destroy();
+    }
+
+    if (Rpg.inventory.has(rpgQuest.homunuculus.data.items.fishKeyItem)) {
+        fishObjs[2].destroy();
     }
 
     if (deliveries.armorer && deliveries.armorer !== "delivered") {
@@ -83,12 +90,30 @@ function enrichFishmonger(lvl: LvlType.NewBalltownFishmonger) {
                     && !deliveries.ringer
                     ? DataNpcPersona.manifest.CloudHouseRinger.name
                     : null,
+                rpgQuest.homunuculus.flags.toldPlayerAboutDesire
+                    && !rpgQuest.homunuculus.everCompleted
+                    && !Rpg.inventory.has(rpgQuest.homunuculus.data.items.fishKeyItem)
+                    ? DataHomunculus.manifest.Water.name
+                    : null,
                 "I don't know",
             );
 
-            if (fishRecipient === 2) {
+            if (fishRecipient === 3) {
                 yield* show("Oh, okay. Let me know if you find an interested party!");
                 return;
+            }
+
+            if (fishRecipient === 2) {
+                lvl.Fishmonger.speed.y = -1.5;
+                yield sleep(500);
+                yield* show(
+                    `The ${DataHomunculus.manifest.Water.name} wants a fish?! Great goodness!`,
+                    "Take this fishy-fishy quickly!",
+                );
+
+                yield* dramaTakeFish(fishObjs[2]);
+
+                yield* DramaInventory.receiveItems([rpgQuest.homunuculus.data.items.fishKeyItem]);
             }
 
             if (fishRecipient === 1) {

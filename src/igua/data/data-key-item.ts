@@ -72,7 +72,7 @@ export namespace DataKeyItem {
                 description: "Fish for Ding Ding Saudah, the eccentric in apartment 2.",
                 texture: Tx.Collectibles.Key.DingDingFish,
             },
-            FishHomunculusWater: {
+            HomunculusWaterFish: {
                 name: "Homunculus of Water's Fish",
                 description: "Fish for the Homunculus of Water.",
                 texture: null,

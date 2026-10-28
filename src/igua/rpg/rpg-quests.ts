@@ -35,10 +35,17 @@ namespace RpgQuests {
 export class RpgQuest<TId extends DataQuest.Id | unknown = unknown> {
     constructor(
         private readonly _state: RpgQuest.State<DataQuest.Flags<TId>>,
-        private readonly _data: DataQuest.Model<DataQuest.Flags<TId>>,
+        private readonly _data: DataQuest.Model<DataQuest.Flags<TId>, DataQuest.Items<TId>>,
         private readonly _reward: RpgExperienceRewarder,
     ) {
     }
+
+    readonly data = (() => {
+        const self = this;
+        return ({
+            items: self._data.items,
+        });
+    })();
 
     get flags(): DataQuest.Flags<TId> {
         return this._state.flags;

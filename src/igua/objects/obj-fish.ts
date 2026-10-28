@@ -83,3 +83,4 @@ export function objFish(seed: Integer) {
 
 objFish.forArmorer = () => objFish(5316007);
 objFish.forRinger = () => objFish(0x4c01e9);
+objFish.forHomunculusWater = () => objFish(0x999888bb1);

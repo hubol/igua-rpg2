@@ -206,6 +206,17 @@
           "originX": 4,
           "originY": 4,
           "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "Marker",
+          "id": 19,
+          "_eid": "73148747",
+          "x": 432,
+          "y": 74,
+          "originX": 8,
+          "originY": 8,
+          "tint": "#00ff00",
+          "values": {"name": "FishMarker", "depth": 0}
         }
       ]
     },
@@ -596,6 +607,58 @@
           "originY": 0,
           "tint": "#ffffff",
           "values": {"name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "Block",
+          "id": 8,
+          "_eid": "93117141",
+          "x": 376,
+          "y": 48,
+          "width": 104,
+          "height": 8,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#ff0000",
+          "values": {"name": "FishBlock", "depth": 0, "visible": false}
+        },
+        {
+          "name": "Block",
+          "id": 9,
+          "_eid": "93117141",
+          "x": 379,
+          "y": 56,
+          "width": 16,
+          "height": 48,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#ff0000",
+          "values": {"name": "FishBlock", "depth": 0, "visible": false}
+        },
+        {
+          "name": "Block",
+          "id": 10,
+          "_eid": "93117141",
+          "x": 467,
+          "y": 56,
+          "width": 16,
+          "height": 48,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#ff0000",
+          "values": {"name": "FishBlock", "depth": 0, "visible": false}
+        },
+        {
+          "name": "Block",
+          "id": 11,
+          "_eid": "93117141",
+          "x": 376,
+          "y": 93,
+          "width": 104,
+          "height": 8,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#ff0000",
+          "values": {"name": "FishBlock", "depth": 0, "visible": false}
         }
       ]
     },
@@ -620,6 +683,71 @@
       "gridCellsX": 64,
       "gridCellsY": 35,
       "decals": [
+        {
+          "x": 438,
+          "y": 81,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 180,
+          "tint": "#5e76ff",
+          "texture": "effects/watery rect 0.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": "WaterGroup"
+        },
+        {
+          "x": 430,
+          "y": 76,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#77c2ff",
+          "texture": "effects/watery rect 0.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": "WaterGroup"
+        },
+        {
+          "x": 463,
+          "y": 92,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffffff",
+          "texture": "effects/bubbles 0.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": "WaterGroup"
+        },
+        {
+          "x": 399,
+          "y": 67,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 90,
+          "tint": "#ffffff",
+          "texture": "effects/bubbles 0.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": "WaterGroup"
+        },
+        {
+          "x": 450,
+          "y": 68,
+          "scaleX": 1,
+          "scaleY": -1,
+          "rotation": 90,
+          "tint": "#ffffff",
+          "texture": "effects/bubbles 0.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": "WaterGroup"
+        },
         {
           "x": 272,
           "y": 376,
