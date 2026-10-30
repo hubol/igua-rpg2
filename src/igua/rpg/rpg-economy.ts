@@ -42,7 +42,7 @@ export namespace RpgEconomy {
             valuables: ["valuable", "valuables"],
             bone_dusts: ["bone dust", "bone dusts"],
             rescue_credits: ["rescue cash", "rescue cash"],
-            homunculus_bucks: ["homunculus buck", "homunculus bucks"],
+            homunculus_bucks: ["homunc-buck", "homunc-bucks"],
         };
 
         export function getPluralizedNoun(price: Integer, currencyId: Currency.Id) {

@@ -637,30 +637,52 @@ export namespace DataShop {
             },
             // TODO all these shops need cool stuff!
             HomunculusEarth: {
-                stocks: [],
+                stocks: [
+                    {
+                        product: { kind: "key_item", id: "SuperEquipmentGlue" },
+                        initialQuantity: 1,
+                        price: { currency: "homunculus_bucks", initial: 1, deltaSold: 0 },
+                    },
+                ],
             },
             HomunculusFlame: {
                 stocks: [
                     {
                         product: { kind: "equipment", id: "MeleeOverheat", level: 1 },
-                        initialQuantity: 6,
+                        initialQuantity: 1,
                         price: { currency: "homunculus_bucks", initial: 1, deltaSold: 0 },
                     },
                     {
                         product: { kind: "equipment", id: "SpellHotPineCone", level: 1 },
-                        initialQuantity: 6,
+                        initialQuantity: 1,
+                        price: { currency: "homunculus_bucks", initial: 1, deltaSold: 0 },
+                    },
+                    {
+                        product: { kind: "key_item", id: "SuperEquipmentGlue" },
+                        initialQuantity: 1,
                         price: { currency: "homunculus_bucks", initial: 1, deltaSold: 0 },
                     },
                 ],
             },
             HomunculusForest: {
-                stocks: [],
+                stocks: [
+                    {
+                        product: { kind: "key_item", id: "SuperEquipmentGlue" },
+                        initialQuantity: 1,
+                        price: { currency: "homunculus_bucks", initial: 1, deltaSold: 0 },
+                    },
+                ],
             },
             HomunculusSkies: {
                 stocks: [
                     {
                         product: { kind: "equipment", id: "DoubleJump", level: 1 },
-                        initialQuantity: 6,
+                        initialQuantity: 1,
+                        price: { currency: "homunculus_bucks", initial: 1, deltaSold: 0 },
+                    },
+                    {
+                        product: { kind: "key_item", id: "SuperEquipmentGlue" },
+                        initialQuantity: 1,
                         price: { currency: "homunculus_bucks", initial: 1, deltaSold: 0 },
                     },
                 ],
@@ -669,13 +691,24 @@ export namespace DataShop {
                 stocks: [
                     {
                         product: { kind: "equipment", id: "NightVision", level: 1 },
-                        initialQuantity: 2,
+                        initialQuantity: 1,
+                        price: { currency: "homunculus_bucks", initial: 1, deltaSold: 0 },
+                    },
+                    {
+                        product: { kind: "key_item", id: "SuperEquipmentGlue" },
+                        initialQuantity: 1,
                         price: { currency: "homunculus_bucks", initial: 1, deltaSold: 0 },
                     },
                 ],
             },
             HomunculusWater: {
-                stocks: [],
+                stocks: [
+                    {
+                        product: { kind: "key_item", id: "SuperEquipmentGlue" },
+                        initialQuantity: 1,
+                        price: { currency: "homunculus_bucks", initial: 1, deltaSold: 0 },
+                    },
+                ],
             },
             DungeonExplorer: {
                 stocks: [
