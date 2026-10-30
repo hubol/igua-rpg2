@@ -54,8 +54,13 @@ export namespace DataKeyItem {
             },
             EquipmentGlue: {
                 name: "Shoe Glue",
-                description: "Used to increase the power of shoes.",
+                description: "Used to combine two shoes, resulting in a shoe with increased power.",
                 texture: Tx.Collectibles.Key.EquipmentGlue,
+            },
+            SuperEquipmentGlue: {
+                name: "Perfected Shoe Glue",
+                description: "A rare find. Used to increase the power of a shoe.",
+                texture: Tx.Collectibles.Key.SuperEquipmentGlue,
             },
             UninflatedBallon: {
                 name: "Uninflated Ballon",
