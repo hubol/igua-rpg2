@@ -487,7 +487,7 @@ export namespace DataEquipment {
                     },
                     flags: flags("is_statically_enchanted"),
                 },
-                Meow: {
+                SpellMeow: {
                     name: "Faux Paw",
                     texture: Tx.Collectibles.Equipment.Paw,
                     description: "Cutie! Enables deeper interspecies communication.",

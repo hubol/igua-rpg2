@@ -723,7 +723,7 @@ export namespace DataShop {
                         price: { currency: "valuables", initial: 100, deltaSold: 0 },
                     },
                     {
-                        product: { kind: "equipment", id: "Meow", level: 1 },
+                        product: { kind: "equipment", id: "SpellMeow", level: 1 },
                         initialQuantity: 1,
                         price: { currency: "valuables", initial: 25, deltaSold: 0 },
                     },
