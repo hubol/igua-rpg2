@@ -1,4 +1,5 @@
 import { Sprite } from "pixi.js";
+import { objText } from "../../assets/fonts";
 import { Sfx } from "../../assets/sounds";
 import { Tx } from "../../assets/textures";
 import { Instances } from "../../lib/game-engine/instances";
@@ -9,6 +10,7 @@ import { approachLinear } from "../../lib/math/number";
 import { Integer } from "../../lib/math/number-alias-types";
 import { Rng } from "../../lib/math/rng";
 import { vnew } from "../../lib/math/vector-type";
+import { container } from "../../lib/pixi/container";
 import { range } from "../../lib/range";
 import { Input } from "../globals";
 import { objCollectibleFlop } from "../objects/collectibles/obj-collectible-flop";
@@ -61,23 +63,32 @@ export function mxnPlayerSpells(obj: ObjIguanaLocomotive, rpgPlayerSpells: RpgPl
                     .speed.at(horizontalSpeedScaled, -3);
             }
 
+            const errors = new Array<string>();
+
+            container()
+                .at(position)
+                .coro(function* (self) {
+                    for (const error of errors) {
+                        obj.play(Sfx.Interact.Error);
+                        const textObj = objText.MediumIrregular(error, { tint: 0x404069, align: "center" })
+                            .anchored(0.5, 0.5)
+                            .show(self);
+                        yield* Coro.all([
+                            interpvr(textObj.pivot).factor(factor.sine).to(0, 37).over(333),
+                            interpc(textObj, "tint").steps(3).to(0xCECEE4).over(666),
+                            sleepf(60),
+                        ]);
+                        textObj.destroy();
+                    }
+                    self.destroy();
+                })
+                .show();
+
             if (spells.OpenFlopBlindBoxes.isEquipped) {
                 const flopIds = openFlopBlindBoxes(4 + spells.OpenFlopBlindBoxes.level);
 
                 if (flopIds.length === 0) {
-                    obj.play(Sfx.Interact.Error);
-                    Sprite.from(Tx.Ui.NoBlindBoxes)
-                        .anchored(0.5, 1)
-                        .at(position)
-                        .tinted(0x404069)
-                        .coro(function* (self) {
-                            yield* Coro.all([
-                                interpvr(self.pivot).factor(factor.sine).to(0, 37).over(333),
-                                interpc(self, "tint").steps(3).to(0xCECEE4).over(666),
-                            ]);
-                        })
-                        .mixin(mxnDestroyAfterSteps, 180)
-                        .show();
+                    errors.push("No blind boxes!");
                 }
 
                 for (const flopId of flopIds) {
@@ -115,6 +126,15 @@ export function mxnPlayerSpells(obj: ObjIguanaLocomotive, rpgPlayerSpells: RpgPl
                     .speed.at(Math.sign(obj.facing) * 2, -1);
                 for (const meowableObj of obj.collidesAll(Instances(mxnEsotericMeowable))) {
                     meowableObj.dispatch("mxnEsotericMeowable:meow");
+                }
+            }
+
+            if (spells.Fairy.isEquipped) {
+                if (Rpg.character.status.conditions.fairy.count >= spells.Fairy.level) {
+                    errors.push("At max firefly!");
+                }
+                else {
+                    Rpg.character.status.conditions.fairy.count += 1;
                 }
             }
 

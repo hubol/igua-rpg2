@@ -48,6 +48,7 @@ export namespace RpgPlayerBuffs {
                 },
                 spells: {
                     equipped: {
+                        Fairy: 0,
                         HotPineCone: 0,
                         OpenFlopBlindBoxes: 0,
                         Meow: 0,

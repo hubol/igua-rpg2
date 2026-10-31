@@ -653,6 +653,11 @@ export namespace DataShop {
                         price: { currency: "homunculus_bucks", initial: 1, deltaSold: 0 },
                     },
                     {
+                        product: { kind: "equipment", id: "SpellFairy", level: 1 },
+                        initialQuantity: 1,
+                        price: { currency: "homunculus_bucks", initial: 1, deltaSold: 0 },
+                    },
+                    {
                         product: { kind: "equipment", id: "SpellHotPineCone", level: 1 },
                         initialQuantity: 1,
                         price: { currency: "homunculus_bucks", initial: 1, deltaSold: 0 },

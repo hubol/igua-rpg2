@@ -498,6 +498,17 @@ export namespace DataEquipment {
                     },
                     flags: flags(),
                 },
+                SpellFairy: {
+                    name: "Hot Honey Shoe",
+                    texture: Tx.Collectibles.Equipment.SpellFairy,
+                    description: "Shoe filled with beloved substance. Enables summoning a familiar.",
+                    buffs: (model, bonus) => {
+                        model.attributes.health += bonus;
+                        model.combat.spells.maxPower += Math.max(600, 1200 - bonus * 60);
+                        model.combat.spells.equipped.Fairy += Math.min(3, 1 + Math.floor(bonus / 2));
+                    },
+                    flags: flags(),
+                },
                 __Fallback__: {
                     name: "???",
                     texture: null,

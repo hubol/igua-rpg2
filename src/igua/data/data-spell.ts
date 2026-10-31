@@ -51,6 +51,10 @@ export namespace DataSpell {
                 name: "Meow",
                 attackProvider: () => RpgAttack.create({}),
             },
+            Fairy: {
+                name: "Summon Firefly",
+                attackProvider: () => RpgAttack.create({}),
+            },
             __Fallback__: {
                 name: "???",
                 attackProvider: () => RpgAttack.create({}),
