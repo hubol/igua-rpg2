@@ -9,6 +9,7 @@ import { Rpg } from "../../rpg/rpg";
 import { RpgEnemyRank } from "../../rpg/rpg-enemy-rank";
 import { RpgInventory } from "../../rpg/rpg-inventory";
 import { RpgLoot } from "../../rpg/rpg-loot";
+import { objFxBurstDusty } from "../effects/obj-fx-burst-dusty";
 import { objLootDrop } from "../obj-loot-drop";
 
 export function objEsotericBoneChest() {
@@ -32,9 +33,13 @@ export function objEsotericBoneChest() {
             isOpening = true;
             obj.coro(function* () {
                 yield* DramaInventory.removeCount(keyItem, 1);
+                objFxBurstDusty()
+                    .at(obj)
+                    .show();
                 const drop = Rpg.loot.drop(lootTable, dummyStatus, Rpg.character.buffs.loot);
                 objLootDrop(drop)
                     .at(obj)
+                    .add(0, -12)
                     .show();
                 obj.destroy();
             });
