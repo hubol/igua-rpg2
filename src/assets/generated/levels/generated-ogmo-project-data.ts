@@ -93,6 +93,7 @@ export namespace OgmoEntities {
       | "objEsotericInProgressOrder"
       | "objEsotericOutOfOrderSign"
       | "objEsotericRemovedShoes"
+      | "objEsotericSpiritExperienceGraph"
       | "objEsotericWizardOfLightStatue"
       | "objFallenBot"
       | "objFlopCollectionIndicator"

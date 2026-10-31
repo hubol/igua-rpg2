@@ -147,10 +147,15 @@ export class RpgExperienceRewarder {
     }));
 
     readonly spirit = this._expose("spirit", (increase) => ({
+        compute: {
+            taxPocketItems(ectoplasmCount: Integer, nonEctoplasmCount: Integer) {
+                return nonEctoplasmCount + computeEctoplasmSpiritExperienceValue(ectoplasmCount);
+            },
+        },
         onTaxPocketItemsCount(emptied: RpgPocket.EmptyResult) {
             const ectoplasmCount = emptied.items["EctoplasmTypeA"] + emptied.items["EctoplasmTypeB"];
-            const flatRateCount = emptied.totalItems - ectoplasmCount;
-            increase(flatRateCount + computeEctoplasmSpiritExperienceValue(ectoplasmCount));
+            const nonEctoplasmCount = emptied.totalItems - ectoplasmCount;
+            increase(this.compute.taxPocketItems(ectoplasmCount, nonEctoplasmCount));
         },
         onTaxValuables(valuablesCount: Integer) {
             increase(valuablesCount);
