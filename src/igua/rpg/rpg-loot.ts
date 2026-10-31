@@ -16,6 +16,7 @@ export class RpgLoot {
     constructor(private readonly _experience: RpgExperience, private readonly _records: RpgRecords) {
     }
 
+    // TODO why is loot buffs passed in?
     drop(table: RpgLoot.Table, dropperStatus: RpgStatus.Model, lootBuffs: RpgPlayerBuffs.Model["loot"]): RpgLoot.Drop {
         this._records.onDropLoot();
         const equipments: DataEquipment.Id[] = [];

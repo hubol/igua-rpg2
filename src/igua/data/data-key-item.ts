@@ -172,6 +172,11 @@ export namespace DataKeyItem {
                 description: "Staff enabling the Homunculus of the Skies to conjure a facsimile of Sky magic.",
                 texture: Tx.Collectibles.Key.StaffSkies,
             },
+            BoneKey: {
+                name: "Bone Key",
+                description: "Key fashioned from bone. Allows opening Bone chests.",
+                texture: Tx.Collectibles.Key.BoneKey,
+            },
             __Fallback__: { name: "???", description: "If you are reading this, this is a bug.", texture: null },
         } satisfies Record<string, Model>,
     );

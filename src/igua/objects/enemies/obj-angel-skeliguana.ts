@@ -35,7 +35,10 @@ const ranks = {
             },
         },
         loot: {
-            tier0: [{ kind: "pocket_item", id: "BoneTypeA" }],
+            tier0: [
+                { kind: "pocket_item", id: "BoneTypeA", weight: 90 },
+                { kind: "key_item", id: "BoneKey", weight: 10 },
+            ],
             tier1: [
                 { kind: "equipment", id: "BoneCoin", weight: 3 },
                 { kind: "equipment", id: "EctoplasmStreak", weight: 2 },
@@ -50,9 +53,10 @@ const ranks = {
         },
         loot: {
             tier0: [
-                { kind: "pocket_item", id: "BoneTypeA", count: 7, weight: 50 },
+                { kind: "pocket_item", id: "BoneTypeA", count: 7, weight: 35 },
                 { kind: "pocket_item", id: "BoneTypeA", count: 10, weight: 30 },
                 { kind: "pocket_item", id: "BoneTypeA", count: 12, weight: 20 },
+                { kind: "key_item", id: "BoneKey", weight: 15 },
             ],
             tier1: [
                 { kind: "equipment", id: "BoneCoin", weight: 6 },
@@ -68,9 +72,10 @@ const ranks = {
         },
         loot: {
             tier0: [
-                { kind: "pocket_item", id: "BoneTypeA", count: 9, weight: 50 },
-                { kind: "pocket_item", id: "BoneTypeA", count: 12, weight: 30 },
-                { kind: "pocket_item", id: "BoneTypeA", count: 15, weight: 20 },
+                { kind: "pocket_item", id: "BoneTypeA", count: 9, weight: 30 },
+                { kind: "pocket_item", id: "BoneTypeA", count: 12, weight: 28 },
+                { kind: "pocket_item", id: "BoneTypeA", count: 15, weight: 22 },
+                { kind: "key_item", id: "BoneKey", weight: 20 },
             ],
             tier1: [
                 { kind: "equipment", id: "EctoplasmStreak", weight: 10 },

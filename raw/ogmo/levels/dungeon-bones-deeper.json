@@ -4,8 +4,8 @@
   "height": 280,
   "offsetX": 0,
   "offsetY": 0,
-  "backgroundColor": "#408000",
   "values": {"Terrain Color": "#000000", "Region ID": "~Unset~"},
+  "backgroundColor": "#408000",
   "layers": [
     {
       "name": "MarkerEntities",
@@ -141,6 +141,36 @@
           "originX": 0,
           "originY": -2,
           "values": {"sceneName": "scnDungeonBones", "checkpointName": "fromDeeper", "name": "", "depth": 0}
+        },
+        {
+          "name": "AnyObject",
+          "id": 2,
+          "_eid": "90592852",
+          "x": 288,
+          "y": 160,
+          "originX": 13,
+          "originY": 12,
+          "values": {"objId": "objEsotericBoneChest", "name": "", "depth": 0}
+        },
+        {
+          "name": "AnyObject",
+          "id": 3,
+          "_eid": "90592852",
+          "x": 344,
+          "y": 160,
+          "originX": 13,
+          "originY": 12,
+          "values": {"objId": "objEsotericBoneChest", "name": "", "depth": 0}
+        },
+        {
+          "name": "AnyObject",
+          "id": 4,
+          "_eid": "90592852",
+          "x": 400,
+          "y": 160,
+          "originX": 13,
+          "originY": 12,
+          "values": {"objId": "objEsotericBoneChest", "name": "", "depth": 0}
         }
       ]
     },
@@ -172,7 +202,7 @@
           "_eid": "93117141",
           "x": 0,
           "y": 160,
-          "width": 280,
+          "width": 440,
           "height": 64,
           "originX": 0,
           "originY": 0,
@@ -185,7 +215,7 @@
           "_eid": "93117141",
           "x": 0,
           "y": 0,
-          "width": 280,
+          "width": 440,
           "height": 64,
           "originX": 0,
           "originY": 0,
@@ -209,7 +239,7 @@
           "name": "Block",
           "id": 3,
           "_eid": "93117141",
-          "x": 280,
+          "x": 432,
           "y": 0,
           "width": 104,
           "height": 224,

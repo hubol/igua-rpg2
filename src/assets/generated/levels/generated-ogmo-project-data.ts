@@ -86,6 +86,7 @@ export namespace OgmoEntities {
       | "objEnvironmentFxSparkle"
       | "objEsotericBakerCakeChecker"
       | "objEsotericBinocularViewer"
+      | "objEsotericBoneChest"
       | "objEsotericBoneDusts"
       | "objEsotericDecorationCampfire"
       | "objEsotericHotPineConeTree"
