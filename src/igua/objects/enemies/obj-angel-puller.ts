@@ -1,4 +1,4 @@
-import { Sprite } from "pixi.js";
+import { Graphics, Sprite } from "pixi.js";
 import { Tx } from "../../../assets/textures";
 import { interp } from "../../../lib/game-engine/routines/interp";
 import { sleep } from "../../../lib/game-engine/routines/sleep";
@@ -47,13 +47,22 @@ const themes = (() => {
 })();
 
 const ranks = {
-    level0: RpgEnemyRank.create({}),
+    level0: RpgEnemyRank.create({
+        status: {
+            healthMax: 13,
+        },
+    }),
 };
 
 export function objAngelPuller() {
     const theme = themes.common;
     const rank = ranks.level0;
     const armObj = objIndexedSprite([txArmLow, txArmMiddle, txArmHigh].reverse());
+
+    const hurtboxObj = new Graphics()
+        .beginFill(0xff0000)
+        .drawRect(13, 8, 32, 46)
+        .invisible();
 
     return container(
         armObj,
@@ -72,8 +81,9 @@ export function objAngelPuller() {
                 .mixin(mxnFacingPivot, { right: 8, left: -8, down: 2, up: -2 }),
         )
             .mixin(mxnFacingPivot, { right: 2, left: -2, down: 0, up: 0 }),
+        hurtboxObj,
     )
-        .mixin(mxnEnemy, { rank, hurtboxes: [] })
+        .mixin(mxnEnemy, { rank, hurtboxes: [hurtboxObj] })
         .mixin(mxnDetectPlayer)
         .coro(function* (self) {
             const leverObj = objAngelPuller.objLever()
@@ -102,18 +112,25 @@ objAngelPuller.objLever = function objAngelPullerLever () {
     };
 
     function* coroPull(attacker: RpgStatus.Model) {
-        yield interp(api, "handlePulledUnit").to(1).over(250);
-        yield sleep(100);
-        // TODO attack
-        yield interp(api, "handlePulledUnit").to(0).over(400);
+        let isDone = false;
+        obj.coro(function* () {
+            yield interp(api, "handlePulledUnit").steps(8).to(1).over(250);
+            yield sleep(100);
+            // TODO attack
+            yield interp(api, "handlePulledUnit").steps(8).to(0).over(400);
+            isDone = true;
+        });
+        return () => isDone;
     }
 
-    const handleObj = Sprite.from(txsLever[1]);
+    const handleObj = Sprite.from(txsLever[1])
+        .step(self => self.y = Math.round(api.handlePulledUnit * 13));
 
-    return container(
+    const obj = container(
         Sprite.from(txsLever[0]),
         handleObj,
-    )
+    );
+    return obj
         .merge({ objAngelPullerLever: api })
         .zIndexed(ZIndex.BackgroundEntities);
 };
