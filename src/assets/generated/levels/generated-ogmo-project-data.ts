@@ -57,6 +57,7 @@ export namespace OgmoEntities {
     objId:
       | "objAngelBallon"
       | "objAngelBouncing"
+      | "objAngelPuller"
       | "objAngelSnail"
       | "objAngelSnow"
       | "objCasinoLewdFinger"
