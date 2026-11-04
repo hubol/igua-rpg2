@@ -4,16 +4,18 @@ import { interp } from "../../../lib/game-engine/routines/interp";
 import { sleep } from "../../../lib/game-engine/routines/sleep";
 import { approachLinear } from "../../../lib/math/number";
 import { PolarInt } from "../../../lib/math/number-alias-types";
-import { Rng } from "../../../lib/math/rng";
 import { container } from "../../../lib/pixi/container";
+import { Check } from "../../../lib/types/check";
 import { ZIndex } from "../../core/scene/z-index";
 import { mxnDetectPlayer } from "../../mixins/mxn-detect-player";
 import { mxnEnemy } from "../../mixins/mxn-enemy";
 import { mxnFacingPivot } from "../../mixins/mxn-facing-pivot";
+import { mxnInteract } from "../../mixins/mxn-interact";
 import { mxnRpgAttack } from "../../mixins/mxn-rpg-attack";
-import { MxnRpgStatus } from "../../mixins/mxn-rpg-status";
+import { Rpg } from "../../rpg/rpg";
 import { RpgAttack } from "../../rpg/rpg-attack";
 import { RpgEnemyRank } from "../../rpg/rpg-enemy-rank";
+import { RpgFaction } from "../../rpg/rpg-faction";
 import { RpgStatus } from "../../rpg/rpg-status";
 import { objGroundSpawner } from "../obj-ground-spawner";
 import { objProjectileFlameColumn } from "../projectiles/obj-projectile-flame-column";
@@ -65,6 +67,13 @@ const atks = {
     flameColumn: RpgAttack.create({ physical: 50 }),
 };
 
+const playerAtks = {
+    flameColumn: Check<RpgAttack.Model>({
+        ...atks.flameColumn,
+        versus: RpgFaction.Enemy,
+    }),
+};
+
 export function objAngelPuller() {
     const theme = themes.common;
     const rank = ranks.level0;
@@ -103,12 +112,27 @@ export function objAngelPuller() {
                 .add(-39, -31)
                 .show();
 
+            self.handles("mxnEnemy.died", () => {
+                const interactiveLeverObj = leverObj.mixin(mxnInteract, () => {
+                    // TODO feels like this should be more convenient
+                    interactiveLeverObj.interact.enabled = false;
+                    interactiveLeverObj
+                        .coro(function* () {
+                            yield* interactiveLeverObj.objAngelPullerLever.coroPull(
+                                Rpg.character.status,
+                                playerAtks.flameColumn,
+                            );
+                            interactiveLeverObj.interact.enabled = true;
+                        });
+                });
+            });
+
             armObj
                 .step(self => self.textureUnit = leverObj.objAngelPullerLever.handlePulledUnit);
 
             while (true) {
                 yield () => self.mxnDetectPlayer.isDetected;
-                yield* leverObj.objAngelPullerLever.coroPull(self.status);
+                yield* leverObj.objAngelPullerLever.coroPull(self.status, atks.flameColumn);
             }
         })
         .step(self => {
@@ -130,22 +154,22 @@ objAngelPuller.objLever = function objAngelPullerLever () {
         coroPull,
     };
 
-    function* coroPull(attacker: RpgStatus.Model) {
+    function* coroPull(attacker: RpgStatus.Model, attack: RpgAttack.Model) {
         yield interp(api, "handlePulledUnit").steps(8).to(1).over(250);
         yield sleep(100);
 
         const flamesObjs = [
-            objAngelPuller.objFlameColumnTrail(attacker, 1)
+            objAngelPuller.objFlameColumnTrail(attacker, attack, 1)
                 .at(obj.x + 80, obj.y + 28)
                 .show(),
-            objAngelPuller.objFlameColumnTrail(attacker, -1)
+            objAngelPuller.objFlameColumnTrail(attacker, attack, -1)
                 .at(obj.x - 20, obj.y + 28)
                 .show(),
         ];
 
         yield () => flamesObjs.every(obj => obj.destroyed);
 
-        yield interp(api, "handlePulledUnit").steps(8).to(0).over(400);
+        yield interp(api, "handlePulledUnit").steps(8).to(0).over(660);
     }
 
     const handleObj = Sprite.from(txsLever[1])
@@ -163,10 +187,11 @@ objAngelPuller.objLever = function objAngelPullerLever () {
 // TODO kinda copy-pastey from miffed...
 objAngelPuller.objFlameColumnTrail = function objAngelPullerFlameColumnTrail (
     attacker: RpgStatus.Model,
+    attack: RpgAttack.Model,
     signX: PolarInt,
 ) {
     return objGroundSpawner({
-        objFactory: () => objProjectileFlameColumn().mixin(mxnRpgAttack, { attack: atks.flameColumn, attacker }),
+        objFactory: () => objProjectileFlameColumn().mixin(mxnRpgAttack, { attack, attacker }),
         maxDistance: 150,
         speedX: 20 * signX,
     });
