@@ -24,7 +24,7 @@ export function objPuddle(width: number, tint = 0x68A8D0) {
                 tint,
             },
         },
-        versus: RpgFaction.Anyone,
+        versus: "anyone",
     });
     return objPuddleBase(
         width,
@@ -45,7 +45,7 @@ export function objPuddlePoison(width: number, tint = 0x80B020) {
                 tint,
             },
         },
-        versus: RpgFaction.Anyone,
+        versus: "anyone",
     });
     return objPuddleBase(
         width,

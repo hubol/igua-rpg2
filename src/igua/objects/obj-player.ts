@@ -89,7 +89,7 @@ function getMaxMidairJumpsCount() {
             : 0);
 }
 
-const filterVulnerableObjs = (obj: MxnRpgStatus) => obj.status.faction !== RpgFaction.Player;
+const filterVulnerableObjs = (obj: MxnRpgStatus) => obj.status.faction !== "player";
 const filterSpecialSignObjs = (obj: ObjSign) => obj.isSpecial;
 
 function objPlayer(looks: IguanaLooks.Serializable) {

@@ -167,14 +167,13 @@ export class RpgPlayerStatus implements RpgStatus.Model {
         };
     })();
 
-    readonly factionDefenses = (() => {
+    readonly factionDefenses = ((): RpgStatus.Model["factionDefenses"] => {
         const buffs = this._buffs;
 
         return {
-            [RpgFaction.Anyone]: 0,
-            [RpgFaction.Enemy]: 0,
-            [RpgFaction.Player]: 0,
-            get [RpgFaction.Miner]() {
+            enemy: 0,
+            player: 0,
+            get miner() {
                 return buffs.getAggregatedBuffs().combat.defense.faction.miner;
             },
         };
@@ -184,7 +183,7 @@ export class RpgPlayerStatus implements RpgStatus.Model {
         wetness: 1,
     };
 
-    readonly faction = RpgFaction.Player;
+    readonly faction: RpgStatus.Model["faction"] = "player";
 
     readonly quirks = {
         emotionalDamageIsFatal: true,

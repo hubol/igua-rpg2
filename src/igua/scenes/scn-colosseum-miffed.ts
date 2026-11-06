@@ -101,5 +101,5 @@ function enrichEmoBallista(lvl: LvlType.ColosseumMiffed) {
 
 const atkGiantBallista = RpgAttack.create({
     emotional: 5,
-    versus: RpgFaction.Enemy,
+    versus: "enemy",
 });

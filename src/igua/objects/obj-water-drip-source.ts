@@ -43,7 +43,7 @@ const atkPoisonDrip = RpgAttack.create({
             value: 5,
         },
     },
-    versus: RpgFaction.Anyone,
+    versus: "anyone",
 });
 
 const atkDrip = RpgAttack.create({
@@ -53,7 +53,7 @@ const atkDrip = RpgAttack.create({
             value: 5,
         },
     },
-    versus: RpgFaction.Anyone,
+    versus: "anyone",
 });
 
 function getTx(attack: RpgAttack.Model | null) {

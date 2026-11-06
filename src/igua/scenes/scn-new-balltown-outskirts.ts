@@ -108,7 +108,7 @@ const atkPickaxe = RpgAttack.create({
 const ranks = {
     miner: RpgEnemyRank.create({
         status: {
-            faction: RpgFaction.Miner,
+            faction: "miner",
         },
     }),
 };

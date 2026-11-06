@@ -9,7 +9,7 @@ export function devObjHotPineCone() {
     const obj = objProjectilePuddleDrip({
         attack: RpgAttack.create({
             physical: 40,
-            versus: RpgFaction.Anyone,
+            versus: "anyone",
             conditions: {
                 wetness: {
                     tint: 0xf0f000,

@@ -45,7 +45,7 @@ const consts = {
 
 const atkDestroyCactus = RpgAttack.create({
     emotional: 999,
-    versus: RpgFaction.Enemy,
+    versus: "enemy",
 });
 
 const atkTrapPlayer = RpgAttack.create({

@@ -22,7 +22,7 @@ export namespace DataSpell {
 
                     return (ref) =>
                         RpgAttack.create({
-                            versus: RpgFaction.Anyone,
+                            versus: "anyone",
                             conditions: {
                                 overheat: {
                                     get value() {
@@ -41,7 +41,7 @@ export namespace DataSpell {
                 name: "Open Blind Boxes",
                 attackProvider: (ref) =>
                     RpgAttack.create({
-                        versus: RpgFaction.Enemy,
+                        versus: "enemy",
                         get emotional() {
                             return 10 + ref.level;
                         },

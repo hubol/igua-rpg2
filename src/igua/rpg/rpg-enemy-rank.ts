@@ -25,7 +25,7 @@ export namespace RpgEnemyRank {
                 healthMax,
                 invulnerable: status?.invulnerable ?? 0,
                 invulnerableMax: status?.invulnerableMax ?? 10,
-                faction: status?.faction ?? RpgFaction.Enemy,
+                faction: status?.faction ?? "enemy",
                 pride: status?.pride ?? 0,
                 conditions: {
                     fairy: {
@@ -79,10 +79,9 @@ export namespace RpgEnemyRank {
                     overheat: status?.guardingDefenses?.overheat ?? 0,
                 },
                 factionDefenses: {
-                    [RpgFaction.Anyone]: 0,
-                    [RpgFaction.Enemy]: 100,
-                    [RpgFaction.Miner]: 0,
-                    [RpgFaction.Player]: 0,
+                    enemy: 100,
+                    miner: 0,
+                    player: 0,
                 },
                 recoveries: {
                     wetness: 1,

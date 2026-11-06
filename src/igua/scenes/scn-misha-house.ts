@@ -26,7 +26,7 @@ import { RpgFaction } from "../rpg/rpg-faction";
 const ranks = {
     misha: RpgEnemyRank.create({
         status: {
-            faction: RpgFaction.Player,
+            faction: "player",
         },
     }),
 };

@@ -6,7 +6,7 @@ import { mxnRpgAttack } from "./mxn-rpg-attack";
 const atkKill = RpgAttack.create({
     physical: 9999,
     emotional: 9999,
-    versus: RpgFaction.Anyone,
+    versus: "anyone",
 });
 
 export function mxnRpgKill(obj: DisplayObject) {

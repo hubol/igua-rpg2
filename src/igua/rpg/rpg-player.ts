@@ -67,7 +67,7 @@ export class RpgPlayer {
                         + player.buffs.combat.melee.faceAttack.physical,
                 );
             },
-            versus: RpgFaction.Enemy,
+            versus: "enemy",
             quirks: {
                 isPlayerMeleeAttack: true,
             },
@@ -94,7 +94,7 @@ export class RpgPlayer {
                         + player.buffs.combat.melee.clawAttack.physical,
                 );
             },
-            versus: RpgFaction.Enemy,
+            versus: "enemy",
             quirks: {
                 // TODO should it have both player melee quirks?
                 isPlayerClawMeleeAttack: true,
@@ -120,7 +120,7 @@ export class RpgPlayer {
                 const bonus = Math.max(3, Math.ceil(base * 0.3));
                 return Math.max(2, base + bonus);
             },
-            versus: RpgFaction.Enemy,
+            versus: "enemy",
             quirks: {
                 // TODO should it have both player melee quirks?
                 isPlayerClawMeleeAttack: true,

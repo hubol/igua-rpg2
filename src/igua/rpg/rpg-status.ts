@@ -259,7 +259,7 @@ export namespace RpgStatus {
                 return { rejected: true, doesntReceiveDamageWhileCutsceneIsPlaying: true };
             }
 
-            if (attack.versus !== RpgFaction.Anyone && attack.versus !== target.faction) {
+            if (isTargetFactionOkForAttack(attacker, target, attack)) {
                 return { rejected: true, wrongFaction: true };
             }
 
@@ -515,4 +515,22 @@ export namespace RpgStatus {
             return context;
         }
     }
+}
+
+function isTargetFactionOkForAttack(
+    attacker: RpgStatus.Model | null,
+    target: RpgStatus.Model,
+    attack: RpgAttack.Model,
+) {
+    if (attack.versus === "anyone") {
+        return true;
+    }
+
+    if (attack.versus === target.faction) {
+        return true;
+    }
+
+    return attacker
+        && attack.versus === "opposing_faction"
+        && RpgFaction.getOpposingFaction(attacker.faction) === target.faction;
 }

@@ -300,7 +300,7 @@ const rescueRank = RpgEnemyRank.create({
 
 const atkBlast = RpgAttack.create({
     emotional: 7,
-    versus: RpgFaction.Enemy,
+    versus: "enemy",
 });
 
 function objTamagoRescue(targetObj: DisplayObject) {

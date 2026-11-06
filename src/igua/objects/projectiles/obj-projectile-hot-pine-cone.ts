@@ -19,7 +19,7 @@ const atkBurn = RpgAttack.create({
             value: 1,
         },
     },
-    versus: RpgFaction.Anyone,
+    versus: "anyone",
 });
 
 interface ObjProjectileHotPineConeArgs extends Partial<MxnRpgAttackArgs> {

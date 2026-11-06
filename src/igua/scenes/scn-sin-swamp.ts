@@ -29,7 +29,7 @@ const atkPoison = RpgAttack.create({
             value: 1,
         },
     },
-    versus: RpgFaction.Anyone,
+    versus: "anyone",
 });
 
 function enrichPoison(lvl: LvlType.SinSwamp) {

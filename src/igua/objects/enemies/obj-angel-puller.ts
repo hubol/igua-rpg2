@@ -70,7 +70,7 @@ const atks = {
 const playerAtks = {
     flameColumn: Check<RpgAttack.Model>({
         ...atks.flameColumn,
-        versus: RpgFaction.Enemy,
+        versus: "enemy",
     }),
 };
 

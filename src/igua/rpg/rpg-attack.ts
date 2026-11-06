@@ -4,6 +4,8 @@ import { DeepPartial } from "../../lib/types/deep-partial";
 import { RpgFaction } from "./rpg-faction";
 
 export namespace RpgAttack {
+    export type Versus = RpgFaction | "anyone" | "opposing_faction";
+
     export interface Model {
         physical: Integer;
         emotional: Integer;
@@ -22,7 +24,7 @@ export namespace RpgAttack {
                 damage: Integer;
             };
         };
-        versus: RpgFaction;
+        versus: Versus;
         quirks: {
             isPlayerMeleeAttack: boolean;
             isPlayerClawMeleeAttack: boolean;
@@ -35,7 +37,7 @@ export namespace RpgAttack {
             {
                 physical: model.physical ?? 0,
                 emotional: model.emotional ?? 0,
-                versus: model.versus ?? RpgFaction.Player,
+                versus: model.versus ?? "player",
                 quirks: {
                     isPlayerClawMeleeAttack: model.quirks?.isPlayerClawMeleeAttack ?? false,
                     isPlayerMeleeAttack: model.quirks?.isPlayerMeleeAttack ?? false,

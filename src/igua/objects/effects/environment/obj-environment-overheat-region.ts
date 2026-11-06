@@ -11,7 +11,7 @@ const atk = RpgAttack.create({
             value: 1,
         },
     },
-    versus: RpgFaction.Anyone,
+    versus: "anyone",
 });
 
 export function objEnvironmentOverheatRegion(entity: OgmoEntities.OverheatRegion) {
