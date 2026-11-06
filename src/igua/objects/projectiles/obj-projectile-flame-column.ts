@@ -49,6 +49,8 @@ export function objProjectileFlameColumn() {
                 interpc(spriteObj, "tint").steps(4).to(0xf0f000).over(600),
             ]);
 
+            // TODO hitbox "lingers" -- should dischargeable include a mechanism for this
+
             objFxSmoke66Px().at(self).add(0, -60).show();
             self.destroy();
         });
