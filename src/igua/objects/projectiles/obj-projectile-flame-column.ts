@@ -35,10 +35,11 @@ export function objProjectileFlameColumn() {
         .tinted(0xf03010);
 
     const shapeObj = new Graphics().beginFill(0xff0000).drawRect(-8, -32, 16, 32).invisible();
+    const hitboxObjs = [shapeObj];
 
     return container(spriteObj, shapeObj)
         .mixin(mxnDischargeable)
-        .collisionShape(CollisionShape.DisplayObjects, [shapeObj])
+        .collisionShape(CollisionShape.DisplayObjects, hitboxObjs)
         .coro(function* (self) {
             yield sleepf(10);
             self.mxnDischargeable.charge();
@@ -49,9 +50,11 @@ export function objProjectileFlameColumn() {
                 interpc(spriteObj, "tint").steps(4).to(0xf0f000).over(600),
             ]);
 
-            // TODO hitbox "lingers" -- should dischargeable include a mechanism for this
-
             objFxSmoke66Px().at(self).add(0, -60).show();
             self.destroy();
+        })
+        .coro(function* () {
+            yield () => spriteObj.effectiveTextureIndex >= 4;
+            hitboxObjs.length = 0;
         });
 }
