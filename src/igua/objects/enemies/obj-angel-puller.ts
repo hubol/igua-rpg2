@@ -1,9 +1,11 @@
 import { Graphics, Sprite } from "pixi.js";
+import { Sfx } from "../../../assets/sounds";
 import { Tx } from "../../../assets/textures";
 import { interp } from "../../../lib/game-engine/routines/interp";
 import { sleep } from "../../../lib/game-engine/routines/sleep";
 import { approachLinear } from "../../../lib/math/number";
 import { PolarInt } from "../../../lib/math/number-alias-types";
+import { Rng } from "../../../lib/math/rng";
 import { container } from "../../../lib/pixi/container";
 import { Check } from "../../../lib/types/check";
 import { ZIndex } from "../../core/scene/z-index";
@@ -155,8 +157,12 @@ objAngelPuller.objLever = function objAngelPullerLever () {
     };
 
     function* coroPull(attacker: RpgStatus.Model, attack: RpgAttack.Model) {
+        handleObj.play(Sfx.Effect.PullerHandle);
+
         yield interp(api, "handlePulledUnit").steps(8).to(1).over(250);
         yield sleep(100);
+
+        handleObj.play(Sfx.Effect.PullerFlameBurst.rate(0.9, 1.1));
 
         const flamesObjs = [
             objAngelPuller.objFlameColumnTrail(attacker, attack, 1)
@@ -191,7 +197,12 @@ objAngelPuller.objFlameColumnTrail = function objAngelPullerFlameColumnTrail (
     signX: PolarInt,
 ) {
     return objGroundSpawner({
-        objFactory: () => objProjectileFlameColumn().mixin(mxnRpgAttack, { attack, attacker }),
+        objFactory: (i) =>
+            objProjectileFlameColumn()
+                .mixin(mxnRpgAttack, { attack, attacker })
+                .coro(function* (self) {
+                    self.play(Sfx.Effect.PullerFlameBurstTrail.rate(0.8 + i * 0.125 + Rng.float(0.1)));
+                }),
         maxDistance: 150,
         speedX: 20 * signX,
     });
