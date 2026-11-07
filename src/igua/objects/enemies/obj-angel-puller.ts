@@ -7,7 +7,6 @@ import { approachLinear } from "../../../lib/math/number";
 import { PolarInt } from "../../../lib/math/number-alias-types";
 import { Rng } from "../../../lib/math/rng";
 import { container } from "../../../lib/pixi/container";
-import { Check } from "../../../lib/types/check";
 import { ZIndex } from "../../core/scene/z-index";
 import { mxnDetectPlayer } from "../../mixins/mxn-detect-player";
 import { mxnEnemy } from "../../mixins/mxn-enemy";
@@ -17,7 +16,6 @@ import { mxnRpgAttack } from "../../mixins/mxn-rpg-attack";
 import { Rpg } from "../../rpg/rpg";
 import { RpgAttack } from "../../rpg/rpg-attack";
 import { RpgEnemyRank } from "../../rpg/rpg-enemy-rank";
-import { RpgFaction } from "../../rpg/rpg-faction";
 import { RpgStatus } from "../../rpg/rpg-status";
 import { objGroundSpawner } from "../obj-ground-spawner";
 import { objProjectileFlameColumn } from "../projectiles/obj-projectile-flame-column";
@@ -66,14 +64,7 @@ const ranks = {
 };
 
 const atks = {
-    flameColumn: RpgAttack.create({ physical: 50 }),
-};
-
-const playerAtks = {
-    flameColumn: Check<RpgAttack.Model>({
-        ...atks.flameColumn,
-        versus: "enemy",
-    }),
+    flameColumn: RpgAttack.create({ physical: 50, versus: "opposing_faction" }),
 };
 
 export function objAngelPuller() {
@@ -122,7 +113,7 @@ export function objAngelPuller() {
                         .coro(function* () {
                             yield* interactiveLeverObj.objAngelPullerLever.coroPull(
                                 Rpg.character.status,
-                                playerAtks.flameColumn,
+                                atks.flameColumn,
                             );
                             interactiveLeverObj.interact.enabled = true;
                         });
