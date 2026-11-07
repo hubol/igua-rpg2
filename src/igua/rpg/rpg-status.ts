@@ -259,7 +259,7 @@ export namespace RpgStatus {
                 return { rejected: true, doesntReceiveDamageWhileCutsceneIsPlaying: true };
             }
 
-            if (isTargetFactionOkForAttack(attacker, target, attack)) {
+            if (!isTargetFactionOkForAttack(attacker, target, attack)) {
                 return { rejected: true, wrongFaction: true };
             }
 
