@@ -7,9 +7,12 @@ import { approachLinear } from "../../../lib/math/number";
 import { PolarInt } from "../../../lib/math/number-alias-types";
 import { Rng } from "../../../lib/math/rng";
 import { container } from "../../../lib/pixi/container";
+import { MapRgbFilter } from "../../../lib/pixi/filters/map-rgb-filter";
+import { Check } from "../../../lib/types/check";
 import { ZIndex } from "../../core/scene/z-index";
 import { mxnDetectPlayer } from "../../mixins/mxn-detect-player";
 import { mxnEnemy } from "../../mixins/mxn-enemy";
+import { mxnEnemyDeathBurst } from "../../mixins/mxn-enemy-death-burst";
 import { mxnFacingPivot } from "../../mixins/mxn-facing-pivot";
 import { mxnInteract } from "../../mixins/mxn-interact";
 import { mxnRpgAttack } from "../../mixins/mxn-rpg-attack";
@@ -46,7 +49,9 @@ const themes = (() => {
             toothGapWidth: 1,
         },
         sprites: {},
-        tints: {},
+        tints: {
+            map: Check<MapRgbFilter.Map>([0xF291D8, 0xEF5F75, 0xF291D8]),
+        },
     })
         .createTheme();
 
@@ -77,6 +82,12 @@ export function objAngelPuller() {
         .drawRect(13, 8, 32, 46)
         .invisible();
 
+    const soulAnchorObj = new Graphics()
+        .beginFill(0x808080)
+        .drawRect(0, 0, 1, 1)
+        .at(28, 33)
+        .invisible();
+
     const mouthObj = theme.createMouthObj();
     return container(
         armObj,
@@ -96,9 +107,11 @@ export function objAngelPuller() {
         )
             .mixin(mxnFacingPivot, { right: 2, left: -2, down: 0, up: 0 }),
         hurtboxObj,
+        soulAnchorObj,
     )
-        .mixin(mxnEnemy, { rank, hurtboxes: [hurtboxObj] })
+        .mixin(mxnEnemy, { rank, hurtboxes: [hurtboxObj], soulAnchorObj })
         .mixin(mxnDetectPlayer)
+        .mixin(mxnEnemyDeathBurst, { map: theme.tints.map })
         .coro(function* (self) {
             const leverObj = objAngelPuller.objLever()
                 .at(self)
