@@ -10,14 +10,21 @@ export interface MxnRpgAttackArgs {
     attack: RpgAttack.Model;
     attacker?: RpgStatus.Model;
     damageTargetsOnce?: boolean;
+    damageTargetsContext?: Set<RpgStatus.Model>;
 }
 
-export function mxnRpgAttack(obj: DisplayObject, { attack, attacker, damageTargetsOnce = false }: MxnRpgAttackArgs) {
+export function mxnRpgAttack(
+    obj: DisplayObject,
+    {
+        attack,
+        attacker,
+        damageTargetsOnce = false,
+        damageTargetsContext = mxnRpgAttack.createDamageTargetsContext(),
+    }: MxnRpgAttackArgs,
+) {
     if (attacker) {
         obj.mixin(mxnDestroyOnStatusDeath, attacker);
     }
-
-    const targetsDamaged = new Set<RpgStatus.Model>();
 
     return obj
         .dispatches<"mxnRpgAttack.hit">()
@@ -30,7 +37,7 @@ export function mxnRpgAttack(obj: DisplayObject, { attack, attacker, damageTarge
 
             // TODO filter by faction here pls
             for (const instance of Instances(mxnRpgStatus)) {
-                if (damageTargetsOnce && targetsDamaged.has(instance.status)) {
+                if (damageTargetsOnce && damageTargetsContext.has(instance.status)) {
                     continue;
                 }
                 const hurtboxObj = obj.collidesOne(instance.hurtboxes);
@@ -43,7 +50,7 @@ export function mxnRpgAttack(obj: DisplayObject, { attack, attacker, damageTarge
                             : undefined,
                     });
                     if (!result.rejected) {
-                        targetsDamaged.add(instance.status);
+                        damageTargetsContext.add(instance.status);
                         self.dispatch("mxnRpgAttack.hit");
                     }
                     if (self.destroyed) {
@@ -53,3 +60,7 @@ export function mxnRpgAttack(obj: DisplayObject, { attack, attacker, damageTarge
             }
         });
 }
+
+mxnRpgAttack.createDamageTargetsContext = function createDamageTargetsContext () {
+    return new Set<RpgStatus.Model>();
+};

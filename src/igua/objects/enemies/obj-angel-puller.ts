@@ -187,10 +187,12 @@ objAngelPuller.objFlameColumnTrail = function objAngelPullerFlameColumnTrail (
     attack: RpgAttack.Model,
     signX: PolarInt,
 ) {
+    const damageTargetsContext = mxnRpgAttack.createDamageTargetsContext();
+
     return objGroundSpawner({
         objFactory: (i) =>
             objProjectileFlameColumn()
-                .mixin(mxnRpgAttack, { attack, attacker })
+                .mixin(mxnRpgAttack, { attack, attacker, damageTargetsOnce: true, damageTargetsContext })
                 .coro(function* (self) {
                     self.play(Sfx.Effect.PullerFlameBurstTrail.rate(0.8 + i * 0.125 + Rng.float(0.1)));
                 }),
