@@ -14,7 +14,8 @@ import { objLootDrop } from "../obj-loot-drop";
 
 export function objEsotericBoneChest() {
     const keyItem: RpgInventory.Item.KeyItem = { kind: "key_item", id: "BoneKey" };
-    const obj = Sprite.from(Tx.Esoteric.Dungeon.BoneChest);
+    const obj = Sprite.from(Tx.Esoteric.Dungeon.BoneChest)
+        .dispatches<"objEsotericBoneChest.fail">();
 
     let isOpening = false;
 
@@ -26,6 +27,7 @@ export function objEsotericBoneChest() {
             }
 
             if (!Rpg.inventory.has(keyItem)) {
+                obj.dispatch("objEsotericBoneChest.fail");
                 Sfx.Interact.Error.play();
                 return;
             }
@@ -44,6 +46,7 @@ export function objEsotericBoneChest() {
                 obj.destroy();
             });
         })
+        .track(objEsotericBoneChest)
         .zIndexed(ZIndex.BackgroundEntities);
 }
 

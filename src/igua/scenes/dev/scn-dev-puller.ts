@@ -9,7 +9,7 @@ export function scnDevPuller() {
     Rpg.character.position.currentRegionId = Rpg.character.startingRegionId;
     Lvl.DummyWide();
 
-    objAngelPuller()
+    objAngelPuller("level0")
         .at(scene.level.width / 2, playerObj.y)
         .show();
 

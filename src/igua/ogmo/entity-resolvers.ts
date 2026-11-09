@@ -17,6 +17,7 @@ import { objAngelBrick } from "../objects/enemies/obj-angel-brick";
 import { objAngelCactus } from "../objects/enemies/obj-angel-cactus";
 import { objAngelChill } from "../objects/enemies/obj-angel-chill";
 import { objAngelMiffed } from "../objects/enemies/obj-angel-miffed";
+import { objAngelPuller } from "../objects/enemies/obj-angel-puller";
 import { objAngelSkeliguana } from "../objects/enemies/obj-angel-skeliguana";
 import { objAngelSnail } from "../objects/enemies/obj-angel-snail";
 import { objAngelSpikeBall } from "../objects/enemies/obj-angel-spike-ball";
@@ -120,6 +121,7 @@ export const OgmoEntityResolvers = {
     },
     EnemyCactus: (entity: OgmoEntities.EnemyCactus) => objAngelCactus(entity.values.variant).at(1, 3),
     EnemyChill: objAngelChill,
+    EnemyPuller: (entity: OgmoEntities.EnemyPuller) => objAngelPuller(entity.values.variant).at(0, 3),
     EnemySkeliguana: (entity: OgmoEntities.EnemySkeliguana) => {
         const obj = objAngelSkeliguana(entity.values.variant);
         applyEntityToIguanaObj(obj, entity);

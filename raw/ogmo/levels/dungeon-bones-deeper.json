@@ -1,11 +1,11 @@
 {
   "ogmoVersion": "3.4.0-hubol",
-  "width": 500,
-  "height": 280,
+  "width": 872,
+  "height": 488,
   "offsetX": 0,
   "offsetY": 0,
-  "values": {"Terrain Color": "#000000", "Region ID": "~Unset~"},
-  "backgroundColor": "#408000",
+  "values": {"Terrain Color": "#331c50", "Region ID": "Ohio"},
+  "backgroundColor": "#1b0834",
   "layers": [
     {
       "name": "MarkerEntities",
@@ -14,8 +14,8 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 64,
-      "gridCellsY": 35,
+      "gridCellsX": 109,
+      "gridCellsY": 61,
       "entities": []
     },
     {
@@ -25,8 +25,8 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 64,
-      "gridCellsY": 35,
+      "gridCellsX": 109,
+      "gridCellsY": 61,
       "entities": []
     },
     {
@@ -36,8 +36,8 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 64,
-      "gridCellsY": 35,
+      "gridCellsX": 109,
+      "gridCellsY": 61,
       "decals": [],
       "folder": "../textures"
     },
@@ -48,8 +48,8 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 64,
-      "gridCellsY": 35,
+      "gridCellsX": 109,
+      "gridCellsY": 61,
       "entities": []
     },
     {
@@ -59,8 +59,8 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 64,
-      "gridCellsY": 35,
+      "gridCellsX": 109,
+      "gridCellsY": 61,
       "entities": [
         {
           "name": "Player",
@@ -82,8 +82,8 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 64,
-      "gridCellsY": 35,
+      "gridCellsX": 109,
+      "gridCellsY": 61,
       "entities": [
         {
           "name": "IguanaNpc",
@@ -105,8 +105,8 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 64,
-      "gridCellsY": 35,
+      "gridCellsX": 109,
+      "gridCellsY": 61,
       "decals": [],
       "folder": "../textures"
     },
@@ -117,8 +117,8 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 64,
-      "gridCellsY": 35,
+      "gridCellsX": 109,
+      "gridCellsY": 61,
       "entities": [
         {
           "name": "Darkness",
@@ -143,34 +143,74 @@
           "values": {"sceneName": "scnDungeonBones", "checkpointName": "fromDeeper", "name": "", "depth": 0}
         },
         {
+          "name": "EnemyPuller",
+          "id": 5,
+          "_eid": "25894242",
+          "x": 440,
+          "y": 328,
+          "originX": 38,
+          "originY": 50,
+          "values": {"variant": "level0", "name": "", "depth": 0}
+        },
+        {
+          "name": "EnvironmentBallons",
+          "id": 6,
+          "_eid": "21595347",
+          "x": 192,
+          "y": 160,
+          "originX": 15,
+          "originY": 45,
+          "values": {"count": 3, "seed": 0, "name": "", "depth": 0}
+        },
+        {
+          "name": "EnvironmentBallons",
+          "id": 7,
+          "_eid": "21595347",
+          "x": 264,
+          "y": 160,
+          "originX": 15,
+          "originY": 45,
+          "values": {"count": 3, "seed": 0, "name": "", "depth": 0}
+        },
+        {
+          "name": "Sign",
+          "id": 8,
+          "_eid": "39046554",
+          "x": 704,
+          "y": 328,
+          "originX": 0,
+          "originY": 26,
+          "values": {"title": "Warning!", "message": "Be careful. For real.", "name": "", "depth": 0, "isSpecial": false}
+        },
+        {
           "name": "AnyObject",
-          "id": 2,
+          "id": 12,
           "_eid": "90592852",
           "x": 288,
           "y": 160,
           "originX": 13,
           "originY": 12,
-          "values": {"objId": "objEsotericBoneChest", "name": "", "depth": 0}
+          "values": {"objId": "objEsotericBoneChest", "name": "Chest", "depth": 0}
         },
         {
           "name": "AnyObject",
-          "id": 3,
+          "id": 13,
           "_eid": "90592852",
           "x": 344,
           "y": 160,
           "originX": 13,
           "originY": 12,
-          "values": {"objId": "objEsotericBoneChest", "name": "", "depth": 0}
+          "values": {"objId": "objEsotericBoneChest", "name": "Chest", "depth": 0}
         },
         {
           "name": "AnyObject",
-          "id": 4,
+          "id": 14,
           "_eid": "90592852",
           "x": 400,
           "y": 160,
           "originX": 13,
           "originY": 12,
-          "values": {"objId": "objEsotericBoneChest", "name": "", "depth": 0}
+          "values": {"objId": "objEsotericBoneChest", "name": "Chest", "depth": 0}
         }
       ]
     },
@@ -181,9 +221,82 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 64,
-      "gridCellsY": 35,
-      "decals": [],
+      "gridCellsX": 109,
+      "gridCellsY": 61,
+      "decals": [
+        {
+          "x": 351,
+          "y": 333,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#0e0519",
+          "texture": "terrain/earth/burned 0.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 281,
+          "y": 333,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#0e0519",
+          "texture": "terrain/earth/burned 0.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 519,
+          "y": 333,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#0e0519",
+          "texture": "terrain/earth/burned 0.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 388,
+          "y": 330,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#4d2b7a",
+          "texture": "terrain/earth/stones 0.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 485,
+          "y": 331,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#4d2b7a",
+          "texture": "terrain/earth/stones 0.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 589,
+          "y": 333,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#0e0519",
+          "texture": "terrain/earth/burned 0.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        }
+      ],
       "folder": "../textures"
     },
     {
@@ -193,8 +306,8 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 64,
-      "gridCellsY": 35,
+      "gridCellsX": 109,
+      "gridCellsY": 61,
       "entities": [
         {
           "name": "Block",
@@ -202,11 +315,11 @@
           "_eid": "93117141",
           "x": 0,
           "y": 160,
-          "width": 440,
+          "width": 528,
           "height": 64,
           "originX": 0,
           "originY": 0,
-          "tint": "#000000",
+          "tint": "#331c50",
           "values": {"name": "", "depth": 0, "visible": true}
         },
         {
@@ -215,11 +328,11 @@
           "_eid": "93117141",
           "x": 0,
           "y": 0,
-          "width": 440,
+          "width": 768,
           "height": 64,
           "originX": 0,
           "originY": 0,
-          "tint": "#000000",
+          "tint": "#331c50",
           "values": {"name": "", "depth": 0, "visible": true}
         },
         {
@@ -232,21 +345,56 @@
           "height": 96,
           "originX": 0,
           "originY": 0,
-          "tint": "#000000",
+          "tint": "#331c50",
           "values": {"name": "", "depth": 0, "visible": true}
         },
         {
           "name": "Block",
           "id": 3,
           "_eid": "93117141",
-          "x": 432,
+          "x": 768,
           "y": 0,
-          "width": 104,
-          "height": 224,
+          "width": 120,
+          "height": 496,
           "originX": 0,
           "originY": 0,
-          "tint": "#000000",
+          "tint": "#331c50",
           "values": {"name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "Slope",
+          "id": 4,
+          "_eid": "95675713",
+          "x": 528,
+          "y": 160,
+          "width": 128,
+          "height": 64,
+          "flippedX": true,
+          "flippedY": false,
+          "tint": "#331c50",
+          "values": {"name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "Block",
+          "id": 5,
+          "_eid": "93117141",
+          "x": 64,
+          "y": 328,
+          "width": 704,
+          "height": 64,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#331c50",
+          "values": {"name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "Pipe",
+          "id": 6,
+          "_eid": "95769929",
+          "x": 720,
+          "y": 264,
+          "width": 48,
+          "values": {"name": "", "visible": true, "depth": 0}
         }
       ]
     },
@@ -257,8 +405,8 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 64,
-      "gridCellsY": 35,
+      "gridCellsX": 109,
+      "gridCellsY": 61,
       "entities": []
     },
     {
@@ -268,9 +416,114 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 64,
-      "gridCellsY": 35,
-      "decals": [],
+      "gridCellsX": 109,
+      "gridCellsY": 61,
+      "decals": [
+        {
+          "x": 304,
+          "y": -160,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#1b0834",
+          "texture": "shapes/square32.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
+          "x": 320,
+          "y": -144,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#261141",
+          "texture": "shapes/square32.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
+          "x": 336,
+          "y": -128,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#341d52",
+          "texture": "shapes/square32.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
+          "x": 256,
+          "y": -152,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#23034d",
+          "texture": "shapes/square32.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
+          "x": 272,
+          "y": -136,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#311066",
+          "texture": "shapes/square32.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
+          "x": 296,
+          "y": -88,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#909fe6",
+          "texture": "shapes/square32.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
+          "x": 312,
+          "y": -72,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#b3bce6",
+          "texture": "shapes/square32.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
+          "x": 352,
+          "y": -112,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#4d2b7a",
+          "texture": "shapes/square32.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
+        }
+      ],
       "folder": "../textures"
     },
     {
@@ -280,8 +533,8 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 64,
-      "gridCellsY": 35,
+      "gridCellsX": 109,
+      "gridCellsY": 61,
       "decals": [],
       "folder": "../textures"
     },
@@ -292,8 +545,8 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 64,
-      "gridCellsY": 35,
+      "gridCellsX": 109,
+      "gridCellsY": 61,
       "decals": [],
       "folder": "../textures"
     }

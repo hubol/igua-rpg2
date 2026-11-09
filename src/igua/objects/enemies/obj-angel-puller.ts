@@ -68,13 +68,19 @@ const ranks = {
     }),
 };
 
+const variants = {
+    level0: {
+        theme: themes.common,
+        rank: ranks.level0,
+    },
+};
+
 const atks = {
     flameColumn: RpgAttack.create({ physical: 50, versus: "opposing_faction" }),
 };
 
-export function objAngelPuller() {
-    const theme = themes.common;
-    const rank = ranks.level0;
+export function objAngelPuller(variantId: keyof typeof variants) {
+    const { rank, theme } = variants[variantId] ?? variants.level0;
     const armObj = objIndexedSprite([txArmLow, txArmMiddle, txArmHigh].reverse());
 
     const hurtboxObj = new Graphics()

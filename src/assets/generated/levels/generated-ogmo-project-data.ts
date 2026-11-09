@@ -57,7 +57,6 @@ export namespace OgmoEntities {
     objId:
       | "objAngelBallon"
       | "objAngelBouncing"
-      | "objAngelPuller"
       | "objAngelSnail"
       | "objAngelSnow"
       | "objCasinoLewdFinger"
@@ -160,6 +159,7 @@ export namespace OgmoEntities {
   }>;
   export type EnemyStupid = OgmoFactory.EntityBase<{ variant: "level0" | "level1"; name: string; depth: number }>;
   export type HomunculusNpc = OgmoFactory.EntityBase<{ variantId: "Flame" | "Earth" | "Forest" | "Water" | "Light" | "Skies"; name: string; depth: number }>;
+  export type EnemyPuller = OgmoFactory.EntityBase<{ variant: "level0"; name: string; depth: number }>;
 }
 
 export interface OgmoEntityResolverBase {
@@ -216,4 +216,5 @@ export interface OgmoEntityResolverBase {
   AnyObject: (entity: OgmoEntities.AnyObject) => unknown;
   EnemyStupid: (entity: OgmoEntities.EnemyStupid) => unknown;
   HomunculusNpc: (entity: OgmoEntities.HomunculusNpc) => unknown;
+  EnemyPuller: (entity: OgmoEntities.EnemyPuller) => unknown;
 }
