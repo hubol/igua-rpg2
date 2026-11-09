@@ -16,7 +16,68 @@
       "gridCellHeight": 8,
       "gridCellsX": 109,
       "gridCellsY": 61,
-      "entities": []
+      "entities": [
+        {
+          "name": "EnvironmentSparkleMarker",
+          "id": 0,
+          "_eid": "61143896",
+          "x": 183,
+          "y": 106,
+          "originX": 4,
+          "originY": 4,
+          "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "EnvironmentSparkleMarker",
+          "id": 1,
+          "_eid": "61143896",
+          "x": 171,
+          "y": 88,
+          "originX": 4,
+          "originY": 4,
+          "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "EnvironmentSparkleMarker",
+          "id": 2,
+          "_eid": "61143896",
+          "x": 198,
+          "y": 79,
+          "originX": 4,
+          "originY": 4,
+          "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "EnvironmentSparkleMarker",
+          "id": 3,
+          "_eid": "61143896",
+          "x": 214,
+          "y": 96,
+          "originX": 4,
+          "originY": 4,
+          "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "EnvironmentSparkleMarker",
+          "id": 4,
+          "_eid": "61143896",
+          "x": 171,
+          "y": 103,
+          "originX": 4,
+          "originY": 4,
+          "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "EnvironmentSparkleMarker",
+          "id": 5,
+          "_eid": "61143896",
+          "x": 215,
+          "y": 77,
+          "originX": 4,
+          "originY": 4,
+          "values": {"name": "", "depth": 0}
+        }
+      ]
     },
     {
       "name": "RegionEntities",
@@ -522,6 +583,18 @@
           "originY": 0.5,
           "values": {"name": ""},
           "groupName": null
+        },
+        {
+          "x": 230,
+          "y": 104,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffffff",
+          "texture": "town/signage/fundraiser.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
         }
       ],
       "folder": "../textures"
