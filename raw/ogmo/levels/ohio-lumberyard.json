@@ -1,7 +1,7 @@
 {
   "ogmoVersion": "3.4.0-hubol",
   "width": 976,
-  "height": 280,
+  "height": 448,
   "offsetX": 0,
   "offsetY": 0,
   "values": {"Terrain Color": "#000000", "Region ID": "~Unset~"},
@@ -15,14 +15,14 @@
       "gridCellWidth": 8,
       "gridCellHeight": 8,
       "gridCellsX": 122,
-      "gridCellsY": 35,
+      "gridCellsY": 56,
       "entities": [
         {
           "name": "Marker",
           "id": 0,
           "_eid": "73148747",
           "x": 216,
-          "y": 232,
+          "y": 400,
           "originX": 8,
           "originY": 8,
           "tint": "#00ff00",
@@ -38,14 +38,14 @@
       "gridCellWidth": 8,
       "gridCellHeight": 8,
       "gridCellsX": 122,
-      "gridCellsY": 35,
+      "gridCellsY": 56,
       "entities": [
         {
           "name": "GateHorizontal",
           "id": 0,
           "_eid": "97593426",
           "x": -48,
-          "y": 72,
+          "y": 240,
           "height": 128,
           "originX": 0,
           "originY": 0,
@@ -62,7 +62,7 @@
       "gridCellWidth": 8,
       "gridCellHeight": 8,
       "gridCellsX": 122,
-      "gridCellsY": 35,
+      "gridCellsY": 56,
       "decals": [],
       "folder": "../textures"
     },
@@ -74,7 +74,7 @@
       "gridCellWidth": 8,
       "gridCellHeight": 8,
       "gridCellsX": 122,
-      "gridCellsY": 35,
+      "gridCellsY": 56,
       "entities": []
     },
     {
@@ -85,14 +85,14 @@
       "gridCellWidth": 8,
       "gridCellHeight": 8,
       "gridCellsX": 122,
-      "gridCellsY": 35,
+      "gridCellsY": 56,
       "entities": [
         {
           "name": "Player",
           "id": 0,
           "_eid": "93092164",
           "x": 104,
-          "y": 200,
+          "y": 368,
           "originX": 22,
           "originY": 39,
           "flippedX": false,
@@ -108,14 +108,14 @@
       "gridCellWidth": 8,
       "gridCellHeight": 8,
       "gridCellsX": 122,
-      "gridCellsY": 35,
+      "gridCellsY": 56,
       "entities": [
         {
           "name": "IguanaNpc",
           "id": 0,
           "_eid": "90326278",
           "x": 392,
-          "y": 232,
+          "y": 400,
           "originX": 20,
           "originY": 52,
           "flippedX": false,
@@ -131,7 +131,7 @@
       "gridCellWidth": 8,
       "gridCellHeight": 8,
       "gridCellsX": 122,
-      "gridCellsY": 35,
+      "gridCellsY": 56,
       "decals": [],
       "folder": "../textures"
     },
@@ -143,14 +143,14 @@
       "gridCellWidth": 8,
       "gridCellHeight": 8,
       "gridCellsX": 122,
-      "gridCellsY": 35,
+      "gridCellsY": 56,
       "entities": [
         {
           "name": "Sign",
           "id": 0,
           "_eid": "39046554",
           "x": 96,
-          "y": 200,
+          "y": 368,
           "originX": 0,
           "originY": 26,
           "values": {"title": "Wood", "message": "This is the Ohio Lumberyard.", "name": "", "depth": 0, "isSpecial": false}
@@ -165,7 +165,7 @@
       "gridCellWidth": 8,
       "gridCellHeight": 8,
       "gridCellsX": 122,
-      "gridCellsY": 35,
+      "gridCellsY": 56,
       "decals": [],
       "folder": "../textures"
     },
@@ -177,14 +177,14 @@
       "gridCellWidth": 8,
       "gridCellHeight": 8,
       "gridCellsX": 122,
-      "gridCellsY": 35,
+      "gridCellsY": 56,
       "entities": [
         {
           "name": "Block",
           "id": 0,
           "_eid": "93117141",
           "x": 0,
-          "y": 200,
+          "y": 368,
           "width": 152,
           "height": 80,
           "originX": 0,
@@ -197,7 +197,7 @@
           "id": 1,
           "_eid": "93117141",
           "x": 152,
-          "y": 232,
+          "y": 400,
           "width": 672,
           "height": 88,
           "originX": 0,
@@ -210,9 +210,22 @@
           "id": 2,
           "_eid": "93117141",
           "x": 824,
-          "y": 200,
+          "y": 368,
           "width": 152,
           "height": 80,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#000000",
+          "values": {"name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "Block",
+          "id": 3,
+          "_eid": "93117141",
+          "x": 920,
+          "y": -624,
+          "width": 168,
+          "height": 1152,
           "originX": 0,
           "originY": 0,
           "tint": "#000000",
@@ -228,7 +241,7 @@
       "gridCellWidth": 8,
       "gridCellHeight": 8,
       "gridCellsX": 122,
-      "gridCellsY": 35,
+      "gridCellsY": 56,
       "entities": []
     },
     {
@@ -239,7 +252,7 @@
       "gridCellWidth": 8,
       "gridCellHeight": 8,
       "gridCellsX": 122,
-      "gridCellsY": 35,
+      "gridCellsY": 56,
       "decals": [],
       "folder": "../textures"
     },
@@ -251,7 +264,7 @@
       "gridCellWidth": 8,
       "gridCellHeight": 8,
       "gridCellsX": 122,
-      "gridCellsY": 35,
+      "gridCellsY": 56,
       "decals": [],
       "folder": "../textures"
     },
@@ -263,7 +276,7 @@
       "gridCellWidth": 8,
       "gridCellHeight": 8,
       "gridCellsX": 122,
-      "gridCellsY": 35,
+      "gridCellsY": 56,
       "decals": [],
       "folder": "../textures"
     }

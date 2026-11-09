@@ -376,11 +376,11 @@
           "name": "GateMap",
           "id": 25,
           "_eid": "53836309",
-          "x": 3944,
-          "y": 1184,
+          "x": 3936,
+          "y": 1168,
           "originX": 16,
           "originY": 16,
-          "rotation": 0,
+          "rotation": 270,
           "uid": 178750890084023,
           "tint": "#ffffff",
           "values": {"sceneName": "scnOhioLumberyard", "checkpointName": "fromWorldMap", "name": "", "depth": 0, "visible": true}
@@ -449,6 +449,19 @@
           "uid": 179261999975128,
           "tint": "#cecee4",
           "values": {"sceneName": "scnOhioPalace", "checkpointName": "fromWorldMap", "name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "GateMap",
+          "id": 31,
+          "_eid": "53836309",
+          "x": 4104,
+          "y": 1216,
+          "originX": 16,
+          "originY": 16,
+          "rotation": 0,
+          "uid": 179426795830500,
+          "tint": "#ffffff",
+          "values": {"sceneName": "scnOhioGhostTown", "checkpointName": "fromWorldMap", "name": "", "depth": 0, "visible": true}
         }
       ]
     },
@@ -885,8 +898,8 @@
           "name": "Checkpoint",
           "id": 37,
           "_eid": "19953026",
-          "x": 3896,
-          "y": 1216,
+          "x": 3928,
+          "y": 1224,
           "originX": 22,
           "originY": 39,
           "flippedX": true,
@@ -979,6 +992,17 @@
           "originY": 39,
           "flippedX": true,
           "values": {"name": "fromOhioPalace", "depth": 0, "overrideFlipX": "none"}
+        },
+        {
+          "name": "Checkpoint",
+          "id": 46,
+          "_eid": "19953026",
+          "x": 4056,
+          "y": 1240,
+          "originX": 22,
+          "originY": 39,
+          "flippedX": true,
+          "values": {"name": "fromOhioGhostTown", "depth": 0, "overrideFlipX": "none"}
         }
       ]
     },
