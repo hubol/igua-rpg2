@@ -806,6 +806,17 @@
           "originY": 39,
           "flippedX": false,
           "values": {"name": "fromOhioHallOfDoors", "depth": 0, "overrideFlipX": "none"}
+        },
+        {
+          "name": "Checkpoint",
+          "id": 3,
+          "_eid": "19953026",
+          "x": 104,
+          "y": 1240,
+          "originX": 22,
+          "originY": 39,
+          "flippedX": false,
+          "values": {"name": "fromWorldMapLeft", "depth": 0, "overrideFlipX": "none"}
         }
       ]
     },

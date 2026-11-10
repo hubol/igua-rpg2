@@ -462,6 +462,32 @@
           "uid": 179426795830500,
           "tint": "#ffffff",
           "values": {"sceneName": "scnOhioGhostTown", "checkpointName": "fromWorldMap", "name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "GateMap",
+          "id": 32,
+          "_eid": "53836309",
+          "x": 3688,
+          "y": 1480,
+          "originX": 16,
+          "originY": 16,
+          "rotation": 180,
+          "uid": 179435090440530,
+          "tint": "#ffffff",
+          "values": {"sceneName": "scnMountFlop", "checkpointName": "fromWorldMap", "name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "GateMap",
+          "id": 33,
+          "_eid": "53836309",
+          "x": 3528,
+          "y": 1480,
+          "originX": 16,
+          "originY": 16,
+          "rotation": 360,
+          "uid": 179435090440531,
+          "tint": "#ffffff",
+          "values": {"sceneName": "scnMountFlop", "checkpointName": "fromWorldMapLeft", "name": "", "depth": 0, "visible": false}
         }
       ]
     },
@@ -1193,19 +1219,6 @@
           "originX": 12,
           "originY": 10,
           "values": {"variant": "level0", "name": "", "depth": 0}
-        },
-        {
-          "name": "GateMap",
-          "id": 4,
-          "_eid": "53836309",
-          "x": 3688,
-          "y": 1480,
-          "originX": 16,
-          "originY": 16,
-          "rotation": 180,
-          "uid": 178097826142800,
-          "tint": "#ffffff",
-          "values": {"sceneName": "scnMountFlop", "checkpointName": "fromWorldMap", "name": "", "depth": 0, "visible": true}
         },
         {
           "name": "EnemySpikeBall",
