@@ -43,9 +43,7 @@ export class MicrocosmPersonalComputer extends RpgMicrocosm<MicrocosmPersonalCom
     }
 }
 
-const keyItemIds = ["SoftwareHighLow"] satisfies Array<DataKeyItem.Id>;
-
-namespace MicrocosmPersonalComputer {
+export namespace MicrocosmPersonalComputer {
     export interface State {
         softwareKeyItemId: SoftwareKeyItemId | null;
     }

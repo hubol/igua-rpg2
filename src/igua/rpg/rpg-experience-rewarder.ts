@@ -6,13 +6,13 @@ import { RpgPlayerAggregatedBuffs } from "./rpg-player-aggregated-buffs";
 import { RpgPlayerStatus } from "./rpg-player-status";
 import { RpgPocket } from "./rpg-pocket";
 
-type ComputerInteractionKind = "noop" | "small_task" | "medium_task";
-
 const computerInteractionsToExperience = {
     noop: 1,
     "small_task": 7,
     "medium_task": 14,
-} satisfies Record<ComputerInteractionKind, Integer>;
+    "large_task": 30,
+    "xlarge_task": 67,
+} satisfies Record<RpgExperienceRewarder.ComputerInteractionKind, Integer>;
 
 const computerCorrectQuizAnswerCountsToExperience = [25, 25, 50, 75];
 
@@ -63,7 +63,7 @@ export class RpgExperienceRewarder {
         onDepositComputerChips(count: Integer) {
             increase(count * 2);
         },
-        onInteract(kind: ComputerInteractionKind) {
+        onInteract(kind: RpgExperienceRewarder.ComputerInteractionKind) {
             increase(computerInteractionsToExperience[kind]);
         },
         onCorrectQuizAnswer(count: Integer) {
@@ -179,6 +179,10 @@ export class RpgExperienceRewarder {
     private _expose<T>(id: RpgExperience.Id, impl: (increase: IncreaseFn) => T) {
         return impl(amount => this._state[id] += this._getIncreaseAmount(id, amount));
     }
+}
+
+export namespace RpgExperienceRewarder {
+    export type ComputerInteractionKind = "noop" | "small_task" | "medium_task" | "large_task" | "xlarge_task";
 }
 
 function computeEctoplasmSpiritExperienceValue(ectoplasmCount: Integer) {
