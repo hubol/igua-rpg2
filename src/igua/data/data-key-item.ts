@@ -177,6 +177,11 @@ export namespace DataKeyItem {
                 description: "Key fashioned from bone. Allows opening Bone chests.",
                 texture: Tx.Collectibles.Key.BoneKey,
             },
+            SoftwareHighLow: {
+                name: "Software Cartridge (High/Low)",
+                description: "A cartridge labeled HIGHLOW.BAS",
+                texture: Tx.Collectibles.Key.SoftwareHighLow,
+            },
             __Fallback__: { name: "???", description: "If you are reading this, this is a bug.", texture: null },
         } satisfies Record<string, Model>,
     );

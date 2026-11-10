@@ -62,6 +62,9 @@ export namespace DataGift {
             "Indiana.Hall.Hanging": {
                 item: { kind: "equipment", id: "FaceAttack", level: 1 },
             },
+            "Ohio.GhostTown.Interior.Software": {
+                item: { kind: "key_item", id: "SoftwareHighLow" },
+            },
             __Fallback__: {
                 item: { kind: "potion", id: "RestoreHealth" },
             },
