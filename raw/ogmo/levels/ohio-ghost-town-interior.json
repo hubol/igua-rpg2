@@ -328,12 +328,12 @@
       "decals": [
         {
           "x": 491,
-          "y": 198,
+          "y": 196,
           "scaleX": 1,
           "scaleY": 1,
           "rotation": 0,
           "tint": "#ffffff",
-          "texture": "esoteric/gift box.png",
+          "texture": "furniture/vase ghostly 0.png",
           "originX": 0.5,
           "originY": 0.5,
           "values": {"name": "Gift"},
