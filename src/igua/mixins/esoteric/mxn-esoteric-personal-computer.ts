@@ -1,4 +1,5 @@
-import { DisplayObject } from "pixi.js";
+import { DisplayObject, Sprite } from "pixi.js";
+import { Tx } from "../../../assets/textures";
 import { Coro } from "../../../lib/game-engine/routines/coro";
 import { sleep } from "../../../lib/game-engine/routines/sleep";
 import { Rng } from "../../../lib/math/rng";
@@ -26,7 +27,7 @@ export function mxnEsotericPersonalComputer(obj: DisplayObject, cosmPersonalComp
                     : null;
 
                 const result = yield* ask(
-                    "> " + programData?.name ?? "",
+                    "> " + (programData?.name ?? ""),
                     "load",
                     "eject",
                     "run",
@@ -90,12 +91,16 @@ namespace DataProgram {
                 let guess = -1;
                 let guessesCount = 0;
 
-                const message = "GUESS MY NUMBER [1-100]";
-
-                yield* show(message);
-
                 for (; guessesCount < 10;) {
-                    guess = yield* DramaMisc.askInteger(message, { min: 1, max: 100 });
+                    guess = yield* DramaMisc.askInteger(
+                        "GUESS MY NUMBER 1-100",
+                        {
+                            min: 1,
+                            max: 100,
+                            messageObj: Sprite.from(Tx.Characters.ComputerIbmPortrait)
+                                .anchored(0.42, 0.8),
+                        },
+                    );
                     guessesCount++;
                     if (guess === number) {
                         break;
