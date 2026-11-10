@@ -2,7 +2,7 @@ import { Lvl } from "../../assets/generated/levels/generated-level-data";
 import { NoAtlasTx } from "../../assets/no-atlas-textures";
 import { DramaLib } from "../drama/drama-lib";
 import { mxnEsotericPersonalComputer } from "../mixins/esoteric/mxn-esoteric-personal-computer";
-import { mxnGift } from "../mixins/mxn-gift";
+import { mxnGiftPoisonous } from "../mixins/mxn-gift-poisonous";
 import { objCharacterComputerIbm } from "../objects/characters/obj-character-computer-ibm";
 import { CtxTerrainPipe } from "../objects/obj-terrain";
 import { Rpg } from "../rpg/rpg";
@@ -13,7 +13,7 @@ export function scnOhioGhostTownInterior() {
     const lvl = Lvl.OhioGhostTownInterior();
 
     lvl.Gift
-        .mixin(mxnGift, "Ohio.GhostTown.Interior.Software");
+        .mixin(mxnGiftPoisonous, "Ohio.GhostTown.Interior.Software");
 
     objCharacterComputerIbm()
         .at(lvl.ComputerMarker)
