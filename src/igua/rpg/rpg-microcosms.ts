@@ -4,6 +4,7 @@ import { MicrocosmCactusEquipmentMaker } from "./microcosms/microcosm-cactus-equ
 import { MicrocosmDownloadData } from "./microcosms/microcosm-download-data";
 import { MicrocosmHallOfDoors } from "./microcosms/microcosm-hall-of-doors";
 import { MicrocosmLottery } from "./microcosms/microcosm-lottery";
+import { MicrocosmPersonalComputer } from "./microcosms/microcosm-personal-computer";
 import { MicrocosmSimpleBot } from "./microcosms/microcosm-simple-bot";
 import { MicrocosmTamago } from "./microcosms/microcosm-tamago";
 import { MicrocosmTimeDroppedLoot } from "./microcosms/microcosm-time-dropped-loot";
@@ -56,6 +57,7 @@ const manifest = {
         emptySceneName: "scnOhioHallEmpty",
         questId: "Ohio.HallOfDoors",
     }),
+    "Ohio.GhostTown.PersonalComputer": configure(MicrocosmPersonalComputer, {}),
 };
 
 interface RpgMicrocosmClasslike<T> {
