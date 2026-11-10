@@ -64,6 +64,7 @@ export namespace OgmoEntities {
       | "objCasinoLewdSlap"
       | "objCharacterBattleMaster"
       | "objCharacterBoxer"
+      | "objCharacterComputerIbm"
       | "objCharacterDoctorSprite"
       | "objCharacterEmoBallista"
       | "objCharacterFirefly"

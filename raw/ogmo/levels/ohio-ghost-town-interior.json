@@ -16,7 +16,19 @@
       "gridCellHeight": 8,
       "gridCellsX": 188,
       "gridCellsY": 73,
-      "entities": []
+      "entities": [
+        {
+          "name": "Marker",
+          "id": 0,
+          "_eid": "73148747",
+          "x": 1004,
+          "y": 504,
+          "originX": 8,
+          "originY": 8,
+          "tint": "#00ff00",
+          "values": {"name": "ComputerMarker", "depth": 0}
+        }
+      ]
     },
     {
       "name": "RegionEntities",
