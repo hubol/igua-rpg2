@@ -29,7 +29,7 @@ export namespace DataTemporaryEffect {
                 },
             },
             MeleePoisonValueFromHall: {
-                hudText: "Magic room increases poison build up",
+                hudText: "Crystal hall increases poison build up",
                 buffs: (model) => {
                     model.combat.melee.conditions.poison.value += 9966;
                 },
