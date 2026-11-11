@@ -276,7 +276,9 @@ export namespace DataQuest {
                 },
             },
             "MishaHouse.Birthday": {
-                items: null,
+                items: {
+                    cakeKeyItem: { kind: "key_item", id: "MishaCake" },
+                },
                 flags: {
                     readCalendar: false,
                     spokeWithBaker: false,

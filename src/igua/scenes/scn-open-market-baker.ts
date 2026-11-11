@@ -14,7 +14,6 @@ import { objFxFieryBurst170px } from "../objects/effects/obj-fx-fiery-burst-170p
 import { objEsotericBakerCakeChecker } from "../objects/esoteric/obj-esoteric-baker-cake-checker";
 import { objEsotericMishaBirthdayCake } from "../objects/esoteric/obj-esoteric-misha-birthday-cake";
 import { Rpg } from "../rpg/rpg";
-import { RpgInventory } from "../rpg/rpg-inventory";
 
 export function scnOpenMarketBaker() {
     Jukebox.play(Mzk.PreciousInstructions);
@@ -25,7 +24,6 @@ export function scnOpenMarketBaker() {
 function enrichBakerNpc(lvl: LvlType.OpenMarketBaker) {
     let everSmokedInHere = false;
     const mishaBirthdayQuest = Rpg.quest("MishaHouse.Birthday");
-    const cakeItem: RpgInventory.Item.KeyItem = { kind: "key_item", id: "MishaCake" };
 
     lvl.BakerNpc
         .mixin(mxnCutscene, function* () {
@@ -59,7 +57,7 @@ function enrichBakerNpc(lvl: LvlType.OpenMarketBaker) {
             }
 
             if (response === 3) {
-                if (Rpg.inventory.count(cakeItem) >= 1) {
+                if (Rpg.inventory.count(mishaBirthdayQuest.data.items.cakeKeyItem) >= 1) {
                     yield* show("Yes, and I gave you a cake with the exact number of candles.");
                     return;
                 }
@@ -130,7 +128,7 @@ function enrichBakerNpc(lvl: LvlType.OpenMarketBaker) {
                 if (isCorrect) {
                     yield* show("Yep, looks good to me!");
                     cakeObj.destroy();
-                    yield* DramaInventory.receiveCount(cakeItem, 1);
+                    yield* DramaInventory.receiveCount(mishaBirthdayQuest.data.items.cakeKeyItem, 1);
                     yield* show("Take that to Misha right away!!!");
                 }
                 else {

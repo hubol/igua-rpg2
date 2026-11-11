@@ -40,6 +40,8 @@ export function scnMishaHouse() {
     const lvl = Lvl.MishaHouse();
     Jukebox.play(Mzk.OldSailor);
 
+    const birthdayQuest = Rpg.quest("MishaHouse.Birthday");
+
     lvl.MishaNpc
         .mixin(mxnRpgStatus, { status: ranks.misha.status, hurtboxes: [lvl.MishaNpc] })
         .mixin(mxnCutscene, function* () {
@@ -164,8 +166,12 @@ export function scnMishaHouse() {
             Cutscene.setCurrentSpeaker(playerObj);
             yield* show("Oh... I wonder how I could surprise Misha for his birthday.");
 
-            Rpg.quest("MishaHouse.Birthday").flags.readCalendar = true;
+            birthdayQuest.flags.readCalendar = true;
         });
+
+    if (Rpg.inventory.has(birthdayQuest.data.items.cakeKeyItem)) {
+        enrichMishaHouseParty(lvl);
+    }
 
     if (computerQuest.everCompleted) {
         return;
@@ -186,8 +192,6 @@ export function scnMishaHouse() {
                 yield* DramaQuests.complete(computerQuest);
             }, { speaker: lvl.MishaNpc }))
         .show();
-
-    // enrichMishaHouseParty(lvl);
 }
 
 function enrichWaterHeater(lvl: LvlType.MishaHouse) {
