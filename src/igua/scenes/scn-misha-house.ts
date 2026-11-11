@@ -3,6 +3,7 @@ import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data
 import { Mzk } from "../../assets/music";
 import { Tx } from "../../assets/textures";
 import { sleep, sleepf } from "../../lib/game-engine/routines/sleep";
+import { PseudoRng } from "../../lib/math/rng";
 import { container } from "../../lib/pixi/container";
 import { Jukebox } from "../core/igua-audio";
 import { ZIndex } from "../core/scene/z-index";
@@ -16,12 +17,13 @@ import { mxnEnemy } from "../mixins/mxn-enemy";
 import { mxnEnemyDeathBurst } from "../mixins/mxn-enemy-death-burst";
 import { mxnRpgStatus } from "../mixins/mxn-rpg-status";
 import { mxnSpeaker } from "../mixins/mxn-speaker";
+import { objEnvironmentFxBallons } from "../objects/effects/environment/obj-environment-fx-ballons";
 import { objFxExpressSurprise } from "../objects/effects/obj-fx-express-surprise";
 import { playerObj } from "../objects/obj-player";
 import { objIndexedSprite } from "../objects/utils/obj-indexed-sprite";
 import { Rpg } from "../rpg/rpg";
 import { RpgEnemyRank } from "../rpg/rpg-enemy-rank";
-import { RpgFaction } from "../rpg/rpg-faction";
+import { Search } from "../utils/search";
 
 const ranks = {
     misha: RpgEnemyRank.create({
@@ -184,6 +186,8 @@ export function scnMishaHouse() {
                 yield* DramaQuests.complete(computerQuest);
             }, { speaker: lvl.MishaNpc }))
         .show();
+
+    // enrichMishaHouseParty(lvl);
 }
 
 function enrichWaterHeater(lvl: LvlType.MishaHouse) {
@@ -239,4 +243,20 @@ function objMishaComputer() {
         .pivoted(29, 30)
         .mixin(mxnEnemy, { hurtboxes: [computerObj], rank: rankComputer })
         .mixin(mxnEnemyDeathBurst, { map: [0x808080, 0x505050, 0xa0a0a0] });
+}
+
+function enrichMishaHouseParty(lvl: LvlType.MishaHouse) {
+    const ballonSeeds = [582619, 454347, 583247, 71812, 455633, 327677, 72040, 582903, 199613];
+
+    const prng = new PseudoRng(9999);
+    const ballonPositions = Search.findMarkers(0x0090ff);
+
+    for (const position of ballonPositions) {
+        objEnvironmentFxBallons.objFromSeeds(
+            prng.shuffle([...ballonSeeds]).slice(prng.choose(-2, -3)),
+        )
+            .at(position)
+            .zIndexed(ZIndex.CharacterEntities)
+            .show();
+    }
 }

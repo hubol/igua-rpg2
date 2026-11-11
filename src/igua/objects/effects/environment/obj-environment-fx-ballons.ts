@@ -9,8 +9,14 @@ const prng = new PseudoRng();
 
 export function objEnvironmentFxBallons(count: Integer, seed: Integer) {
     prng.seed = seed;
-    const ballons = range(count)
-        .map(() => prng.int(Number.MAX_SAFE_INTEGER))
+    const ballonSeeds = range(count)
+        .map(() => prng.int(Number.MAX_SAFE_INTEGER));
+
+    return objEnvironmentFxBallons.objFromSeeds(ballonSeeds);
+}
+
+objEnvironmentFxBallons.objFromSeeds = function objEnvironmentFxBallonsFromSeeds (ballonSeeds: Integer[]) {
+    const ballons = ballonSeeds
         .map((seed): RpgStatus.Ballon => ({ health: 1, healthMax: 1, seed }));
 
     const obj = container();
@@ -19,4 +25,4 @@ export function objEnvironmentFxBallons(count: Integer, seed: Integer) {
         attachPoint: obj,
         ballons,
     });
-}
+};

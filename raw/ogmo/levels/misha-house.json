@@ -68,6 +68,50 @@
           "originX": 4,
           "originY": 4,
           "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "Marker",
+          "id": 5,
+          "_eid": "73148747",
+          "x": 160,
+          "y": 208,
+          "originX": 8,
+          "originY": 8,
+          "tint": "#0090ff",
+          "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "Marker",
+          "id": 6,
+          "_eid": "73148747",
+          "x": 280,
+          "y": 208,
+          "originX": 8,
+          "originY": 8,
+          "tint": "#0090ff",
+          "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "Marker",
+          "id": 7,
+          "_eid": "73148747",
+          "x": 346,
+          "y": 128,
+          "originX": 8,
+          "originY": 8,
+          "tint": "#0090ff",
+          "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "Marker",
+          "id": 8,
+          "_eid": "73148747",
+          "x": 98,
+          "y": 208,
+          "originX": 8,
+          "originY": 8,
+          "tint": "#0090ff",
+          "values": {"name": "", "depth": 0}
         }
       ]
     },
