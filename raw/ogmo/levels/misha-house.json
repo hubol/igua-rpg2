@@ -112,6 +112,28 @@
           "originY": 8,
           "tint": "#0090ff",
           "values": {"name": "", "depth": 0}
+        },
+        {
+          "name": "Marker",
+          "id": 9,
+          "_eid": "73148747",
+          "x": 256,
+          "y": 208,
+          "originX": 8,
+          "originY": 8,
+          "tint": "#00ff00",
+          "values": {"name": "OlgaMarker", "depth": 0}
+        },
+        {
+          "name": "Marker",
+          "id": 10,
+          "_eid": "73148747",
+          "x": 132,
+          "y": 208,
+          "originX": 8,
+          "originY": 8,
+          "tint": "#00ff00",
+          "values": {"name": "AidarMarker", "depth": 0}
         }
       ]
     },

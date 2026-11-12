@@ -17,8 +17,10 @@ import { mxnEnemy } from "../mixins/mxn-enemy";
 import { mxnEnemyDeathBurst } from "../mixins/mxn-enemy-death-burst";
 import { mxnRpgStatus } from "../mixins/mxn-rpg-status";
 import { mxnSpeaker } from "../mixins/mxn-speaker";
+import { mxnYell } from "../mixins/mxn-yell";
 import { objEnvironmentFxBallons } from "../objects/effects/environment/obj-environment-fx-ballons";
 import { objFxExpressSurprise } from "../objects/effects/obj-fx-express-surprise";
+import { objIguanaNpc } from "../objects/obj-iguana-npc";
 import { playerObj } from "../objects/obj-player";
 import { objIndexedSprite } from "../objects/utils/obj-indexed-sprite";
 import { Rpg } from "../rpg/rpg";
@@ -263,4 +265,35 @@ function enrichMishaHouseParty(lvl: LvlType.MishaHouse) {
             .zIndexed(ZIndex.CharacterEntities)
             .show();
     }
+
+    const olgaObj = objIguanaNpc("Olga")
+        .at(lvl.OlgaMarker)
+        .add(0, 3)
+        .mixin(mxnYell)
+        .zIndexed(ZIndex.CharacterEntities)
+        .show();
+
+    const aidarObj = objIguanaNpc("Aidar")
+        .at(lvl.AidarMarker)
+        .add(0, 3)
+        .mixin(mxnYell)
+        .zIndexed(ZIndex.CharacterEntities)
+        .show();
+
+    const yellPlayerObj = playerObj
+        .mixin(mxnYell);
+
+    Cutscene.play(function* () {
+        yield sleep(500);
+        for (let i = 3; i >= 1; i--) {
+            olgaObj.mxnYell.yell(String(i));
+            yield sleep(1000);
+        }
+
+        for (const obj of [olgaObj, aidarObj, yellPlayerObj]) {
+            obj.mxnYell.yell("Happy birthday, Misha!!");
+            obj.speed.y = -2;
+            yield sleepf(4);
+        }
+    });
 }
