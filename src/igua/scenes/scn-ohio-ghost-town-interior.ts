@@ -1,5 +1,7 @@
 import { Lvl } from "../../assets/generated/levels/generated-level-data";
+import { Mzk } from "../../assets/music";
 import { NoAtlasTx } from "../../assets/no-atlas-textures";
+import { Jukebox } from "../core/igua-audio";
 import { DramaLib } from "../drama/drama-lib";
 import { mxnEsotericPersonalComputer } from "../mixins/esoteric/mxn-esoteric-personal-computer";
 import { mxnGiftPoisonous } from "../mixins/mxn-gift-poisonous";
@@ -8,6 +10,7 @@ import { CtxTerrainPipe } from "../objects/obj-terrain";
 import { Rpg } from "../rpg/rpg";
 
 export function scnOhioGhostTownInterior() {
+    Jukebox.play(Mzk.OldWays);
     DramaLib.Speaker.isDarkMode = true;
     CtxTerrainPipe.value.texture = NoAtlasTx.Terrain.Pipe.Brick;
     const lvl = Lvl.OhioGhostTownInterior();
