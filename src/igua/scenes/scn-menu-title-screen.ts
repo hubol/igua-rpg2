@@ -150,7 +150,7 @@ export function scnMenuTitleScreen() {
                     doppelgangerIguanaObj.facing = playerObj.facing;
                     doppelgangerIguanaObj.ducking = playerObj.ducking;
                 }
-            });
+            }, StepOrder.BeforeCamera);
     }
 }
 
