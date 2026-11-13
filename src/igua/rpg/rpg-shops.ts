@@ -149,6 +149,9 @@ namespace StockKey {
     }
 
     function computeProductKey(product: DataShop.Product) {
+        if (product.kind === "equipment") {
+            return `${product.id}_${product.level}`;
+        }
         return product.id;
     }
 
