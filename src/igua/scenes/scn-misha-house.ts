@@ -2,11 +2,13 @@ import { BLEND_MODES, Sprite } from "pixi.js";
 import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data";
 import { Mzk } from "../../assets/music";
 import { Tx } from "../../assets/textures";
+import { interp } from "../../lib/game-engine/routines/interp";
 import { sleep, sleepf } from "../../lib/game-engine/routines/sleep";
 import { PseudoRng } from "../../lib/math/rng";
 import { container } from "../../lib/pixi/container";
 import { Jukebox } from "../core/igua-audio";
 import { ZIndex } from "../core/scene/z-index";
+import { DramaInventory } from "../drama/drama-inventory";
 import { DramaQuests } from "../drama/drama-quests";
 import { ask, show } from "../drama/show";
 import { Cutscene, scene } from "../globals";
@@ -20,11 +22,13 @@ import { mxnSpeaker } from "../mixins/mxn-speaker";
 import { mxnYell } from "../mixins/mxn-yell";
 import { objEnvironmentFxBallons } from "../objects/effects/environment/obj-environment-fx-ballons";
 import { objFxExpressSurprise } from "../objects/effects/obj-fx-express-surprise";
+import { objEsotericMishaBirthdayCake } from "../objects/esoteric/obj-esoteric-misha-birthday-cake";
 import { objIguanaNpc } from "../objects/obj-iguana-npc";
 import { playerObj } from "../objects/obj-player";
 import { objIndexedSprite } from "../objects/utils/obj-indexed-sprite";
 import { Rpg } from "../rpg/rpg";
 import { RpgEnemyRank } from "../rpg/rpg-enemy-rank";
+import { RpgQuest } from "../rpg/rpg-quests";
 import { Search } from "../utils/search";
 
 const ranks = {
@@ -172,7 +176,8 @@ export function scnMishaHouse() {
         });
 
     if (Rpg.inventory.has(birthdayQuest.data.items.cakeKeyItem)) {
-        enrichMishaHouseParty(lvl);
+        enrichMishaHouseParty(lvl, birthdayQuest);
+        return;
     }
 
     if (computerQuest.everCompleted) {
@@ -251,7 +256,7 @@ function objMishaComputer() {
         .mixin(mxnEnemyDeathBurst, { map: [0x808080, 0x505050, 0xa0a0a0] });
 }
 
-function enrichMishaHouseParty(lvl: LvlType.MishaHouse) {
+function enrichMishaHouseParty(lvl: LvlType.MishaHouse, quest: RpgQuest<"MishaHouse.Birthday">) {
     const ballonSeeds = [582619, 454347, 583247, 71812, 455633, 327677, 72040, 582903, 199613];
 
     const prng = new PseudoRng(9999);
@@ -283,6 +288,9 @@ function enrichMishaHouseParty(lvl: LvlType.MishaHouse) {
     const yellPlayerObj = playerObj
         .mixin(mxnYell);
 
+    lvl.MishaNpc.facing = -1;
+    lvl.MishaNpc.x += 8;
+
     Cutscene.play(function* () {
         yield sleep(500);
         for (let i = 3; i >= 1; i--) {
@@ -295,5 +303,17 @@ function enrichMishaHouseParty(lvl: LvlType.MishaHouse) {
             obj.speed.y = -2;
             yield sleepf(4);
         }
+
+        yield sleep(1000);
+
+        yield* DramaInventory.removeAll(quest.data.items.cakeKeyItem);
+
+        const cakeObj = objEsotericMishaBirthdayCake(quest.flags.learnedMishasAge ?? 55)
+            .at(lvl.ComputerMarker)
+            .show();
+
+        yield interp(cakeObj.objEsotericMishaBirthdayCake, "visibleUnit")
+            .to(1)
+            .over(1000);
     });
 }
