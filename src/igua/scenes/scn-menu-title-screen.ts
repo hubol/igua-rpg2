@@ -91,7 +91,7 @@ export function scnMenuTitleScreen() {
             obj.objDoor.locked = Boolean(saveFiles[i]);
             obj.mixin(mxnLabeled, (obj.objDoor.locked ? "Overwrite\n" : "") + "File " + (i + 1));
             obj.objDoor.lockedCutscene = function* () {
-                if (yield* ask(`File ${i + 1} will be overridden. Continue?`)) {
+                if (yield* ask(`File ${i + 1} will be overwritten. Continue?`)) {
                     obj.objDoor.unlock();
                 }
             };
