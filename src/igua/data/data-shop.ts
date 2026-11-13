@@ -587,11 +587,6 @@ export namespace DataShop {
                     {
                         product: { kind: "potion", id: "AttributeStrengthUp" },
                         initialQuantity: 1,
-                        price: { currency: "combat", deltaSold: 0, initial: 1999 },
-                    },
-                    {
-                        product: { kind: "potion", id: "AttributeStrengthUp" },
-                        initialQuantity: 1,
                         price: { currency: "pocket", deltaSold: 0, initial: 300 },
                     },
                     {
@@ -616,7 +611,7 @@ export namespace DataShop {
                     {
                         product: { kind: "potion", id: "AttributeStrengthUp" },
                         initialQuantity: 1,
-                        price: { currency: "combat", deltaSold: 0, initial: 3999 },
+                        price: { currency: "combat", deltaSold: 0, initial: 8999 },
                     },
                     {
                         product: { kind: "potion", id: "AttributeStrengthUp" },
