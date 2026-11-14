@@ -21,7 +21,9 @@ function enrichAidar(lvl: LvlType.OhioLumberyard) {
             const result = yield* ask(
                 "Hello",
                 introducedGift.isGiveable() ? "What's going on?" : null,
-                mishaBirthdayQuest.flags.spokeWithBaker ? "About Misha's age" : null,
+                mishaBirthdayQuest.flags.spokeWithBaker && !mishaBirthdayQuest.flags.celebrated
+                    ? "About Misha's age"
+                    : null,
                 "Bye",
             );
             if (result === 0) {

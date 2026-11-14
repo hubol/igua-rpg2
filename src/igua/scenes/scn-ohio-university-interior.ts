@@ -47,7 +47,9 @@ function enrichOlgaClassroom(
                 `Hello, ${Rpg.character.attributes.names.current}.`,
                 "Teach me something",
                 classroomUnlockedQuest.isCompletable ? "I want to teach" : null,
-                mishaBirthdayQuest.flags.spokeWithAidar ? "About Misha's age" : null,
+                mishaBirthdayQuest.flags.spokeWithAidar && !mishaBirthdayQuest.flags.celebrated
+                    ? "About Misha's age"
+                    : null,
                 "Bye, Olga!",
             );
 

@@ -47,7 +47,9 @@ function enrichBakerNpc(lvl: LvlType.OpenMarketBaker) {
                 !mishaBirthdayQuest.flags.spokeWithBaker && mishaBirthdayQuest.flags.readCalendar
                     ? "Something for Misha's birthday"
                     : null,
-                mishaBirthdayQuest.flags.learnedMishasAge ? "I know Misha's age!" : null,
+                mishaBirthdayQuest.flags.learnedMishasAge && !mishaBirthdayQuest.flags.celebrated
+                    ? "I know Misha's age!"
+                    : null,
                 "Nothing right now!",
             );
 

@@ -253,6 +253,17 @@
           "originY": 52,
           "flippedX": false,
           "values": {"personaName": "CobblerOhio", "name": "CobblerNpc", "depth": 0}
+        },
+        {
+          "name": "IguanaNpc",
+          "id": 6,
+          "_eid": "90326278",
+          "x": 360,
+          "y": 120,
+          "originX": 20,
+          "originY": 52,
+          "flippedX": true,
+          "values": {"personaName": "Olga", "name": "OlgaNpc", "depth": 0}
         }
       ]
     },
@@ -308,6 +319,8 @@
           "_eid": "88296692",
           "x": 296,
           "y": 72,
+          "width": 34,
+          "height": 48,
           "originX": 0,
           "originY": -2,
           "values": {"sceneName": "scnMishaHouse", "checkpointName": "fromOpenMarket", "name": "", "depth": 0}
@@ -318,6 +331,8 @@
           "_eid": "88296692",
           "x": 656,
           "y": 264,
+          "width": 34,
+          "height": 48,
           "originX": 0,
           "originY": -2,
           "values": {"sceneName": "scnOpenMarketBaker", "checkpointName": "fromMarket", "name": "", "depth": 0}

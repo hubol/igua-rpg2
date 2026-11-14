@@ -73,6 +73,11 @@ export namespace DataTemporaryEffect {
                     model.motion.jump.midairCount += 1;
                 },
             },
+            MishaBirthdayCake: {
+                hudText: "Memory of birthday party creates sense of community",
+                // TODO do something no
+                buffs: () => {},
+            },
             __Fallback__: {
                 hudText: "This is a bug",
                 buffs: () => {},

@@ -140,7 +140,7 @@ export namespace DataKeyItem {
             MishaCake: {
                 name: "Misha's Birthday Cake",
                 description: "A birthday cake with the exact number of candles for Misha's birthday.",
-                texture: null,
+                texture: Tx.Collectibles.Key.MishaCake,
             },
             StaffFlame: {
                 name: "Staff of Flame",

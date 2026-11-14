@@ -284,11 +284,12 @@ export namespace DataQuest {
                     spokeWithBaker: false,
                     spokeWithAidar: false,
                     learnedMishasAge: Null<Integer>(),
+                    celebrated: false,
                 },
                 reward: {
-                    // TODO
-                    kind: "nothing",
+                    kind: "single",
                     countCompletions: "once",
+                    drop: { kind: "potion", id: "AttributeStrengthUp" },
                 },
             },
             "MountFlop.Flower": {

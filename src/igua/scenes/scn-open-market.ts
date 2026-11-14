@@ -3,6 +3,7 @@ import { Mzk } from "../../assets/music";
 import { Jukebox } from "../core/igua-audio";
 import { DramaCobbler } from "../drama/drama-cobbler";
 import { DramaGifts } from "../drama/drama-gifts";
+import { DramaQuests } from "../drama/drama-quests";
 import { show } from "../drama/show";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { mxnIguanaShopkeeper } from "../mixins/mxn-iguana-shopkeeper";
@@ -56,6 +57,28 @@ export function scnOpenMarket() {
         });
 
     enrichFlipNpc(lvl);
+    enrichOlgaNpc(lvl);
+}
+
+function enrichOlgaNpc(lvl: LvlType.OpenMarket) {
+    const quest = Rpg.quest("MishaHouse.Birthday");
+    if (quest.flags.celebrated && quest.isCompletable) {
+        lvl.OlgaNpc
+            .mixin(mxnCutscene, function* () {
+                yield* show(
+                    "Thanks for your help with Misha's birthday.",
+                    "It means a lot.",
+                );
+
+                if (quest.peekCompletionReward()) {
+                    yield* show("Please take this.");
+                    yield* DramaQuests.complete(quest);
+                }
+            });
+    }
+    else {
+        lvl.OlgaNpc.destroy();
+    }
 }
 
 function enrichFlipNpc(lvl: LvlType.OpenMarket) {

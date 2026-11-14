@@ -2,6 +2,7 @@ import { BLEND_MODES, Sprite } from "pixi.js";
 import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data";
 import { Mzk } from "../../assets/music";
 import { Tx } from "../../assets/textures";
+import { Coro } from "../../lib/game-engine/routines/coro";
 import { interp } from "../../lib/game-engine/routines/interp";
 import { sleep, sleepf } from "../../lib/game-engine/routines/sleep";
 import { PseudoRng } from "../../lib/math/rng";
@@ -10,6 +11,7 @@ import { Jukebox } from "../core/igua-audio";
 import { ZIndex } from "../core/scene/z-index";
 import { DramaInventory } from "../drama/drama-inventory";
 import { DramaQuests } from "../drama/drama-quests";
+import { DramaScene } from "../drama/drama-scene";
 import { ask, show } from "../drama/show";
 import { Cutscene, scene } from "../globals";
 import { mxnFxTintRotate } from "../mixins/effects/mxn-fx-tint-rotate";
@@ -29,6 +31,7 @@ import { objIndexedSprite } from "../objects/utils/obj-indexed-sprite";
 import { Rpg } from "../rpg/rpg";
 import { RpgEnemyRank } from "../rpg/rpg-enemy-rank";
 import { RpgQuest } from "../rpg/rpg-quests";
+import { SceneChanger } from "../systems/scene-changer";
 import { Search } from "../utils/search";
 
 const ranks = {
@@ -288,6 +291,9 @@ function enrichMishaHouseParty(lvl: LvlType.MishaHouse, quest: RpgQuest<"MishaHo
     const yellPlayerObj = playerObj
         .mixin(mxnYell);
 
+    const yellMishaObj = lvl.MishaNpc
+        .mixin(mxnYell);
+
     lvl.MishaNpc.facing = -1;
     lvl.MishaNpc.x += 8;
 
@@ -306,14 +312,108 @@ function enrichMishaHouseParty(lvl: LvlType.MishaHouse, quest: RpgQuest<"MishaHo
 
         yield sleep(1000);
 
-        yield* DramaInventory.removeAll(quest.data.items.cakeKeyItem);
-
         const cakeObj = objEsotericMishaBirthdayCake(quest.flags.learnedMishasAge ?? 55)
             .at(lvl.ComputerMarker)
+            .zIndexed(ZIndex.TerrainDecals)
             .show();
+
+        Cutscene.setCurrentSpeaker(playerObj);
+
+        yield* show("I got this cake for you");
+
+        Cutscene.setCurrentSpeaker(lvl.ComputerMarker);
+
+        yield* Coro.all([
+            DramaInventory.removeAll(quest.data.items.cakeKeyItem),
+            Coro.chain([sleep(1500), () => (lvl.MishaNpc.auto.facing = 1, true)]),
+        ]);
 
         yield interp(cakeObj.objEsotericMishaBirthdayCake, "visibleUnit")
             .to(1)
             .over(1000);
+
+        Cutscene.setCurrentSpeaker(lvl.MishaNpc);
+
+        yield* show("Holy fuck it's huge");
+
+        yield interp(cakeObj.objEsotericMishaBirthdayCake, "litUnit")
+            .to(1)
+            .over(500);
+
+        Cutscene.setCurrentSpeaker(playerObj);
+
+        yield* show(
+            "OK well now it's huge and on fire",
+            "So blow out them candles, son!!!!",
+        );
+
+        yield sleep(1000);
+
+        yield interp(lvl.MishaNpc.head.mouth, "agape")
+            .to(1)
+            .over(250);
+
+        yield sleep(250);
+
+        lvl.MishaNpc.speed.at(0, -3);
+
+        yield interp(cakeObj.objEsotericMishaBirthdayCake, "litUnit")
+            .to(0)
+            .over(500);
+
+        yield interp(lvl.MishaNpc.head.mouth, "agape")
+            .to(0)
+            .over(250);
+
+        yield sleep(1000);
+
+        for (const obj of [yellMishaObj, olgaObj, yellPlayerObj, aidarObj]) {
+            // TODO sfx
+            obj.mxnYell.yell("Munch");
+            obj.speed.y = -1;
+            cakeObj.scale.set(cakeObj.scale.x - .25);
+            yield sleep(1000);
+        }
+
+        yield sleep(1000);
+
+        lvl.MishaNpc.auto.facing = -1;
+
+        yield sleep(1000);
+
+        Cutscene.setCurrentSpeaker(lvl.MishaNpc);
+
+        yield* show(
+            "Well, unfortunately, cake is shit.",
+            "Olga, do we have any vodka?",
+        );
+
+        Cutscene.setCurrentSpeaker(olgaObj);
+
+        yield* show("No");
+
+        Cutscene.setCurrentSpeaker(lvl.MishaNpc);
+
+        yield* show("Did anyone bring any whiskey?");
+
+        for (const obj of [aidarObj, playerObj]) {
+            Cutscene.setCurrentSpeaker(obj);
+            yield* show("No");
+        }
+
+        yield sleep(1000);
+
+        Cutscene.setCurrentSpeaker(lvl.MishaNpc);
+
+        yield* show("Well");
+
+        yield sleep(500);
+
+        yield* show("It was still very great that you did this");
+
+        const sceneChanger = SceneChanger.create({ sceneName: scnMishaHouse.name, checkpointName: "fromBirthday" });
+        quest.flags.celebrated = true;
+        yield* DramaScene.change(sceneChanger);
+        Rpg.character.temporaryEffects.add("MishaBirthdayCake", 300);
     });
 }
