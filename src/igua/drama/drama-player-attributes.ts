@@ -21,7 +21,6 @@ function* callName(name: string) {
 
 function* chooseAvailableName() {
     const availableNames = Rpg.character.attributes.names.availableList;
-    let availableNameListIndex = 0;
 
     const playerReallyWantsToChange = yield* ask(`Currently your name is: ${Rpg.character.attributes.names.current}
 
@@ -31,27 +30,10 @@ Do you want to change it?`);
         return;
     }
 
-    // TODO probably could add pagination to ask
-    while (true) {
-        const options = availableNames.slice(availableNameListIndex, availableNameListIndex + 7);
-        const hasNextPage = options.length < availableNames.length;
-        if (hasNextPage) {
-            options.push("(Next page)");
-        }
-        const result = yield* ask("These are the names I have on file for you.", ...options);
-        if (hasNextPage && result === options.length - 1) {
-            availableNameListIndex += 7;
-            if (availableNameListIndex >= availableNames.length) {
-                availableNameListIndex = 0;
-            }
-        }
-        else {
-            const name = options[result + availableNameListIndex];
-            Rpg.character.attributes.names.chooseNameFromAvailable(name);
-            yield* announceNameChange(name);
-            return;
-        }
-    }
+    const result = yield* ask("These are the names I have on file for you.", ...availableNames);
+    const name = availableNames[result];
+    Rpg.character.attributes.names.chooseNameFromAvailable(name);
+    yield* announceNameChange(name);
 }
 
 export const DramaPlayerAttributes = {

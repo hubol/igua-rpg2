@@ -203,7 +203,13 @@ function objQuestionOptionBoxes(speaker: DisplayObject | null, options: AskOptio
 
     const pageObj = objUiPage(
         optionObjs,
-        { selectionIndex: 0, startTicking: true },
+        {
+            selectionIndex: 0,
+            startTicking: true,
+            maxHeight: 186,
+            scrollbarBgTint: colors.primary,
+            scrollbarFgTint: colors.textPrimary,
+        },
     )
         .coro(function* (self) {
             yield () => Boolean(self.selected) && Input.isDown("Confirm");
@@ -248,7 +254,7 @@ function objQuestionOptionBoxes(speaker: DisplayObject | null, options: AskOptio
                         return;
                     }
                     self.scale.set(pageObj.navigation && Input.isDown("Confirm") ? 0.9 : 1);
-                    self.moveTowards(v.at(offset).add(pageObj.selected), 8);
+                    self.moveTowards(v.at(offset).add(pageObj.selected).add(pageObj.selected.parent.pivot, -1), 8);
                 },
             ),
     ).at(117, 66).merge({ state });
