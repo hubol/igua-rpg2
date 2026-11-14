@@ -30,7 +30,7 @@ export function scnDevQuality() {
         const x = 16 * (time - firstTime) / oneMonthMilliseconds;
         for (const [entityId, entityCount] of Object.entries(sliceData)) {
             lineGraphObjs[entityId] ??= objLineGraph(metadata[entityId].tint).show(obj);
-            const y = -entityCount;
+            const y = -Math.round(entityCount * .8);
             lineGraphObjs[entityId].objLineGraph.addPoint(x, y);
         }
     }
