@@ -66,7 +66,7 @@ export namespace DataHint {
             "Ohio.MagicKey0": {
                 kind: "quest",
                 messages: [
-                    `One can be found in your food by utlizing ${
+                    `One can be found in your food by utilizing ${
                         DataNpcPersona.getById("FoodChecker").name
                     }'s services.`,
                 ],
