@@ -89,6 +89,8 @@ function enrichMiner(lvl: LvlType.NewBalltown) {
 }
 
 function enrichOliveFanatic(lvl: LvlType.NewBalltown) {
+    const bakerQuest = Rpg.quest("OhioBaker.Olives");
+
     lvl.OliveFanatic.mixin(mxnCutscene, function* () {
         lvl.OliveFanatic.isDucking = false;
         yield sleep(500);
@@ -97,7 +99,27 @@ function enrichOliveFanatic(lvl: LvlType.NewBalltown) {
             "Many interested",
             "Somewhat interested",
             "Not interested",
+            !Rpg.inventory.has(bakerQuest.data.items.olivesKeyItem) && bakerQuest.flags.toldPlayerAboutDesire
+                ? "I know an interested baker"
+                : null,
         );
+
+        if (result === 3) {
+            yield* show(
+                "A baker, huh?",
+                "Well, he/she/they sound creative...",
+                "Sure, I can give you a jar of lovely, lovely olives.",
+            );
+
+            yield* DramaInventory.receiveItems([bakerQuest.data.items.olivesKeyItem]);
+
+            yield* show(
+                "I'm not sure I'm interested in the outcome of this experiment.",
+                "But I'm still wild about olives!",
+            );
+
+            return;
+        }
 
         if (result === 2) {
             yield* show(

@@ -451,6 +451,22 @@ export namespace DataQuest {
                     ],
                 },
             },
+            "OhioBaker.Olives": {
+                items: {
+                    olivesKeyItem: { kind: "key_item", id: "JarOlives" },
+                },
+                flags: {
+                    toldPlayerAboutDesire: false,
+                },
+                reward: {
+                    kind: "single",
+                    countCompletions: "once",
+                    drop: [
+                        { kind: "potion", id: "CakeOlives" },
+                        { kind: "potion", id: "CakeOlives" },
+                    ],
+                },
+            },
             __Fallback__: {
                 items: null,
                 flags: null,

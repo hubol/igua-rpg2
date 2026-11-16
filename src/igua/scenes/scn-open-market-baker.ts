@@ -7,8 +7,10 @@ import { interp, interpvr } from "../../lib/game-engine/routines/interp";
 import { Jukebox } from "../core/igua-audio";
 import { DramaInventory } from "../drama/drama-inventory";
 import { DramaMisc } from "../drama/drama-misc";
+import { DramaQuests } from "../drama/drama-quests";
 import { dramaShop } from "../drama/drama-shop";
 import { ask, show } from "../drama/show";
+import { mxnFxJumpBpm } from "../mixins/effects/mxn-fx-jump-bpm";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { objFxFieryBurst170px } from "../objects/effects/obj-fx-fiery-burst-170px";
 import { objEsotericBakerCakeChecker } from "../objects/esoteric/obj-esoteric-baker-cake-checker";
@@ -24,6 +26,7 @@ export function scnOpenMarketBaker() {
 function enrichBakerNpc(lvl: LvlType.OpenMarketBaker) {
     let everSmokedInHere = false;
     const mishaBirthdayQuest = Rpg.quest("MishaHouse.Birthday");
+    const olivesQuest = Rpg.quest("OhioBaker.Olives");
 
     lvl.BakerNpc
         .mixin(mxnCutscene, function* () {
@@ -50,11 +53,46 @@ function enrichBakerNpc(lvl: LvlType.OpenMarketBaker) {
                 mishaBirthdayQuest.flags.learnedMishasAge && !mishaBirthdayQuest.flags.celebrated
                     ? "I know Misha's age!"
                     : null,
+                !Rpg.inventory.has(olivesQuest.data.items.olivesKeyItem) && olivesQuest.isCompletable
+                    ? "Any errands?"
+                    : null,
+                Rpg.inventory.has(olivesQuest.data.items.olivesKeyItem)
+                    ? "I have olives!"
+                    : null,
                 "Nothing right now!",
             );
 
-            if (response === 4) {
+            if (response === 6) {
                 yield* show("All good!!! See you around!!!");
+                return;
+            }
+
+            if (response === 5) {
+                yield* show("Yoooooooo! Gimme gimme gimme!!");
+                yield* DramaInventory.removeAll(olivesQuest.data.items.olivesKeyItem);
+
+                const jumpObj = lvl.BakerNpc
+                    .mixin(mxnFxJumpBpm, { mzk: Mzk.PreciousInstructions, bpm: 109, speed: -2 });
+
+                yield* show(
+                    "Dear god it's good!!!",
+                    "Here! Here!",
+                    "I'm a genius!!!",
+                );
+
+                yield* DramaQuests.complete("OhioBaker.Olives");
+
+                jumpObj.mxnFxJumpBpm.isJumping = false;
+                return;
+            }
+
+            if (response === 4) {
+                yield* show(
+                    "I'm looking to experiment with a new cake flavor.",
+                    "I'm obsessed with olives, but don't have a reliable source for them.",
+                    "Maybe you can find me some olives...?",
+                );
+                olivesQuest.flags.toldPlayerAboutDesire = true;
                 return;
             }
 

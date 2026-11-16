@@ -182,6 +182,11 @@ export namespace DataKeyItem {
                 description: "A cartridge labeled HIGHLOW.BAS",
                 texture: Tx.Collectibles.Key.SoftwareHighLow,
             },
+            JarOlives: {
+                name: "Jar of Olives",
+                description: "Lovely New Balltown olives",
+                texture: Tx.Collectibles.Key.JarOlives,
+            },
             __Fallback__: { name: "???", description: "If you are reading this, this is a bug.", texture: null },
         } satisfies Record<string, Model>,
     );

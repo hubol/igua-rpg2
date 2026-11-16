@@ -421,6 +421,15 @@ export namespace DataPotion {
                 flags: flags("is_foodlike"),
                 healthRestore: () => 40,
             },
+            CakeOlives: {
+                stinkLineTint: 0x498F43,
+                name: "Cake Slice (Olives)",
+                description: "Well... the baker seems to like it. Restores some health.",
+                sound: Sfx.Effect.Potion.RestoreHealth,
+                texture: Tx.Collectibles.Potion.CakeSliceOlives,
+                flags: flags("is_foodlike"),
+                healthRestore: () => 10,
+            },
             Fairy: {
                 stinkLineTint: 0x890000,
                 name: "Warm Bean",
