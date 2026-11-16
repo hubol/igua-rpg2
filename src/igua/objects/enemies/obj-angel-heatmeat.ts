@@ -23,6 +23,7 @@ import { mxnVoiceActed } from "../../mixins/mxn-voice-acted";
 import { RpgAttack } from "../../rpg/rpg-attack";
 import { RpgEnemyRank } from "../../rpg/rpg-enemy-rank";
 import { RpgStatus } from "../../rpg/rpg-status";
+import { objFxFlameSmall } from "../effects/obj-fx-flame-small";
 import { objFxRipple } from "../effects/obj-fx-ripple";
 import { playerObj } from "../obj-player";
 import { objProjectileFlameEmber } from "../projectiles/obj-projectile-flame-ember";
@@ -115,8 +116,16 @@ namespace themes {
 }
 
 const ranks = {
-    heat: RpgEnemyRank.create({}),
-    meat: RpgEnemyRank.create({}),
+    heat: RpgEnemyRank.create({
+        status: {
+            healthMax: 200,
+        },
+    }),
+    meat: RpgEnemyRank.create({
+        status: {
+            healthMax: 200,
+        },
+    }),
 };
 
 export type Feature = "overheat_retaliation";
@@ -268,14 +277,29 @@ export function objAngelHeatmeat(variantId: objAngelHeatmeat.VariantId) {
                 return;
             }
 
+            let stepsSinceDamaged = 9999;
+
             self.handles("damaged", (_, event) => {
                 if (event.rejected) {
                     return;
                 }
 
                 objAngelHeatmeatRetaliationAttack(self.status)
-                    .at(self.getWorldCenter())
+                    .at(puppetObj.objPuppetHeatmeat.flameObj.getWorldCenter())
                     .show();
+
+                stepsSinceDamaged = 0;
+                puppetObj.objPuppetHeatmeat.flameVisibleUnit = 1;
+            });
+
+            self.step(() => {
+                stepsSinceDamaged++;
+                if (stepsSinceDamaged > 15) {
+                    puppetObj.objPuppetHeatmeat.flameVisibleUnit = Math.max(
+                        0,
+                        puppetObj.objPuppetHeatmeat.flameVisibleUnit - 0.05,
+                    );
+                }
             });
         })
         .step(self => {
@@ -315,6 +339,13 @@ function objPuppetHeatmeat(theme: themes.Type) {
     let armsRaisedUnit = 0;
     const armsObj = objIndexedSprite(txsArms);
 
+    const flameObj = objFxFlameSmall()
+        .at(27, 0)
+        .step(self => {
+            self.alpha = api.flameVisibleUnit >= 1 ? 1 : 0.5;
+            self.visible = api.flameVisibleUnit > 0;
+        });
+
     const api = {
         mouthObj,
         get armsRaisedUnit() {
@@ -325,6 +356,8 @@ function objPuppetHeatmeat(theme: themes.Type) {
             armsRaisedUnit = value;
         },
         isOnGround: false,
+        flameVisibleUnit: 0,
+        flameObj,
     };
 
     return container(
@@ -341,6 +374,7 @@ function objPuppetHeatmeat(theme: themes.Type) {
         container(
             theme.createSprite("horn"),
             theme.createSprite("hair"),
+            flameObj,
             container(
                 theme.createEyesObj()
                     .add(27, 27),

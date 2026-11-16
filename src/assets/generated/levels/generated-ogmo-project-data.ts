@@ -115,6 +115,7 @@ export namespace OgmoEntities {
       | "objFxFactNew"
       | "objFxFieryBurst170px"
       | "objFxFizzle"
+      | "objFxFlameSmall"
       | "objFxFormativeBlob"
       | "objFxFormativeBurst"
       | "objFxHeart"

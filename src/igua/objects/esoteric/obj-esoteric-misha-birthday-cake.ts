@@ -1,15 +1,14 @@
 import { Graphics, Sprite } from "pixi.js";
 import { Tx } from "../../../assets/textures";
 import { blendColor } from "../../../lib/color/blend-color";
-import { sleepf } from "../../../lib/game-engine/routines/sleep";
 import { nlerp } from "../../../lib/math/number";
 import { Integer } from "../../../lib/math/number-alias-types";
 import { PseudoRng, Rng } from "../../../lib/math/rng";
 import { container } from "../../../lib/pixi/container";
 import { range } from "../../../lib/range";
 import { ZIndex } from "../../core/scene/z-index";
+import { objFxFlameSmall } from "../effects/obj-fx-flame-small";
 import { objEphemeralSprite } from "../obj-ephemeral-sprite";
-import { objIndexedSprite } from "../utils/obj-indexed-sprite";
 
 const [
     txLayer0,
@@ -20,7 +19,6 @@ const [
     txIcingFront,
 ] = Tx.Esoteric.MishaBirthday.Cake.split({ count: 6 });
 
-const txsCandleLights = Tx.Esoteric.MishaBirthdayCandleLight.split({ width: 4 });
 const txsCandleSmoke = Tx.Esoteric.MishaCandleSmoke.split({ width: 22 });
 
 const prng = new PseudoRng();
@@ -64,18 +62,10 @@ export function objEsotericMishaBirthdayCake(candlesCount: Integer) {
                         .anchored(0.5, 1)
                         .tinted(blendColor(0xffffff, 0x99afdd, 1 - yUnit))
                         .zIndexed(y),
-                    objIndexedSprite(txsCandleLights)
-                        .anchored(0.5, 1)
+                    objFxFlameSmall()
                         .at(0, prng.intc(-12, -14))
                         .invisible()
                         .step(self => self.visible = api.isLit)
-                        .coro(function* (self) {
-                            while (true) {
-                                self.textureIndex = Rng.int(3);
-                                self.pivot.at(Rng.intc(-1, 1), Rng.intc(-1, 1));
-                                yield sleepf(Rng.intc(5, 10));
-                            }
-                        })
                         .coro(function* (self) {
                             yield () => api.isLit;
                             yield () => !api.isLit;
