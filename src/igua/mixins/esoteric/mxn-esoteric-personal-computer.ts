@@ -1,15 +1,24 @@
 import { DisplayObject, Sprite } from "pixi.js";
+import { Sfx } from "../../../assets/sounds";
 import { Tx } from "../../../assets/textures";
 import { Coro } from "../../../lib/game-engine/routines/coro";
+import { factor, interpvr } from "../../../lib/game-engine/routines/interp";
 import { sleep } from "../../../lib/game-engine/routines/sleep";
+import { vdeg } from "../../../lib/math/angle";
 import { Rng } from "../../../lib/math/rng";
+import { VectorSimple } from "../../../lib/math/vector-type";
 import { DramaInventory } from "../../drama/drama-inventory";
 import { DramaMisc } from "../../drama/drama-misc";
 import { ask, show } from "../../drama/show";
+import { Cutscene } from "../../globals";
+import { playerObj } from "../../objects/obj-player";
 import { MicrocosmPersonalComputer } from "../../rpg/microcosms/microcosm-personal-computer";
 import { Rpg } from "../../rpg/rpg";
+import { RpgAttack } from "../../rpg/rpg-attack";
 import { RpgExperienceRewarder } from "../../rpg/rpg-experience-rewarder";
+import { mxnFxSpriteGhost } from "../effects/mxn-fx-sprite-ghost";
 import { mxnCutscene } from "../mxn-cutscene";
+import { mxnRpgAttack } from "../mxn-rpg-attack";
 
 export function mxnEsotericPersonalComputer(obj: DisplayObject, cosmPersonalComputer: MicrocosmPersonalComputer) {
     const eventsObj = obj
@@ -22,6 +31,11 @@ export function mxnEsotericPersonalComputer(obj: DisplayObject, cosmPersonalComp
             eventsObj.dispatch("mxnEsotericPersonalComputer.booted");
 
             while (true) {
+                // TODO feels a little weird, but i guess it is exceptional for the player to die during cutscenes...
+                if (!Rpg.character.status.isAlive) {
+                    return;
+                }
+
                 const programData = cosmPersonalComputer.insertedSoftwareKeyItemId
                     ? DataProgram.manifest[cosmPersonalComputer.insertedSoftwareKeyItemId]
                     : null;
@@ -106,6 +120,25 @@ namespace DataProgram {
                         break;
                     }
 
+                    Cutscene.current!.attributes.allowPlayerMovement = true;
+
+                    const normal = vdeg(Rng.int(2) * 180);
+
+                    const startPosition = playerObj.vcpy().add(normal, 150);
+                    const endPosition = playerObj.vcpy().add(normal, -150);
+
+                    const wrongObj = objAttackWrong(endPosition)
+                        .at(startPosition)
+                        .show();
+
+                    yield () => wrongObj.destroyed;
+
+                    if (!Rpg.character.status.isAlive) {
+                        return "noop";
+                    }
+
+                    Cutscene.current!.attributes.allowPlayerMovement = false;
+
                     if (guess < number) {
                         yield* show("TOO LOW");
                     }
@@ -115,9 +148,12 @@ namespace DataProgram {
                 }
 
                 if (guess !== number) {
+                    Sfx.Interact.Error.play();
                     yield* show("TOO MANY GUESSES");
                     return "noop";
                 }
+
+                Sfx.Interact.Correct.play();
 
                 yield* show(
                     "CORRECT",
@@ -141,3 +177,26 @@ namespace DataProgram {
         },
     };
 }
+
+function objAttackWrong(targetPosition: VectorSimple) {
+    return Sprite.from(Tx.Effects.Wrong)
+        .anchored(0.5, 1)
+        .mixin(mxnRpgAttack, { attack: atks.punishment })
+        .mixin(mxnFxSpriteGhost)
+        .coro(function* (self) {
+            self.play(Sfx.Interact.Error);
+            yield sleep(250);
+            self.mxnFxSpriteGhost.perFrame = 0.3;
+            yield interpvr(self).factor(factor.sine).to(targetPosition).over(2000);
+            self.destroy();
+        });
+}
+
+const atks = {
+    punishment: RpgAttack.create({
+        emotional: 10,
+        quirks: {
+            ignoreCutscenePlaying: true,
+        },
+    }),
+};

@@ -14,6 +14,7 @@ import { Rpg } from "../rpg/rpg";
 
 function getDefaultCutsceneAttributes() {
     return {
+        allowPlayerMovement: false,
         speaker: Null<DisplayObject>(),
         letterbox: true,
         computerObjsSpoken: new Set<DisplayObject>(),

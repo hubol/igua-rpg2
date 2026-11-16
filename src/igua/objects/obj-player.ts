@@ -25,7 +25,6 @@ import { mxnSparkling } from "../mixins/mxn-sparkling";
 import { mxnSpeaker } from "../mixins/mxn-speaker";
 import { Rpg } from "../rpg/rpg";
 import { RpgDarkness } from "../rpg/rpg-darkness";
-import { RpgFaction } from "../rpg/rpg-faction";
 import { RpgSaveFiles } from "../rpg/rpg-save-files";
 import { RpgStatus } from "../rpg/rpg-status";
 import { objFxEnemyDefeat } from "./effects/obj-fx-enemy-defeat";
@@ -208,11 +207,11 @@ function objPlayer(looks: IguanaLooks.Serializable) {
         .merge({
             get canInteract() {
                 // TODO Same--I sometimes wonder if this belongs closer to the RPG layer
-                return this.hasControl && !layers.overlay.inventory.isOpen;
+                return !Cutscene.isPlaying && !layers.overlay.inventory.isOpen;
             },
             get hasControl() {
                 // TODO I sometimes wonder if this belongs closer to the RPG layer
-                return !Cutscene.isPlaying;
+                return !Cutscene.current || Cutscene.current.attributes.allowPlayerMovement;
             },
             get walkingTopSpeed() {
                 return getWalkingTopSpeed();
