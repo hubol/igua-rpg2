@@ -10,6 +10,7 @@ import { vnew } from "../../../lib/math/vector-type";
 import { container } from "../../../lib/pixi/container";
 import { MapRgbFilter } from "../../../lib/pixi/filters/map-rgb-filter";
 import { scene } from "../../globals";
+import { mxnDestroyAfterSteps } from "../../mixins/mxn-destroy-after-steps";
 import { mxnDetectPlayer } from "../../mixins/mxn-detect-player";
 import { mxnEnemy } from "../../mixins/mxn-enemy";
 import { mxnEnemyDeathBurst } from "../../mixins/mxn-enemy-death-burst";
@@ -21,7 +22,10 @@ import { mxnSparkling } from "../../mixins/mxn-sparkling";
 import { mxnVoiceActed } from "../../mixins/mxn-voice-acted";
 import { RpgAttack } from "../../rpg/rpg-attack";
 import { RpgEnemyRank } from "../../rpg/rpg-enemy-rank";
+import { RpgStatus } from "../../rpg/rpg-status";
 import { objFxRipple } from "../effects/obj-fx-ripple";
+import { playerObj } from "../obj-player";
+import { objProjectileFlameEmber } from "../projectiles/obj-projectile-flame-ember";
 import { objProjectileSaw } from "../projectiles/obj-projectile-saw";
 import { objIndexedSprite } from "../utils/obj-indexed-sprite";
 import { AngelThemeTemplate } from "./angel-theme-template";
@@ -115,14 +119,18 @@ const ranks = {
     meat: RpgEnemyRank.create({}),
 };
 
+export type Feature = "overheat_retaliation";
+
 const variants = {
     heat: {
         rank: ranks.heat,
         theme: themes.heat,
+        features: new Set<Feature>(["overheat_retaliation"]),
     },
     meat: {
         rank: ranks.meat,
         theme: themes.meat,
+        features: new Set<Feature>([]),
     },
 };
 
@@ -134,10 +142,18 @@ const atks = {
     saw: RpgAttack.create({
         physical: 40,
     }),
+    retaliation: RpgAttack.create({
+        conditions: {
+            overheat: {
+                value: 90,
+                damage: 25,
+            },
+        },
+    }),
 };
 
 export function objAngelHeatmeat(variantId: objAngelHeatmeat.VariantId) {
-    const { rank, theme } = variants[variantId];
+    const { rank, theme, features } = variants[variantId];
 
     const hurtboxObjs = [
         new Graphics().beginFill(0xff0000).drawRect(6, 17, 43, 25),
@@ -247,6 +263,21 @@ export function objAngelHeatmeat(variantId: objAngelHeatmeat.VariantId) {
                 state.isFlying = true;
             }
         })
+        .coro(function* (self) {
+            if (!features.has("overheat_retaliation")) {
+                return;
+            }
+
+            self.handles("damaged", (_, event) => {
+                if (event.rejected) {
+                    return;
+                }
+
+                objAngelHeatmeatRetaliationAttack(self.status)
+                    .at(self.getWorldCenter())
+                    .show();
+            });
+        })
         .step(self => {
             // TODO I think it's time to invent a knockback mixin or something...
             self.speed.x = approachLinear(self.speed.x, 0, self.isOnGround ? 0.4 : 0.067);
@@ -333,3 +364,13 @@ const messageSfxs: Record<objAngelHeatmeat.VariantId, Record<objAngelHeatmeat.Me
     heat: Sfx.Enemy.Heatmeat.Heat,
     meat: Sfx.Enemy.Heatmeat.Meat,
 };
+
+function objAngelHeatmeatRetaliationAttack(attacker: RpgStatus.Model) {
+    return objProjectileFlameEmber(playerObj)
+        .mixin(mxnRpgAttack, { attack: atks.retaliation, damageTargetsOnce: true, attacker })
+        .handles("mxnRpgAttack.hit", (self) => self.mixin(mxnDestroyAfterSteps, 15))
+        .step(self => self.objProjectileFlameEmber.speed = approachLinear(self.objProjectileFlameEmber.speed, 12, 1))
+        .coro(function* (self) {
+            self.play(Sfx.Enemy.Heatmeat.Retaliate.rate(0.9, 1.1));
+        });
+}
