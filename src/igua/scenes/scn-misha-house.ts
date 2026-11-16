@@ -1,6 +1,7 @@
 import { BLEND_MODES, Sprite } from "pixi.js";
 import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data";
 import { Mzk } from "../../assets/music";
+import { Sfx } from "../../assets/sounds";
 import { Tx } from "../../assets/textures";
 import { Coro } from "../../lib/game-engine/routines/coro";
 import { interp } from "../../lib/game-engine/routines/interp";
@@ -328,6 +329,8 @@ function enrichMishaHouseParty(lvl: LvlType.MishaHouse, quest: RpgQuest<"MishaHo
             Coro.chain([sleep(1500), () => (lvl.MishaNpc.auto.facing = 1, true)]),
         ]);
 
+        Sfx.Esoteric.MishaCakeBuild.rate(2).play();
+
         yield interp(cakeObj.objEsotericMishaBirthdayCake, "visibleUnit")
             .to(1)
             .over(1000);
@@ -335,6 +338,8 @@ function enrichMishaHouseParty(lvl: LvlType.MishaHouse, quest: RpgQuest<"MishaHo
         Cutscene.setCurrentSpeaker(lvl.MishaNpc);
 
         yield* show("Holy fuck it's huge");
+
+        Sfx.Cutscene.CakeCandlesLight.play();
 
         yield interp(cakeObj.objEsotericMishaBirthdayCake, "litUnit")
             .to(1)
@@ -349,6 +354,8 @@ function enrichMishaHouseParty(lvl: LvlType.MishaHouse, quest: RpgQuest<"MishaHo
 
         yield sleep(1000);
 
+        lvl.MishaNpc.play(Sfx.Cutscene.BreatheIn);
+
         yield interp(lvl.MishaNpc.head.mouth, "agape")
             .to(1)
             .over(250);
@@ -356,6 +363,8 @@ function enrichMishaHouseParty(lvl: LvlType.MishaHouse, quest: RpgQuest<"MishaHo
         yield sleep(250);
 
         lvl.MishaNpc.speed.at(0, -3);
+
+        lvl.MishaNpc.play(Sfx.Cutscene.BreatheOut);
 
         yield interp(cakeObj.objEsotericMishaBirthdayCake, "litUnit")
             .to(0)
@@ -368,7 +377,10 @@ function enrichMishaHouseParty(lvl: LvlType.MishaHouse, quest: RpgQuest<"MishaHo
         yield sleep(1000);
 
         for (const obj of [yellMishaObj, olgaObj, yellPlayerObj, aidarObj]) {
-            // TODO sfx
+            if (obj === playerObj) {
+                playerObj.heal(25);
+            }
+            obj.play(Sfx.Cutscene.Munch);
             obj.mxnYell.yell("Munch");
             obj.speed.y = -1;
             cakeObj.scale.set(cakeObj.scale.x - .25);
