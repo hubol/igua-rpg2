@@ -152,6 +152,12 @@ export function scnMishaHouse() {
     lvl.Calendar
         .mixin(mxnSpeaker, { name: "Misha's Calendar", tintPrimary: 0x848AE0, tintSecondary: 0x2E0D33 })
         .mixin(mxnCutscene, function* () {
+            if (birthdayQuest.flags.celebrated) {
+                yield* show("That was a nice birthday party.");
+                Rpg.character.temporaryEffects.add("MishaBirthdayCake", 300);
+                return;
+            }
+
             yield* show(
                 "Seven Days Ago ... Work",
                 "Six Days Ago ... Work",
