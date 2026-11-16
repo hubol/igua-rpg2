@@ -507,6 +507,15 @@ export namespace DataShop {
                     },
                 ],
             },
+            OpenBakerOlives: {
+                stocks: [
+                    {
+                        initialQuantity: 999,
+                        price: { currency: "valuables", deltaSold: 0, initial: 5 },
+                        product: { kind: "potion", id: "CakeOlives" },
+                    },
+                ],
+            },
             JumpGoon: {
                 stocks: [
                     {

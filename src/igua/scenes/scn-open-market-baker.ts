@@ -59,11 +59,18 @@ function enrichBakerNpc(lvl: LvlType.OpenMarketBaker) {
                 Rpg.inventory.has(olivesQuest.data.items.olivesKeyItem)
                     ? "I have olives!"
                     : null,
+                olivesQuest.everCompleted ? "Delicious olive cake!" : null,
                 "Nothing right now!",
             );
 
-            if (response === 6) {
+            if (response === 7) {
                 yield* show("All good!!! See you around!!!");
+                return;
+            }
+
+            if (response === 6) {
+                yield* show("Ah! I'm glad you enjoy my olive cake.");
+                yield* dramaShop("OpenBakerOlives", lvl.BakerNpc.speaker);
                 return;
             }
 
@@ -81,6 +88,11 @@ function enrichBakerNpc(lvl: LvlType.OpenMarketBaker) {
                 );
 
                 yield* DramaQuests.complete("OhioBaker.Olives");
+
+                yield* show(
+                    "A sample for you!!",
+                    "If you want any more olive cake, I'll sell it to you--real cheap!",
+                );
 
                 jumpObj.mxnFxJumpBpm.isJumping = false;
                 return;
