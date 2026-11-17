@@ -190,7 +190,7 @@ export namespace DataKeyItem {
             CostcoCard: {
                 name: "Costco Membership Card",
                 description: "Membership card for an esteemed institution. Lasts for one year.",
-                texture: null,
+                texture: Tx.Collectibles.Key.CostcoCard,
             },
             __Fallback__: { name: "???", description: "If you are reading this, this is a bug.", texture: null },
         } satisfies Record<string, Model>,
