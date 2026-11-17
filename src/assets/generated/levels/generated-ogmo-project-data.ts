@@ -90,6 +90,7 @@ export namespace OgmoEntities {
       | "objEsotericBoneChest"
       | "objEsotericBoneDusts"
       | "objEsotericDecorationCampfire"
+      | "objEsotericGhostFace"
       | "objEsotericHotPineConeTree"
       | "objEsotericInProgressOrder"
       | "objEsotericOutOfOrderSign"
