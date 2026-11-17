@@ -112,6 +112,7 @@ export namespace DataNpcPersona {
             OhioPokeOpponent: { job: "Trainer", name: "Claude", looksId: "HeadTurner" },
             PoisonFacilitator: { job: "Overseer", name: "Marsh", looksId: "NervousOnTheSurface" },
             DungeonExplorer: { job: "Explorer", name: "Trench", looksId: "Cyclops" },
+            CostcoGreeter: { job: "Greeter", name: "Munnie", looksId: "Jester" },
             __Fallback__: { job: "???", name: "???", looksId: "MintyJourney" },
         } satisfies Record<string, Model>,
     );
