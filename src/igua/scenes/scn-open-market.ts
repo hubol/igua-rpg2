@@ -1,15 +1,19 @@
 import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data";
 import { Mzk } from "../../assets/music";
+import { sleep } from "../../lib/game-engine/routines/sleep";
 import { Jukebox } from "../core/igua-audio";
 import { DramaCobbler } from "../drama/drama-cobbler";
 import { DramaGifts } from "../drama/drama-gifts";
 import { DramaInventory } from "../drama/drama-inventory";
 import { DramaQuests } from "../drama/drama-quests";
 import { ask, show } from "../drama/show";
+import { Cutscene } from "../globals";
 import { mxnCharacterCricket } from "../mixins/mxn-character-cricket";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { mxnIguanaShopkeeper } from "../mixins/mxn-iguana-shopkeeper";
 import { mxnSpeaker } from "../mixins/mxn-speaker";
+import { objFxHeart } from "../objects/effects/obj-fx-heart";
+import { playerObj } from "../objects/obj-player";
 import { Rpg } from "../rpg/rpg";
 
 export function scnOpenMarket() {
@@ -70,6 +74,36 @@ function enrichCricket(lvl: LvlType.OpenMarket) {
     lvl.Cricket
         .mixin(mxnCharacterCricket)
         .mixin(mxnCutscene, function* () {
+            if (quest.everCompleted) {
+                yield* show(
+                    "It's nice to know that my son is happy.",
+                );
+                return;
+            }
+
+            if (quest.flags.deliveredLetter) {
+                yield* show("Did you deliver the letter to my son?");
+                Cutscene.setCurrentSpeaker(playerObj);
+                yield* show(
+                    "Yes! He appreciated the letter.",
+                    "He is just relaxing by the sea with his boyfriend.",
+                    "He wanted me to tell you that he is happy.",
+                );
+                // TODO sfx
+                objFxHeart.objBurst(10, 10)
+                    .at(lvl.Cricket)
+                    .show();
+
+                yield sleep(2000);
+                Cutscene.setCurrentSpeaker(lvl.Cricket);
+                yield* show(
+                    "Oh wow... that makes me... really happy...",
+                    "Thank you for doing this.",
+                );
+                yield* DramaQuests.complete("Ohio.CricketFamily");
+                return;
+            }
+
             if (Rpg.inventory.has(quest.data.items.motherLetterKeyItem)) {
                 yield* show(
                     "Have you delivered the letter to my son yet?",

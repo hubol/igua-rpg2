@@ -477,8 +477,9 @@ export namespace DataQuest {
                 reward: {
                     kind: "single",
                     countCompletions: "once",
-                    // TODO
-                    drop: [],
+                    drop: [
+                        { kind: "equipment", id: "HealthUp", level: 2 },
+                    ],
                 },
             },
             __Fallback__: {
