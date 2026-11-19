@@ -13,7 +13,9 @@ export function mxnIguanaSpeaker(obj: DisplayObject, persona: DataNpcPersona.Typ
             },
         })
         .mixin(mxnSpeaker, { name: persona.name, ...objIguanaNpc.getSpeakerColors(DataNpcLooks[persona.looksId]) })
-        .handles("mxnSpeaker.speakingStarted", (self) => {
-            self.mxnIguanaSpeaker.rpgIguanaNpc.onSpeak();
+        .handles("mxnSpeaker.speakingStarted", (self, event) => {
+            if (event === "directed") {
+                self.mxnIguanaSpeaker.rpgIguanaNpc.onSpeak();
+            }
         });
 }

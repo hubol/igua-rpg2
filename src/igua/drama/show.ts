@@ -117,7 +117,7 @@ function* startSpeaking(text: string) {
     }
 
     if (currentSpeaker?.is(mxnSpeaker)) {
-        currentSpeaker.dispatch("mxnSpeaker.speakingStarted");
+        currentSpeaker.dispatch("mxnSpeaker.speakingStarted", "directed");
     }
 
     yield () => currentSpeakerMessageBoxObj!.state.isReadyToReceiveText;

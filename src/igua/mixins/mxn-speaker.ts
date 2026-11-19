@@ -14,7 +14,7 @@ interface MxnSpeakerArgs {
 export function mxnSpeaker(obj: DisplayObject, args: MxnSpeakerArgs) {
     const speaker = merge(args, { spokeOnceInCurrentScene: false });
     const speakerObj = obj.merge({ speaker })
-        .dispatches<"mxnSpeaker.speakingStarted">()
+        .dispatchesValue<"mxnSpeaker.speakingStarted", MxnSpeaker.Proximity>()
         .dispatches<"mxnSpeaker.speakingEnded">();
 
     speakerObj.handles("mxnSpeaker.speakingEnded", () => speaker.spokeOnceInCurrentScene = true);
@@ -68,4 +68,5 @@ export function mxnSpeaker(obj: DisplayObject, args: MxnSpeakerArgs) {
 export type MxnSpeaker = ReturnType<typeof mxnSpeaker>;
 export namespace MxnSpeaker {
     export type Args = MxnSpeakerArgs;
+    export type Proximity = "ambient" | "directed";
 }

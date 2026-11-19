@@ -23,7 +23,7 @@ export function mxnYell(obj: DisplayObject) {
     const api = {
         yell(message: string) {
             if (obj.is(mxnSpeaker)) {
-                obj.dispatch("mxnSpeaker.speakingStarted");
+                obj.dispatch("mxnSpeaker.speakingStarted", "ambient");
                 obj.coro(function* () {
                     yield sleep(2000);
                     obj.dispatch("mxnSpeaker.speakingEnded");
