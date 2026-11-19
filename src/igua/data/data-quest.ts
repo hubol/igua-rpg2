@@ -478,7 +478,8 @@ export namespace DataQuest {
                     kind: "single",
                     countCompletions: "once",
                     drop: [
-                        { kind: "equipment", id: "HealthUp", level: 2 },
+                        { kind: "equipment", id: "HealthUp", level: 1 },
+                        { kind: "equipment", id: "HealthUp", level: 1 },
                     ],
                 },
             },
