@@ -2069,6 +2069,30 @@
           "originY": 0.5,
           "values": {"name": ""},
           "groupName": null
+        },
+        {
+          "x": 3776,
+          "y": 879,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#245917",
+          "texture": "characters/cricket.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": "CricketSon"}
+        },
+        {
+          "x": 3800,
+          "y": 885,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#e23c27",
+          "texture": "characters/cricket.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": "CricketBoyfriend"}
         }
       ],
       "folder": "../textures"
@@ -10891,7 +10915,8 @@
           "texture": "world map/ghost town.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 4151,
@@ -10903,7 +10928,8 @@
           "texture": "terrain/grass/messy 28px.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 4185,
@@ -10915,7 +10941,8 @@
           "texture": "terrain/grass/messy 28px.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 4222,
@@ -10927,7 +10954,8 @@
           "texture": "terrain/grass/messy 28px.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 4263,
@@ -10939,7 +10967,8 @@
           "texture": "stone/rock small shaded1.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 4248,
@@ -10951,7 +10980,8 @@
           "texture": "stone/rock small shaded1.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 4125,
@@ -10963,7 +10993,8 @@
           "texture": "stone/rock small shaded1.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 4112,
@@ -10975,7 +11006,8 @@
           "texture": "stone/rock small shaded1.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 4183,
@@ -10987,7 +11019,8 @@
           "texture": "stone/rock small shaded1.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         }
       ],
       "folder": "../textures"

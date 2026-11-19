@@ -471,7 +471,9 @@ export namespace DataQuest {
                 items: {
                     motherLetterKeyItem: { kind: "key_item", id: "CricketLetterMother" },
                 },
-                flags: {},
+                flags: {
+                    deliveredLetter: false,
+                },
                 reward: {
                     kind: "single",
                     countCompletions: "once",

@@ -350,6 +350,32 @@
       "gridCellsY": 60,
       "decals": [
         {
+          "x": 1076,
+          "y": 90,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 90,
+          "tint": "#7bc44e",
+          "texture": "shapes/dashed line 3px.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
+          "x": 986,
+          "y": 90,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 90,
+          "tint": "#7bc44e",
+          "texture": "shapes/dashed line 3px.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
           "x": 601,
           "y": 458,
           "scaleX": 1,
@@ -1144,7 +1170,7 @@
         },
         {
           "x": 1112,
-          "y": 71,
+          "y": 87,
           "scaleX": 1,
           "scaleY": 1,
           "rotation": 0,
@@ -1499,7 +1525,7 @@
           "id": 28,
           "_eid": "95769929",
           "x": 936,
-          "y": 73,
+          "y": 89,
           "width": 192,
           "values": {"name": "", "visible": false, "depth": 0}
         }
@@ -1645,7 +1671,7 @@
         },
         {
           "x": 936,
-          "y": 72,
+          "y": 79,
           "scaleX": 2,
           "scaleY": 8,
           "rotation": 0,
@@ -1762,7 +1788,7 @@
         },
         {
           "x": 1064,
-          "y": 72,
+          "y": 79,
           "scaleX": 2,
           "scaleY": 8,
           "rotation": 0,
@@ -1775,7 +1801,7 @@
         },
         {
           "x": 1000,
-          "y": 72,
+          "y": 79,
           "scaleX": 2,
           "scaleY": 0.5,
           "rotation": 0,
@@ -1931,7 +1957,7 @@
         },
         {
           "x": 976,
-          "y": 74,
+          "y": 81,
           "scaleX": 1,
           "scaleY": 2,
           "rotation": 0,
@@ -1944,7 +1970,7 @@
         },
         {
           "x": 1043,
-          "y": 66,
+          "y": 73,
           "scaleX": 1,
           "scaleY": -2,
           "rotation": 0,
@@ -1957,7 +1983,7 @@
         },
         {
           "x": 1088,
-          "y": 74,
+          "y": 81,
           "scaleX": -1,
           "scaleY": 2,
           "rotation": 0,

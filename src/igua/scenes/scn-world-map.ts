@@ -12,11 +12,13 @@ import { txt } from "../../lib/pixi/txt";
 import { Jukebox } from "../core/igua-audio";
 import { ZIndex } from "../core/scene/z-index";
 import { DataPocketItem } from "../data/data-pocket-item";
+import { DramaInventory } from "../drama/drama-inventory";
 import { DramaQuests } from "../drama/drama-quests";
 import { dramaQuizComputerScience } from "../drama/drama-quiz-computer-science";
 import { DramaWallet } from "../drama/drama-wallet";
 import { ask, show } from "../drama/show";
 import { mxnBoilPivot } from "../mixins/mxn-boil-pivot";
+import { mxnCharacterCricket } from "../mixins/mxn-character-cricket";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { mxnIguanaShopkeeper } from "../mixins/mxn-iguana-shopkeeper";
 import { mxnSinePivot } from "../mixins/mxn-sine-pivot";
@@ -63,6 +65,61 @@ export function scnWorldMap() {
     enrichMrIndiana(lvl);
     maybePanicUpdatePlayerPosition(lvl);
     enrichStrengthShopkeeperNpcs(lvl);
+    enrichCrickets(lvl);
+}
+
+function enrichCrickets(lvl: LvlType.WorldMap) {
+    const quest = Rpg.quest("Ohio.CricketFamily");
+    lvl.CricketBoyfriend
+        .mixin(mxnCharacterCricket)
+        .mixin(mxnCutscene, function* () {
+            if (quest.flags.deliveredLetter) {
+                yield* show("Did he tell you about the leg stuff, wing stuff?");
+            }
+            else if (Rpg.inventory.has(quest.data.items.motherLetterKeyItem)) {
+                yield* ask("Oh, hi!", "I have a letter for you!");
+                yield* show("Oh, really?");
+                yield* DramaInventory.removeAll(quest.data.items.motherLetterKeyItem);
+                yield* show("Oh, no, this isn't for me. This is for my boyfriend.");
+                yield* DramaInventory.receiveOne(quest.data.items.motherLetterKeyItem);
+            }
+            else {
+                yield* show("Oh, hi!");
+            }
+        });
+
+    lvl.CricketSon
+        .mixin(mxnCharacterCricket)
+        .mixin(mxnCutscene, function* () {
+            if (quest.flags.deliveredLetter) {
+                yield* show("Yeah, we'll go to the market for a visit soon.");
+            }
+            else if (Rpg.inventory.has(quest.data.items.motherLetterKeyItem)) {
+                yield* ask("Hello!", "I have a letter for you!");
+                yield* show("A letter? Let me guess, is it from my mom?");
+                yield* DramaInventory.removeAll(quest.data.items.motherLetterKeyItem);
+                yield* show(
+                    "Haha, yeah, it is.",
+                    "My mom is great. But I wanted to go on a chillaxing quest.",
+                    "She's always showing me job postings.",
+                    "I've done a million interviews for jobs I don't want that go nowhere.",
+                    "So I came up here to relax by the sea.",
+                    "Then I met this hot guy and we're up here doing leg stuff, wing stuff.",
+                );
+
+                yield sleep(500);
+
+                yield* show(
+                    "Just... tell her that I'm happy.",
+                    "She will like that.",
+                );
+
+                quest.flags.deliveredLetter = true;
+            }
+            else {
+                yield* show("Hello!");
+            }
+        });
 }
 
 function enrichStrengthShopkeeperNpcs(lvl: LvlType.WorldMap) {

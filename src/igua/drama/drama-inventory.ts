@@ -222,6 +222,10 @@ function* receiveCount(item: RpgInventory.Item, count: Integer) {
     yield* receiveItems(range(count).map(() => item));
 }
 
+function* receiveOne(item: RpgInventory.Item) {
+    yield* receiveCount(item, 1);
+}
+
 interface AskWhichAndRemoveCountOptions extends AskUseCountOptions {
     message?: string;
     countMessage?: string;
@@ -293,6 +297,7 @@ export const DramaInventory = {
     },
     receiveCount,
     receiveItems,
+    receiveOne,
     removeCount: removeCountFromPlayer,
     removeAll,
     pocket: {
