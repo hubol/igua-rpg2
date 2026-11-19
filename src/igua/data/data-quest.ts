@@ -467,6 +467,18 @@ export namespace DataQuest {
                     ],
                 },
             },
+            "Ohio.CricketFamily": {
+                items: {
+                    motherLetterKeyItem: { kind: "key_item", id: "CricketLetterMother" },
+                },
+                flags: {},
+                reward: {
+                    kind: "single",
+                    countCompletions: "once",
+                    // TODO
+                    drop: [],
+                },
+            },
             __Fallback__: {
                 items: null,
                 flags: null,

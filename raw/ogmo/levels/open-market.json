@@ -1141,6 +1141,18 @@
           "originY": 0.5,
           "values": {"name": ""},
           "groupName": null
+        },
+        {
+          "x": 1112,
+          "y": 71,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#245917",
+          "texture": "characters/cricket.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": "Cricket"}
         }
       ],
       "folder": "../textures"

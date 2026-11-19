@@ -3,10 +3,13 @@ import { Mzk } from "../../assets/music";
 import { Jukebox } from "../core/igua-audio";
 import { DramaCobbler } from "../drama/drama-cobbler";
 import { DramaGifts } from "../drama/drama-gifts";
+import { DramaInventory } from "../drama/drama-inventory";
 import { DramaQuests } from "../drama/drama-quests";
-import { show } from "../drama/show";
+import { ask, show } from "../drama/show";
+import { mxnCharacterCricket } from "../mixins/mxn-character-cricket";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { mxnIguanaShopkeeper } from "../mixins/mxn-iguana-shopkeeper";
+import { mxnSpeaker } from "../mixins/mxn-speaker";
 import { Rpg } from "../rpg/rpg";
 
 export function scnOpenMarket() {
@@ -58,6 +61,42 @@ export function scnOpenMarket() {
 
     enrichFlipNpc(lvl);
     enrichOlgaNpc(lvl);
+    enrichCricket(lvl);
+}
+
+function enrichCricket(lvl: LvlType.OpenMarket) {
+    const quest = Rpg.quest("Ohio.CricketFamily");
+
+    lvl.Cricket
+        .mixin(mxnCharacterCricket)
+        .mixin(mxnCutscene, function* () {
+            if (Rpg.inventory.has(quest.data.items.motherLetterKeyItem)) {
+                yield* show(
+                    "Have you delivered the letter to my son yet?",
+                    "Remember, he should be camping up north by the sea.",
+                );
+                return;
+            }
+
+            yield* show(
+                "Oh! Oh! Oh!",
+                "My son is camping up north to look at the sea!!!",
+                "Oh! Oh! Oh!",
+                "I'm so worried about him!",
+                "You can't just do things like look at the sea all the time!!!",
+                "You need to do other things, like get a well-paying job!",
+                "I haven't heard from him in a while, and I need to stay here in case there are any good deals.",
+            );
+
+            if (yield* ask("Can you deliver this letter for me?")) {
+                yield* show("Much appreciated!");
+                yield* DramaInventory.receiveCount(quest.data.items.motherLetterKeyItem, 1);
+                yield* show("Again, he told me he would be up north to look at the sea.");
+            }
+            else {
+                yield* show("Got it! I will just be here worrying in the meantime.");
+            }
+        });
 }
 
 function enrichOlgaNpc(lvl: LvlType.OpenMarket) {

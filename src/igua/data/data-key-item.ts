@@ -192,6 +192,11 @@ export namespace DataKeyItem {
                 description: "Membership card for an esteemed institution. Lasts for one year.",
                 texture: Tx.Collectibles.Key.CostcoCard,
             },
+            CricketLetterMother: {
+                name: "Mama Cricket's Letter",
+                description: "Letter from the mother cricket to her carefree son.",
+                texture: Tx.Collectibles.Key.CricketLetter,
+            },
             __Fallback__: { name: "???", description: "If you are reading this, this is a bug.", texture: null },
         } satisfies Record<string, Model>,
     );
