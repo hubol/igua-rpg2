@@ -1,9 +1,12 @@
 import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data";
+import { Mzk } from "../../assets/music";
+import { Jukebox } from "../core/igua-audio";
 import { DramaCostco } from "../drama/drama-costco";
 import { show } from "../drama/show";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
 
 export function scnOhioCostco() {
+    Jukebox.play(Mzk.DealsFantastico);
     const lvl = Lvl.OhioCostco();
     enrichGreeterNpc(lvl);
 }

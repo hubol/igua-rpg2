@@ -10,6 +10,7 @@ export const GeneratedMusicData = {
    "BreadCrumbPool": { ogg: require("./ogg/bread-crumb-pool.ogg") },
    "CedarWorld": { ogg: require("./ogg/cedar-world.ogg") },
    "Covid19": { ogg: require("./ogg/covid-19.ogg") },
+   "DealsFantastico": { ogg: require("./ogg/deals-fantastico.ogg") },
    "DemoGoodEnd": { ogg: require("./ogg/demo good end.ogg") },
    "DespicableMessage": { ogg: require("./ogg/despicable-message.ogg") },
    "EditableMoog": { ogg: require("./ogg/editable-moog.ogg") },
