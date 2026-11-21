@@ -1,14 +1,18 @@
 import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data";
 import { Mzk } from "../../assets/music";
 import { Jukebox } from "../core/igua-audio";
+import { ZIndex } from "../core/scene/z-index";
 import { DramaCostco } from "../drama/drama-costco";
 import { show } from "../drama/show";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
+import { objEsotericHotDogCondimentDispenser } from "../objects/esoteric/obj-esoteric-hot-dog-condiment-dispenser";
+import { playerObj } from "../objects/obj-player";
 
 export function scnOhioCostco() {
     Jukebox.play(Mzk.DealsFantastico);
     const lvl = Lvl.OhioCostco();
     enrichGreeterNpc(lvl);
+    enrichHotdoggerNpc(lvl);
 }
 
 function enrichGreeterNpc(lvl: LvlType.OhioCostco) {
@@ -37,4 +41,32 @@ function enrichGreeterNpc(lvl: LvlType.OhioCostco) {
                 self.y -= 1;
             });
         });
+}
+
+function enrichHotdoggerNpc(lvl: LvlType.OhioCostco) {
+    lvl.HotdoggerNpc
+        .mixin(mxnCutscene, function* () {
+            yield () => playerObj.isOnGround;
+            if (playerObj.y <= lvl.OnCounterMarker.y) {
+                yield* show("Please get off the counter.");
+                return;
+            }
+
+            yield* show("Hi.");
+        });
+
+    lvl.HotdogCounter
+        .zIndexed(ZIndex.CharacterEntities + 1);
+
+    objEsotericHotDogCondimentDispenser("ketchup")
+        .at(lvl.KetchupMarker)
+        .show();
+
+    objEsotericHotDogCondimentDispenser("onion")
+        .at(lvl.OnionMarker)
+        .show();
+
+    objEsotericHotDogCondimentDispenser("mustard")
+        .at(lvl.MustardMarker)
+        .show();
 }

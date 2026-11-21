@@ -1,11 +1,11 @@
 {
   "ogmoVersion": "3.4.0-hubol",
-  "width": 856,
+  "width": 1416,
   "height": 280,
   "offsetX": 0,
   "offsetY": 0,
-  "backgroundColor": "#408000",
   "values": {"Terrain Color": "#000000", "Region ID": "~Unset~"},
+  "backgroundColor": "#408000",
   "layers": [
     {
       "name": "MarkerEntities",
@@ -14,9 +14,54 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 107,
+      "gridCellsX": 177,
       "gridCellsY": 35,
-      "entities": []
+      "entities": [
+        {
+          "name": "Marker",
+          "id": 0,
+          "_eid": "73148747",
+          "x": 784,
+          "y": 243,
+          "originX": 8,
+          "originY": 8,
+          "tint": "#00ff00",
+          "values": {"name": "KetchupMarker", "depth": 0}
+        },
+        {
+          "name": "Marker",
+          "id": 1,
+          "_eid": "73148747",
+          "x": 872,
+          "y": 243,
+          "originX": 8,
+          "originY": 8,
+          "tint": "#00ff00",
+          "values": {"name": "MustardMarker", "depth": 0}
+        },
+        {
+          "name": "Marker",
+          "id": 2,
+          "_eid": "73148747",
+          "x": 960,
+          "y": 243,
+          "originX": 8,
+          "originY": 8,
+          "tint": "#00ff00",
+          "values": {"name": "OnionMarker", "depth": 0}
+        },
+        {
+          "name": "Marker",
+          "id": 3,
+          "_eid": "73148747",
+          "x": 672,
+          "y": 231,
+          "originX": 8,
+          "originY": 8,
+          "tint": "#00ff00",
+          "values": {"name": "OnCounterMarker", "depth": 0}
+        }
+      ]
     },
     {
       "name": "RegionEntities",
@@ -25,7 +70,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 107,
+      "gridCellsX": 177,
       "gridCellsY": 35,
       "entities": []
     },
@@ -36,9 +81,22 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 107,
+      "gridCellsX": 177,
       "gridCellsY": 35,
-      "decals": [],
+      "decals": [
+        {
+          "x": 575,
+          "y": 228,
+          "scaleX": 4.5625,
+          "scaleY": 1.6,
+          "rotation": 0,
+          "tint": "#000000",
+          "texture": "shapes/square32.png",
+          "originX": 0,
+          "originY": 0,
+          "values": {"name": "HotdogCounter"}
+        }
+      ],
       "folder": "../textures"
     },
     {
@@ -48,7 +106,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 107,
+      "gridCellsX": 177,
       "gridCellsY": 35,
       "entities": []
     },
@@ -59,14 +117,14 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 107,
+      "gridCellsX": 177,
       "gridCellsY": 35,
       "entities": [
         {
           "name": "Player",
           "id": 0,
           "_eid": "93092164",
-          "x": 744,
+          "x": 1304,
           "y": 240,
           "originX": 22,
           "originY": 39,
@@ -82,19 +140,30 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 107,
+      "gridCellsX": 177,
       "gridCellsY": 35,
       "entities": [
         {
           "name": "IguanaNpc",
           "id": 0,
           "_eid": "90326278",
-          "x": 568,
+          "x": 1128,
           "y": 240,
           "originX": 20,
           "originY": 52,
           "flippedX": false,
           "values": {"personaName": "CostcoGreeter", "name": "GreeterNpc", "depth": 0}
+        },
+        {
+          "name": "IguanaNpc",
+          "id": 1,
+          "_eid": "90326278",
+          "x": 648,
+          "y": 240,
+          "originX": 20,
+          "originY": 52,
+          "flippedX": false,
+          "values": {"personaName": "CostcoHotdogger", "name": "HotdoggerNpc", "depth": 0}
         }
       ]
     },
@@ -105,7 +174,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 107,
+      "gridCellsX": 177,
       "gridCellsY": 35,
       "decals": [],
       "folder": "../textures"
@@ -117,14 +186,14 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 107,
+      "gridCellsX": 177,
       "gridCellsY": 35,
       "entities": [
         {
           "name": "Door",
           "id": 0,
           "_eid": "88296692",
-          "x": 712,
+          "x": 1272,
           "y": 192,
           "width": 34,
           "height": 48,
@@ -136,7 +205,7 @@
           "name": "Door",
           "id": 1,
           "_eid": "88296692",
-          "x": 768,
+          "x": 1328,
           "y": 192,
           "width": 34,
           "height": 48,
@@ -153,7 +222,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 107,
+      "gridCellsX": 177,
       "gridCellsY": 35,
       "decals": [],
       "folder": "../textures"
@@ -165,7 +234,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 107,
+      "gridCellsX": 177,
       "gridCellsY": 35,
       "entities": [
         {
@@ -174,7 +243,7 @@
           "_eid": "93117141",
           "x": 0,
           "y": 240,
-          "width": 856,
+          "width": 1600,
           "height": 40,
           "originX": 0,
           "originY": 0,
@@ -198,7 +267,7 @@
           "name": "Block",
           "id": 3,
           "_eid": "93117141",
-          "x": 824,
+          "x": 1384,
           "y": 24,
           "width": 32,
           "height": 216,
@@ -211,7 +280,7 @@
           "name": "Block",
           "id": 4,
           "_eid": "93117141",
-          "x": 464,
+          "x": 1024,
           "y": 24,
           "width": 32,
           "height": 216,
@@ -226,12 +295,21 @@
           "_eid": "93117141",
           "x": 0,
           "y": 0,
-          "width": 856,
+          "width": 1600,
           "height": 24,
           "originX": 0,
           "originY": 0,
           "tint": "#000000",
           "values": {"name": "", "depth": 0, "visible": true}
+        },
+        {
+          "name": "Pipe",
+          "id": 7,
+          "_eid": "95769929",
+          "x": 575,
+          "y": 228,
+          "width": 146,
+          "values": {"name": "", "visible": false, "depth": 0}
         }
       ]
     },
@@ -242,7 +320,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 107,
+      "gridCellsX": 177,
       "gridCellsY": 35,
       "entities": []
     },
@@ -253,9 +331,58 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 107,
+      "gridCellsX": 177,
       "gridCellsY": 35,
-      "decals": [],
+      "decals": [
+        {
+          "x": 718,
+          "y": 156,
+          "scaleX": 3,
+          "scaleY": 48,
+          "rotation": 0,
+          "tint": "#a70000",
+          "texture": "shapes/line vertical16.png",
+          "originX": 0,
+          "originY": 0,
+          "values": {"name": ""}
+        },
+        {
+          "x": 575,
+          "y": -28,
+          "scaleX": 4.5625,
+          "scaleY": 6,
+          "rotation": 0,
+          "tint": "#a70000",
+          "texture": "shapes/square32.png",
+          "originX": 0,
+          "originY": 0,
+          "values": {"name": ""}
+        },
+        {
+          "x": 648,
+          "y": 96,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffffff",
+          "texture": "town/signage/costco hotdog.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""}
+        },
+        {
+          "x": 575,
+          "y": 160,
+          "scaleX": 3,
+          "scaleY": 48,
+          "rotation": 0,
+          "tint": "#a70000",
+          "texture": "shapes/line vertical16.png",
+          "originX": 0,
+          "originY": 0,
+          "values": {"name": ""}
+        }
+      ],
       "folder": "../textures"
     },
     {
@@ -265,7 +392,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 107,
+      "gridCellsX": 177,
       "gridCellsY": 35,
       "decals": [],
       "folder": "../textures"
@@ -277,7 +404,7 @@
       "offsetY": 0,
       "gridCellWidth": 8,
       "gridCellHeight": 8,
-      "gridCellsX": 107,
+      "gridCellsX": 177,
       "gridCellsY": 35,
       "decals": [],
       "folder": "../textures"
