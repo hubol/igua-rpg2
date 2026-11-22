@@ -73,6 +73,7 @@ export namespace OgmoEntities {
       | "objCharacterForestSpirit"
       | "objCharacterGamblingExpert"
       | "objCharacterKingSpino"
+      | "objCharacterLamp"
       | "objCharacterMrIndiana"
       | "objCharacterNutcase"
       | "objCharacterPrinceSpino"
