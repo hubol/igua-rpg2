@@ -1,11 +1,10 @@
 import { Sprite, Texture } from "pixi.js";
 import { Tx } from "../../../assets/textures";
-import { factor, interpv, interpvr } from "../../../lib/game-engine/routines/interp";
+import { factor, interpvr } from "../../../lib/game-engine/routines/interp";
 import { sleep } from "../../../lib/game-engine/routines/sleep";
 import { container } from "../../../lib/pixi/container";
 import { ZIndex } from "../../core/scene/z-index";
 import { DramaInventory } from "../../drama/drama-inventory";
-import { ask, show } from "../../drama/show";
 import { mxnCutscene } from "../../mixins/mxn-cutscene";
 import { MxnSpeaker, mxnSpeaker } from "../../mixins/mxn-speaker";
 import { RpgHotDogs } from "../../rpg/rpg-hot-dogs";
@@ -64,10 +63,6 @@ export function objEsotericHotDogCondimentDispenser(condimentId: RpgHotDogs.Cond
         .pivoted(22, 29)
         .mixin(mxnSpeaker, config)
         .mixin(mxnCutscene, function* () {
-            yield* show("Dispenses condiments.");
-            if (!(yield* ask("Use it on your hot dog?"))) {
-                return;
-            }
             yield* DramaInventory.potions.addCondimentToHotDog(
                 condimentId,
                 (function* () {
