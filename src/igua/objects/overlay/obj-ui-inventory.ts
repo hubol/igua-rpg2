@@ -13,9 +13,11 @@ import { Empty } from "../../../lib/types/empty";
 import { Null } from "../../../lib/types/null";
 import { DataItem } from "../../data/data-item";
 import { DataKeyItem } from "../../data/data-key-item";
+import { DataPotion } from "../../data/data-potion";
 import { Cutscene, Input } from "../../globals";
 import { mxnBoilPivot } from "../../mixins/mxn-boil-pivot";
 import { mxnHudModifiers } from "../../mixins/mxn-hud-modifiers";
+import { mxnSinePivot } from "../../mixins/mxn-sine-pivot";
 import { mxnTextTyped } from "../../mixins/mxn-text-typed";
 import { mxnUiPageButton } from "../../mixins/mxn-ui-page-button";
 import { MxnUiPageElement, mxnUiPageElement } from "../../mixins/mxn-ui-page-element";
@@ -383,12 +385,16 @@ function objUiItemInfo(selectedObjSupplier: () => DisplayObject | undefined, qui
         .anchored(0, 0)
         .mixin(mxnTextTyped, () => name);
 
+    const healingObj = objUiPotionHealing();
+
     return container(
         new Graphics().lineStyle({ join: LINE_JOIN.BEVEL, alignment: 1, width: 4, color: 0x808080 })
             .beginFill(0x808080)
             .drawRect(0, 0, 168, 55),
         descriptionObj,
         nameObj,
+        healingObj
+            .at(168, 0),
     )
         .step(self => {
             const obj = selectedObjSupplier();
@@ -397,8 +403,17 @@ function objUiItemInfo(selectedObjSupplier: () => DisplayObject | undefined, qui
             description = "";
             let item: RpgInventory.Item | null = null;
 
+            healingObj.visible = false;
+
             if (obj?.is(mxnUiPotion) && obj.mxnUiPotion.potionId) {
-                item = { kind: "potion", id: obj.mxnUiPotion.potionId };
+                const potionId = obj.mxnUiPotion.potionId;
+                item = { kind: "potion", id: potionId };
+
+                const healthRestore = DataPotion.getById(potionId).healthRestore;
+                if (healthRestore) {
+                    healingObj.visible = true;
+                    healingObj.objUiPotionHealing.value = healthRestore(Rpg.character.status);
+                }
             }
             else if (obj?.is(mxnUiKeyItem)) {
                 item = { kind: "key_item", id: obj.mxnUiKeyItem.keyItemId };
@@ -423,6 +438,25 @@ function objUiItemInfo(selectedObjSupplier: () => DisplayObject | undefined, qui
             }
             self.visible = Boolean(name || description);
         });
+}
+
+function objUiPotionHealing() {
+    const api = {
+        set value(value: Integer) {
+            textObj.text = "+" + value;
+        },
+    };
+
+    const textObj = objText.MediumBold("+0", { align: "center" })
+        .anchored(0.5, 0.5)
+        .at(0, 2);
+    return container(
+        Sprite.from(Tx.Ui.PotionHealing)
+            .anchored(0.5, 0.5)
+            .mixin(mxnSinePivot),
+        textObj,
+    )
+        .merge({ objUiPotionHealing: api });
 }
 
 function objUiFlopElement(flopId: RpgFlops.Id) {
