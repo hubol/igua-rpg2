@@ -1,10 +1,11 @@
 import { DisplayObject } from "pixi.js";
 import { Sfx } from "../../assets/sounds";
 import { Coro } from "../../lib/game-engine/routines/coro";
-import { sleep } from "../../lib/game-engine/routines/sleep";
+import { sleep, sleepf } from "../../lib/game-engine/routines/sleep";
 import { Integer } from "../../lib/math/number-alias-types";
 import { container } from "../../lib/pixi/container";
 import { range } from "../../lib/range";
+import { Force } from "../../lib/types/force";
 import { Null } from "../../lib/types/null";
 import { DataEquipment } from "../data/data-equipment";
 import { DataItem } from "../data/data-item";
@@ -264,18 +265,25 @@ function* removeAll(item: RpgInventory.Item) {
 }
 
 function* addCondimentToHotDog(condimentId: RpgHotDogs.CondimentId, applyCoro?: Coro.Type) {
-    const result = RpgHotDogs.apply(Rpg.inventory.potions, condimentId);
-    if (result.isSuccess) {
-        yield* DramaInventory.removeCount({ kind: "potion", id: result.removePotionId }, 1);
+    for (let i = 0;; i++) {
+        const result = RpgHotDogs.apply(Rpg.inventory.potions, condimentId);
+        if (!result.isSuccess) {
+            if (i === 0) {
+                const message = result.haveAnyHotDogs
+                    ? "None of your hot dogs need that condiment."
+                    : "You don't have any hot dogs.";
+                yield* show(message);
+            }
+
+            return;
+        }
+
+        const count = yield* DramaInventory.removeAll({ kind: "potion", id: result.removePotionId });
         if (applyCoro) {
             yield* applyCoro;
         }
-        yield* DramaInventory.receiveItems([{ kind: "potion", id: result.receivePotionId }]);
-        return;
+        yield* DramaInventory.receiveCount({ kind: "potion", id: result.receivePotionId }, count);
     }
-    yield* show(
-        result.haveAnyHotDogs ? "None of your hot dogs need that condiment." : "You don't have any hot dogs.",
-    );
 }
 
 function* removeAllPotions() {
