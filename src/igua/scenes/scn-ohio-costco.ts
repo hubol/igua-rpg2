@@ -18,7 +18,7 @@ import { RpgEconomy } from "../rpg/rpg-economy";
 import { RpgInventory } from "../rpg/rpg-inventory";
 
 export function scnOhioCostco() {
-    Jukebox.play(Mzk.DealsFantastico);
+    Jukebox.play(Mzk.PenultimateRainbow);
     const lvl = Lvl.OhioCostco();
     enrichGreeterNpc(lvl);
     enrichHotdoggerNpc(lvl);

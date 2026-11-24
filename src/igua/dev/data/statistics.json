@@ -738,5 +738,25 @@
     "SongTitle": 54,
     "Spell": 4,
     "TemporaryEffect": 11
+  },
+  "2026-11-24": {
+    "Enemy": 20,
+    "Equipment": 44,
+    "Fact": 12,
+    "Gift": 19,
+    "Hint": 7,
+    "Homunculus": 6,
+    "Idol": 4,
+    "KeyItem": 37,
+    "NpcPersona": 102,
+    "PocketItem": 16,
+    "Potion": 43,
+    "Quest": 42,
+    "RespawnConfiguration": 3,
+    "Scene": 105,
+    "Shop": 38,
+    "SongTitle": 55,
+    "Spell": 4,
+    "TemporaryEffect": 11
   }
 }

@@ -32,6 +32,7 @@ export const GeneratedMusicData = {
    "OldWays": { ogg: require("./ogg/old-ways.ogg") },
    "OpenWound": { ogg: require("./ogg/open-wound.ogg") },
    "PaperParty": { ogg: require("./ogg/paper-party.ogg") },
+   "PenultimateRainbow": { ogg: require("./ogg/penultimate-rainbow.ogg") },
    "PerishInstrument": { ogg: require("./ogg/perish-instrument.ogg") },
    "PieShake": { ogg: require("./ogg/pie-shake.ogg") },
    "PleasureMafia": { ogg: require("./ogg/pleasure-mafia.ogg") },
