@@ -1,6 +1,5 @@
 import { Mzk } from "../../assets/music";
 import { Integer } from "../../lib/math/number-alias-types";
-import { IsoDateString } from "../../lib/math/string-alias-types";
 import { Null } from "../../lib/types/null";
 import { DataHomunculus } from "../data/data-homunculus";
 import { DataNpcPersona } from "../data/data-npc-persona";
@@ -52,7 +51,7 @@ export function getInitialRpgProgress() {
         },
         flags: {
             costco: {
-                membershipCardExpiration: Null<IsoDateString>(),
+                membershipCardExpiration: Null<Date>(),
             },
             desert: {
                 nerdBouncerSatiated: false,

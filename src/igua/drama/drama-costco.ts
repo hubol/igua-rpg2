@@ -1,4 +1,3 @@
-import { IsoDateString } from "../../lib/math/string-alias-types";
 import { Rpg } from "../rpg/rpg";
 import { RpgEconomy } from "../rpg/rpg-economy";
 import { RpgInventory } from "../rpg/rpg-inventory";
@@ -47,21 +46,16 @@ function* checkMembership() {
 
 const rpgCostcoMembership = {
     getExpirationDate() {
-        if (Rpg.flags.costco.membershipCardExpiration) {
-            const date = new Date(Rpg.flags.costco.membershipCardExpiration);
-            return Number.isNaN(date.getTime()) ? null : date;
-        }
-
-        return null;
+        const date = Rpg.flags.costco.membershipCardExpiration;
+        return Number.isNaN(date?.getTime() ?? Number.NaN) ? null : date;
     },
-    createExpirationDateString(): IsoDateString {
+    createExpirationDate(): Date {
         const hourMs = 1000 * 60 * 60;
         const yearMs = hourMs * 24 * 365.25;
-        const date = new Date(new Date().getTime() + yearMs);
-        return date.toISOString();
+        return new Date(new Date().getTime() + yearMs);
     },
     setExpirationDateToOneYearFromNow() {
-        Rpg.flags.costco.membershipCardExpiration = this.createExpirationDateString();
+        Rpg.flags.costco.membershipCardExpiration = this.createExpirationDate();
     },
     get isExpired() {
         const date = this.getExpirationDate();
