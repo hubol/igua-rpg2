@@ -138,12 +138,26 @@ export function mxnPlayerSpells(obj: ObjIguanaLocomotive, rpgPlayerSpells: RpgPl
                 }
             }
 
+            let healAmount = 0;
+
             if (spells.Heal.isEquipped) {
+                healAmount += spells.Heal.level;
+                syllables = Math.max(1, syllables);
+            }
+
+            if (healAmount > 0) {
                 if (obj.is(mxnRpgStatus)) {
-                    obj.heal(spells.Heal.level);
+                    obj.heal(healAmount);
+                    objFxHeart.objBurst(
+                        healAmount > 0 ? 0 : 10,
+                        Math.min(20, healAmount),
+                        { tintStart: 0x0000ff, tintEnd: 0x0000a0 },
+                    )
+                        .at(position)
+                        .show();
                 }
                 else {
-                    errors.push("Something is terribly wrong!");
+                    errors.push("Subject cannot be healed!");
                 }
             }
 
