@@ -23,9 +23,9 @@ import { RpgFlopBlindBox } from "../rpg/rpg-flop-blind-box";
 import { RpgFlops } from "../rpg/rpg-flops";
 import { RpgPlayerSpells } from "../rpg/rpg-player-spells";
 import { mxnEsotericMeowable } from "./esoteric/mxn-esoteric-meowable";
-import { mxnDestroyAfterSteps } from "./mxn-destroy-after-steps";
 import { mxnMotion } from "./mxn-motion";
 import { mxnRpgAttack } from "./mxn-rpg-attack";
+import { mxnRpgStatus } from "./mxn-rpg-status";
 
 export function mxnPlayerSpells(obj: ObjIguanaLocomotive, rpgPlayerSpells: RpgPlayerSpells) {
     return obj
@@ -135,6 +135,15 @@ export function mxnPlayerSpells(obj: ObjIguanaLocomotive, rpgPlayerSpells: RpgPl
                 }
                 else {
                     Rpg.character.status.conditions.fairy.count += 1;
+                }
+            }
+
+            if (spells.Heal.isEquipped) {
+                if (obj.is(mxnRpgStatus)) {
+                    obj.heal(spells.Heal.level);
+                }
+                else {
+                    errors.push("Something is terribly wrong!");
                 }
             }
 

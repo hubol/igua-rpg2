@@ -509,6 +509,18 @@ export namespace DataEquipment {
                     },
                     flags: flags(),
                 },
+                SpellHealSmall: {
+                    name: "Snail",
+                    texture: null,
+                    description: "TODO",
+                    buffs: (model, bonus) => {
+                        model.combat.spells.equipped.Heal += 1 + bonus;
+                        model.combat.spells.maxPower += Math.max(60, 120 - bonus * 10);
+                        model.combat.spells.requirements.minPocketItemsCount += 1;
+                        model.combat.spells.cost.pocketItemChance += Math.max(5, 50 - bonus * 5);
+                    },
+                    flags: flags(),
+                },
                 __Fallback__: {
                     name: "???",
                     texture: null,

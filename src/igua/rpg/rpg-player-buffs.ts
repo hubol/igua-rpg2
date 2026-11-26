@@ -49,9 +49,10 @@ export namespace RpgPlayerBuffs {
                 spells: {
                     equipped: {
                         Fairy: 0,
+                        Heal: 0,
                         HotPineCone: 0,
-                        OpenFlopBlindBoxes: 0,
                         Meow: 0,
+                        OpenFlopBlindBoxes: 0,
                     } satisfies Record<DataSpell.Id, Integer>,
                     requirements: {
                         minPocketItemsCount: 0,
