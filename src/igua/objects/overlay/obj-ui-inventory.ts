@@ -250,7 +250,7 @@ function objUiEquipmentChoosePage(
 
     objUiItemInfo(() => pageObj.selected, "show_equipment")
         .at(-4, 0)
-        .pivotedUnit(1, 0)
+        .pivoted(174, 0)
         .show(pageObj);
 
     return pageObj;
