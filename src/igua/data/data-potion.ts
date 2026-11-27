@@ -211,7 +211,7 @@ export namespace DataPotion {
                 sound: Sfx.Effect.Potion.RestoreHealth,
                 texture: Tx.Collectibles.Potion.HotDogKetchup,
                 flags: flags("is_foodlike", "is_hot_dog", "has_ketchup"),
-                healthRestore: () => 40,
+                healthRestore: () => 20,
             },
             HotDogMustard: {
                 name: "Hot Dog (M)",
@@ -220,7 +220,7 @@ export namespace DataPotion {
                 sound: Sfx.Effect.Potion.RestoreHealth,
                 texture: Tx.Collectibles.Potion.HotDogMustard,
                 flags: flags("is_foodlike", "is_hot_dog", "has_mustard"),
-                healthRestore: () => 40,
+                healthRestore: () => 20,
             },
             HotDogOnion: {
                 name: "Hot Dog (O)",
@@ -229,7 +229,7 @@ export namespace DataPotion {
                 sound: Sfx.Effect.Potion.RestoreHealth,
                 texture: Tx.Collectibles.Potion.HotDogOnion,
                 flags: flags("is_foodlike", "is_hot_dog", "has_onion"),
-                healthRestore: () => 40,
+                healthRestore: () => 20,
             },
             HotDogRelish: {
                 name: "Hot Dog (R)",
@@ -238,7 +238,7 @@ export namespace DataPotion {
                 sound: Sfx.Effect.Potion.RestoreHealth,
                 texture: Tx.Collectibles.Potion.HotDogRelish,
                 flags: flags("is_foodlike", "is_hot_dog", "has_relish"),
-                healthRestore: () => 40,
+                healthRestore: () => 20,
             },
             HotDogKetchupMustard: {
                 name: "Hot Dog (KM)",
@@ -247,7 +247,7 @@ export namespace DataPotion {
                 sound: Sfx.Effect.Potion.RestoreHealth,
                 texture: Tx.Collectibles.Potion.HotDogKetchupMustard,
                 flags: flags("is_foodlike", "is_hot_dog", "has_ketchup", "has_mustard"),
-                healthRestore: () => 70,
+                healthRestore: () => 30,
             },
             HotDogKetchupOnion: {
                 name: "Hot Dog (KO)",
@@ -256,7 +256,7 @@ export namespace DataPotion {
                 sound: Sfx.Effect.Potion.RestoreHealth,
                 texture: Tx.Collectibles.Potion.HotDogKetchupOnion,
                 flags: flags("is_foodlike", "is_hot_dog", "has_ketchup", "has_onion"),
-                healthRestore: () => 70,
+                healthRestore: () => 30,
             },
             HotDogKetchupRelish: {
                 name: "Hot Dog (KR)",
@@ -265,7 +265,7 @@ export namespace DataPotion {
                 sound: Sfx.Effect.Potion.RestoreHealth,
                 texture: Tx.Collectibles.Potion.HotDogKetchupRelish,
                 flags: flags("is_foodlike", "is_hot_dog", "has_ketchup", "has_relish"),
-                healthRestore: () => 70,
+                healthRestore: () => 30,
             },
             HotDogMustardOnion: {
                 name: "Hot Dog (MO)",
@@ -274,7 +274,7 @@ export namespace DataPotion {
                 sound: Sfx.Effect.Potion.RestoreHealth,
                 texture: Tx.Collectibles.Potion.HotDogMustardOnion,
                 flags: flags("is_foodlike", "is_hot_dog", "has_mustard", "has_onion"),
-                healthRestore: () => 70,
+                healthRestore: () => 30,
             },
             HotDogMustardRelish: {
                 name: "Hot Dog (MR)",
@@ -283,7 +283,7 @@ export namespace DataPotion {
                 sound: Sfx.Effect.Potion.RestoreHealth,
                 texture: Tx.Collectibles.Potion.HotDogMustardRelish,
                 flags: flags("is_foodlike", "is_hot_dog", "has_mustard", "has_relish"),
-                healthRestore: () => 70,
+                healthRestore: () => 30,
             },
             HotDogOnionRelish: {
                 name: "Hot Dog (OR)",
@@ -292,7 +292,7 @@ export namespace DataPotion {
                 sound: Sfx.Effect.Potion.RestoreHealth,
                 texture: Tx.Collectibles.Potion.HotDogOnionRelish,
                 flags: flags("is_foodlike", "is_hot_dog", "has_onion", "has_relish"),
-                healthRestore: () => 70,
+                healthRestore: () => 30,
             },
             HotDogKetchupMustardOnion: {
                 name: "Hot Dog (KMO)",
@@ -301,7 +301,7 @@ export namespace DataPotion {
                 sound: Sfx.Effect.Potion.RestoreHealth,
                 texture: Tx.Collectibles.Potion.HotDogKetchupMustardOnion,
                 flags: flags("is_foodlike", "is_hot_dog", "has_ketchup", "has_mustard", "has_onion"),
-                healthRestore: () => 100,
+                healthRestore: () => 40,
             },
             HotDogKetchupMustardRelish: {
                 name: "Hot Dog (KMR)",
@@ -310,7 +310,7 @@ export namespace DataPotion {
                 sound: Sfx.Effect.Potion.RestoreHealth,
                 texture: Tx.Collectibles.Potion.HotDogKetchupMustardRelish,
                 flags: flags("is_foodlike", "is_hot_dog", "has_ketchup", "has_mustard", "has_relish"),
-                healthRestore: () => 100,
+                healthRestore: () => 40,
             },
             HotDogKetchupOnionRelish: {
                 name: "Hot Dog (KOR)",
@@ -320,7 +320,7 @@ export namespace DataPotion {
                 sound: Sfx.Effect.Potion.RestoreHealth,
                 texture: Tx.Collectibles.Potion.HotDogKetchupOnionRelish,
                 flags: flags("is_foodlike", "is_hot_dog", "has_ketchup", "has_onion", "has_relish"),
-                healthRestore: () => 100,
+                healthRestore: () => 40,
             },
             HotDogMustardOnionRelish: {
                 name: "Hot Dog (MOR)",
@@ -329,7 +329,7 @@ export namespace DataPotion {
                 sound: Sfx.Effect.Potion.RestoreHealth,
                 texture: Tx.Collectibles.Potion.HotDogMustardOnionRelish,
                 flags: flags("is_foodlike", "is_hot_dog", "has_mustard", "has_onion", "has_relish"),
-                healthRestore: () => 100,
+                healthRestore: () => 40,
             },
             HotDogKetchupMustardOnionRelish: {
                 name: "Hot Dog (Perfected)",
@@ -338,7 +338,7 @@ export namespace DataPotion {
                 sound: Sfx.Effect.Potion.RestoreHealth,
                 texture: Tx.Collectibles.Potion.HotDogKetchupMustardOnionRelish,
                 flags: flags("is_foodlike", "is_hot_dog", "has_ketchup", "has_mustard", "has_onion", "has_relish"),
-                healthRestore: () => 150,
+                healthRestore: () => 90,
             },
             ThrowableBerry: {
                 name: "Throwing Seedling",
