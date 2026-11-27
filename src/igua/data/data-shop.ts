@@ -734,7 +734,13 @@ export namespace DataShop {
                 ],
             },
             OhioCostcoShelf0: {
-                stocks: [],
+                stocks: [
+                    {
+                        product: { kind: "key_item", id: "CostcoPaperTowels" },
+                        initialQuantity: 999,
+                        price: { currency: "valuables", initial: 20, deltaSold: 0 },
+                    },
+                ],
             },
             OhioCostcoShelf1: {
                 stocks: [
@@ -743,10 +749,21 @@ export namespace DataShop {
                         initialQuantity: 1,
                         price: { currency: "valuables", initial: 9, deltaSold: 0 },
                     },
+                    {
+                        product: { kind: "key_item", id: "CostcoWater" },
+                        initialQuantity: 999,
+                        price: { currency: "valuables", initial: 20, deltaSold: 0 },
+                    },
                 ],
             },
             OhioCostcoShelf2: {
-                stocks: [],
+                stocks: [
+                    {
+                        product: { kind: "key_item", id: "CostcoMango" },
+                        initialQuantity: 999,
+                        price: { currency: "valuables", initial: 20, deltaSold: 0 },
+                    },
+                ],
             },
             __Fallback__: { stocks: [] },
         } satisfies Record<string, Model>,

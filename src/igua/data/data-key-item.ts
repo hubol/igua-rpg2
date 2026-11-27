@@ -197,6 +197,21 @@ export namespace DataKeyItem {
                 description: "Letter from the mother cricket to her carefree son.",
                 texture: Tx.Collectibles.Key.CricketLetter,
             },
+            CostcoPaperTowels: {
+                name: "Bulk Paper Towels",
+                description: "It's a lot of paper towels. Is it even that good of a deal?",
+                texture: Tx.Collectibles.Key.CostcoPaperTowels,
+            },
+            CostcoMango: {
+                name: "Bulk Dried Mango",
+                description: "It's a lot of dried mango. For your own safety, you should never own this.",
+                texture: Tx.Collectibles.Key.CostcoMango,
+            },
+            CostcoWater: {
+                name: "Bulk Bottled Water",
+                description: "It's too much water. Carrying this is an enormous burden.",
+                texture: Tx.Collectibles.Key.CostcoWater,
+            },
             __Fallback__: { name: "???", description: "If you are reading this, this is a bug.", texture: null },
         } satisfies Record<string, Model>,
     );
