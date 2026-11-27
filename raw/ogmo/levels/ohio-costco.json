@@ -617,7 +617,8 @@
           "texture": "furniture/girder 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 1328,
@@ -629,7 +630,8 @@
           "texture": "furniture/girder 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 800,
@@ -641,7 +643,8 @@
           "texture": "furniture/girder 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 976,
@@ -653,7 +656,8 @@
           "texture": "furniture/girder 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 320,
@@ -665,7 +669,8 @@
           "texture": "furniture/girder 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 496,
@@ -677,7 +682,8 @@
           "texture": "furniture/girder 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": -32,
@@ -689,7 +695,8 @@
           "texture": "furniture/girder 0.png",
           "originX": 0.5,
           "originY": 0.5,
-          "values": {"name": ""}
+          "values": {"name": ""},
+          "groupName": null
         },
         {
           "x": 144,
@@ -699,6 +706,55 @@
           "rotation": 0,
           "tint": "#525252",
           "texture": "furniture/girder 0.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": ""},
+          "groupName": null
+        },
+        {
+          "x": 134,
+          "y": 150,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#a70000",
+          "texture": "furniture/metal shelf large.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": "Shelf0"}
+        },
+        {
+          "x": 298,
+          "y": 150,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#a70000",
+          "texture": "furniture/metal shelf large.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": "Shelf1"}
+        },
+        {
+          "x": 462,
+          "y": 150,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#a70000",
+          "texture": "furniture/metal shelf large.png",
+          "originX": 0.5,
+          "originY": 0.5,
+          "values": {"name": "Shelf2"}
+        },
+        {
+          "x": 248,
+          "y": 66,
+          "scaleX": 1,
+          "scaleY": 1,
+          "rotation": 0,
+          "tint": "#ffffff",
+          "texture": "collectibles/key/magic key.png",
           "originX": 0.5,
           "originY": 0.5,
           "values": {"name": ""}
@@ -788,7 +844,115 @@
           "x": 575,
           "y": 228,
           "width": 146,
-          "values": {"name": "", "visible": false, "depth": 0}
+          "values": {"name": "", "visible": true, "depth": 0}
+        },
+        {
+          "name": "Pipe",
+          "id": 8,
+          "_eid": "95769929",
+          "x": 60,
+          "y": 79,
+          "width": 148,
+          "values": {"name": "", "visible": true, "depth": 0}
+        },
+        {
+          "name": "Pipe",
+          "id": 9,
+          "_eid": "95769929",
+          "x": 60,
+          "y": 120,
+          "width": 148,
+          "values": {"name": "", "visible": true, "depth": 0}
+        },
+        {
+          "name": "Pipe",
+          "id": 10,
+          "_eid": "95769929",
+          "x": 60,
+          "y": 161,
+          "width": 148,
+          "values": {"name": "", "visible": true, "depth": 0}
+        },
+        {
+          "name": "Pipe",
+          "id": 11,
+          "_eid": "95769929",
+          "x": 60,
+          "y": 202,
+          "width": 148,
+          "values": {"name": "", "visible": true, "depth": 0}
+        },
+        {
+          "name": "Pipe",
+          "id": 12,
+          "_eid": "95769929",
+          "x": 224,
+          "y": 79,
+          "width": 148,
+          "values": {"name": "", "visible": true, "depth": 0}
+        },
+        {
+          "name": "Pipe",
+          "id": 13,
+          "_eid": "95769929",
+          "x": 224,
+          "y": 120,
+          "width": 148,
+          "values": {"name": "", "visible": true, "depth": 0}
+        },
+        {
+          "name": "Pipe",
+          "id": 14,
+          "_eid": "95769929",
+          "x": 224,
+          "y": 161,
+          "width": 148,
+          "values": {"name": "", "visible": true, "depth": 0}
+        },
+        {
+          "name": "Pipe",
+          "id": 15,
+          "_eid": "95769929",
+          "x": 224,
+          "y": 202,
+          "width": 148,
+          "values": {"name": "", "visible": true, "depth": 0}
+        },
+        {
+          "name": "Pipe",
+          "id": 16,
+          "_eid": "95769929",
+          "x": 388,
+          "y": 79,
+          "width": 148,
+          "values": {"name": "", "visible": true, "depth": 0}
+        },
+        {
+          "name": "Pipe",
+          "id": 17,
+          "_eid": "95769929",
+          "x": 388,
+          "y": 120,
+          "width": 148,
+          "values": {"name": "", "visible": true, "depth": 0}
+        },
+        {
+          "name": "Pipe",
+          "id": 18,
+          "_eid": "95769929",
+          "x": 388,
+          "y": 161,
+          "width": 148,
+          "values": {"name": "", "visible": true, "depth": 0}
+        },
+        {
+          "name": "Pipe",
+          "id": 19,
+          "_eid": "95769929",
+          "x": 388,
+          "y": 202,
+          "width": 148,
+          "values": {"name": "", "visible": true, "depth": 0}
         }
       ]
     },

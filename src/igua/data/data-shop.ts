@@ -733,6 +733,21 @@ export namespace DataShop {
                     },
                 ],
             },
+            OhioCostcoShelf0: {
+                stocks: [],
+            },
+            OhioCostcoShelf1: {
+                stocks: [
+                    {
+                        product: { kind: "key_item", id: "MagicKey" },
+                        initialQuantity: 1,
+                        price: { currency: "valuables", initial: 9, deltaSold: 0 },
+                    },
+                ],
+            },
+            OhioCostcoShelf2: {
+                stocks: [],
+            },
             __Fallback__: { stocks: [] },
         } satisfies Record<string, Model>,
     );

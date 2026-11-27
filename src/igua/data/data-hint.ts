@@ -89,6 +89,14 @@ export namespace DataHint {
                 shopId: "DungeonExplorer",
                 stockItem: { kind: "key_item", id: "MagicKey" },
             },
+            "Ohio.MagicKey3": {
+                kind: "shop_stock_purchase",
+                messages: [
+                    `One can be purchased for cheap at Costco.`,
+                ],
+                shopId: "OhioCostcoShelf1",
+                stockItem: { kind: "key_item", id: "MagicKey" },
+            },
             __Fallback__: {
                 kind: "quest",
                 messages: ["This is a bug"],

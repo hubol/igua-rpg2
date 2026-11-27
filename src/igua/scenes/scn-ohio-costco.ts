@@ -1,27 +1,50 @@
+import { DisplayObject } from "pixi.js";
 import { Lvl, LvlType } from "../../assets/generated/levels/generated-level-data";
 import { Mzk } from "../../assets/music";
+import { NoAtlasTx } from "../../assets/no-atlas-textures";
 import { range } from "../../lib/range";
 import { Check } from "../../lib/types/check";
 import { Null } from "../../lib/types/null";
 import { Jukebox } from "../core/igua-audio";
 import { ZIndex } from "../core/scene/z-index";
+import { DataShop } from "../data/data-shop";
 import { DramaCostco } from "../drama/drama-costco";
 import { DramaInventory } from "../drama/drama-inventory";
 import { DramaMisc } from "../drama/drama-misc";
+import { dramaShop } from "../drama/drama-shop";
 import { DramaWallet } from "../drama/drama-wallet";
 import { ask, show } from "../drama/show";
 import { mxnCutscene } from "../mixins/mxn-cutscene";
 import { objEsotericHotDogCondimentDispenser } from "../objects/esoteric/obj-esoteric-hot-dog-condiment-dispenser";
 import { playerObj } from "../objects/obj-player";
+import { CtxTerrainPipe } from "../objects/obj-terrain";
 import { Rpg } from "../rpg/rpg";
 import { RpgEconomy } from "../rpg/rpg-economy";
 import { RpgInventory } from "../rpg/rpg-inventory";
 
 export function scnOhioCostco() {
+    CtxTerrainPipe.value.texture = NoAtlasTx.Terrain.Pipe.Invisible4px;
     Jukebox.play(Mzk.PenultimateRainbow);
     const lvl = Lvl.OhioCostco();
     enrichGreeterNpc(lvl);
     enrichHotdoggerNpc(lvl);
+    enrichShelves(lvl);
+}
+
+function enrichShelves(lvl: LvlType.OhioCostco) {
+    lvl.Shelf0.mixin(mxnCostcoShop, "OhioCostcoShelf0");
+    lvl.Shelf1.mixin(mxnCostcoShop, "OhioCostcoShelf1");
+    lvl.Shelf2.mixin(mxnCostcoShop, "OhioCostcoShelf2");
+}
+
+function mxnCostcoShop(obj: DisplayObject, shopId: DataShop.Id) {
+    return obj
+        .mixin(mxnCutscene, function* () {
+            yield* dramaShop(shopId, {
+                tintPrimary: 0xE61936,
+                tintSecondary: 0x0060AB,
+            });
+        });
 }
 
 function enrichGreeterNpc(lvl: LvlType.OhioCostco) {

@@ -46,6 +46,7 @@ async function createNoAtlasTx(tx: typeof Tx) {
                 Cloud0: await wrap(tx.Terrain.Pipe.Cloud0),
                 Grate: await wrap(tx.Terrain.Pipe.Grate),
                 Gray: await wrap(tx.Terrain.Pipe.Gray),
+                Invisible4px: await wrap(tx.Terrain.Pipe.Invisible4px),
                 Orange: await wrap(tx.Terrain.Pipe.Orange),
             },
         },
