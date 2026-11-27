@@ -1,9 +1,11 @@
 import { Container, DisplayObject } from "pixi.js";
 import { Sfx } from "../../assets/sounds";
+import { Instances } from "../../lib/game-engine/instances";
 import { Coro } from "../../lib/game-engine/routines/coro";
 import { Rng } from "../../lib/math/rng";
 import { clone } from "../../lib/object/clone";
 import { layers } from "../globals";
+import { objEnvironmentProjectileOkRegion } from "../objects/effects/environment/obj-environment-projectile-ok-region";
 import { objFxOverheated } from "../objects/effects/obj-fx-overheated";
 import { objAngelEyes } from "../objects/enemies/obj-angel-eyes";
 import { objLootDrop } from "../objects/obj-loot-drop";
@@ -92,10 +94,12 @@ export function mxnEnemy(obj: Container, args: MxnEnemyArgs) {
         return staggered;
     }
 
-    // TODO should it expose a way to register hitboxes/hurtboxes
-    // Or should that be another mixin?
-
-    // TODO maybe exposes a way to create projectiles associated with this enemy?
+    function getProjectileOkBounds() {
+        return Instances(
+            objEnvironmentProjectileOkRegion,
+            (regionObj) => regionObj.collides(obj),
+        )[0]?.getWorldBounds() ?? null;
+    }
 
     let leftEyeInjuredStepsCount = -1;
     let rightEyeInjuredStepsCount = -1;
@@ -136,6 +140,7 @@ export function mxnEnemy(obj: Container, args: MxnEnemyArgs) {
         .merge({
             mxnEnemy: {
                 dramaStagger,
+                getProjectileOkBounds,
                 soulAnchorObj: args.soulAnchorObj ?? obj,
             },
         })

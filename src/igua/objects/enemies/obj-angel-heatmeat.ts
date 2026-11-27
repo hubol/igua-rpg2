@@ -10,6 +10,7 @@ import { vnew } from "../../../lib/math/vector-type";
 import { container } from "../../../lib/pixi/container";
 import { MapRgbFilter } from "../../../lib/pixi/filters/map-rgb-filter";
 import { scene } from "../../globals";
+import { mxnFxSpawnMany } from "../../mixins/effects/mxn-fx-spawn-many";
 import { mxnDestroyAfterSteps } from "../../mixins/mxn-destroy-after-steps";
 import { mxnDetectPlayer } from "../../mixins/mxn-detect-player";
 import { mxnEnemy } from "../../mixins/mxn-enemy";
@@ -25,10 +26,12 @@ import { RpgEnemyRank } from "../../rpg/rpg-enemy-rank";
 import { RpgStatus } from "../../rpg/rpg-status";
 import { objFxFlameSmall } from "../effects/obj-fx-flame-small";
 import { objFxRipple } from "../effects/obj-fx-ripple";
+import { objFxSteamCloud } from "../effects/obj-fx-steam-cloud";
 import { playerObj } from "../obj-player";
 import { objProjectileFlameEmber } from "../projectiles/obj-projectile-flame-ember";
 import { objProjectileSaw } from "../projectiles/obj-projectile-saw";
 import { objIndexedSprite } from "../utils/obj-indexed-sprite";
+import { objRegionCopy } from "../utils/obj-region-copy";
 import { AngelThemeTemplate } from "./angel-theme-template";
 import { objAngelMouth } from "./obj-angel-mouth";
 
@@ -128,13 +131,13 @@ const ranks = {
     }),
 };
 
-export type Feature = "overheat_retaliation";
+export type Feature = "overheat_retaliation" | "overheat_aura";
 
 const variants = {
     heat: {
         rank: ranks.heat,
         theme: themes.heat,
-        features: new Set<Feature>(["overheat_retaliation"]),
+        features: new Set<Feature>(["overheat_retaliation", "overheat_aura"]),
     },
     meat: {
         rank: ranks.meat,
@@ -148,6 +151,14 @@ const consts = {
 };
 
 const atks = {
+    aura: RpgAttack.create({
+        conditions: {
+            overheat: {
+                value: 1,
+                damage: 50,
+            },
+        },
+    }),
     saw: RpgAttack.create({
         physical: 40,
     }),
@@ -188,6 +199,7 @@ export function objAngelHeatmeat(variantId: objAngelHeatmeat.VariantId) {
     const state = {
         isFlying: true,
         wallHitsUntilFall: consts.wallHitsUntilFallStart,
+        canRetaliate: true,
     };
 
     return container(
@@ -280,7 +292,7 @@ export function objAngelHeatmeat(variantId: objAngelHeatmeat.VariantId) {
             let stepsSinceDamaged = 9999;
 
             self.handles("damaged", (_, event) => {
-                if (event.rejected) {
+                if (event.rejected || !state.canRetaliate) {
                     return;
                 }
 
@@ -294,13 +306,33 @@ export function objAngelHeatmeat(variantId: objAngelHeatmeat.VariantId) {
 
             self.step(() => {
                 stepsSinceDamaged++;
-                if (stepsSinceDamaged > 15) {
-                    puppetObj.objPuppetHeatmeat.flameVisibleUnit = Math.max(
-                        0,
-                        puppetObj.objPuppetHeatmeat.flameVisibleUnit - 0.05,
-                    );
-                }
+                puppetObj.objPuppetHeatmeat.flameVisibleUnit = approachLinear(
+                    puppetObj.objPuppetHeatmeat.flameVisibleUnit,
+                    state.canRetaliate ? 1 : 0,
+                    0.1,
+                );
             });
+        })
+        .coro(function* (self) {
+            if (!features.has("overheat_aura")) {
+                return;
+            }
+
+            while (true) {
+                state.canRetaliate = true;
+                yield sleep(10_000);
+                const bounds = self.mxnEnemy.getProjectileOkBounds();
+                if (bounds) {
+                    state.canRetaliate = false;
+                    const auraObj = objRegionCopy(bounds)
+                        .mixin(mxnRpgAttack, { attacker: self.status, attack: atks.aura })
+                        .mixin(mxnFxSpawnMany, { perFrame: 1, spawnObj: objFxSteamCloud })
+                        .show();
+                    yield sleep(20_000);
+                    auraObj.destroy();
+                }
+                yield sleep(5_000);
+            }
         })
         .step(self => {
             // TODO I think it's time to invent a knockback mixin or something...

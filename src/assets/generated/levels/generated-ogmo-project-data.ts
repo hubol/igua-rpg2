@@ -53,6 +53,7 @@ export namespace OgmoEntities {
   export type EnvironmentBallons = OgmoFactory.EntityBase<{ count: number; seed: number; name: string; depth: number }>;
   export type EnvironmentSpeakerRegion = OgmoFactory.EntityBase<{ speakerName: string; speakerTintSecondary: string; name: string; depth: number; messages: string }>;
   export type EnvironmentSpeakerPlayerRegion = OgmoFactory.EntityBase<{ messages: string; name: string; depth: number }>;
+  export type ProjectileOkRegion = OgmoFactory.EntityBase<{ name: string; depth: number }>;
   export type AnyObject = OgmoFactory.EntityBase<{
     objId:
       | "objAngelBallon"
@@ -86,6 +87,7 @@ export namespace OgmoEntities {
       | "objDieOnEmpty"
       | "objEnemyHealthBars"
       | "objEnvironmentFxSparkle"
+      | "objEnvironmentProjectileOkRegion"
       | "objEsotericBakerCakeChecker"
       | "objEsotericBinocularViewer"
       | "objEsotericBoneChest"
@@ -133,6 +135,7 @@ export namespace OgmoEntities {
       | "objFxSparkleMany"
       | "objFxSpiritualRelease"
       | "objFxStarburst54"
+      | "objFxSteamCloud"
       | "objFxSuperDust"
       | "objHeliumExhaust"
       | "objHud"
@@ -217,6 +220,7 @@ export interface OgmoEntityResolverBase {
   EnvironmentBallons: (entity: OgmoEntities.EnvironmentBallons) => unknown;
   EnvironmentSpeakerRegion: (entity: OgmoEntities.EnvironmentSpeakerRegion) => unknown;
   EnvironmentSpeakerPlayerRegion: (entity: OgmoEntities.EnvironmentSpeakerPlayerRegion) => unknown;
+  ProjectileOkRegion: (entity: OgmoEntities.ProjectileOkRegion) => unknown;
   AnyObject: (entity: OgmoEntities.AnyObject) => unknown;
   EnemyStupid: (entity: OgmoEntities.EnemyStupid) => unknown;
   HomunculusNpc: (entity: OgmoEntities.HomunculusNpc) => unknown;

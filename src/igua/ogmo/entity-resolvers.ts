@@ -10,6 +10,7 @@ import { objDevPlayer } from "../objects/dev/obj-dev-player";
 import { objEnvironmentFxBallons } from "../objects/effects/environment/obj-environment-fx-ballons";
 import { objEnvironmentFxSparkle } from "../objects/effects/environment/obj-environment-fx-sparkle";
 import { objEnvironmentOverheatRegion } from "../objects/effects/environment/obj-environment-overheat-region";
+import { objEnvironmentProjectileOkRegion } from "../objects/effects/environment/obj-environment-projectile-ok-region";
 import { objEnvironmentSpeakerPlayerRegion } from "../objects/effects/environment/obj-environment-speaker-player-region";
 import { objEnvironmentSpeakerRegion } from "../objects/effects/environment/obj-environment-speaker-region";
 import { objAngelBallon } from "../objects/enemies/obj-angel-ballon";
@@ -157,6 +158,7 @@ export const OgmoEntityResolvers = {
     IguanaNpcPatrolMarker: objIguanaNpcPatrolMarker,
     OutOfOrderSign: objEsotericOutOfOrderSign,
     HomunculusNpc: (entity: OgmoEntities.HomunculusNpc) => objCharacterHomunculus(entity.values.variantId),
+    ProjectileOkRegion: objEnvironmentProjectileOkRegion,
 };
 
 const __checkedOgmoEntityResolvers: OgmoEntityResolverBase = OgmoEntityResolvers;

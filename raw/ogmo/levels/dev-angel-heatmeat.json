@@ -39,7 +39,21 @@
       "gridCellHeight": 8,
       "gridCellsX": 64,
       "gridCellsY": 35,
-      "entities": []
+      "entities": [
+        {
+          "name": "ProjectileOkRegion",
+          "id": 2,
+          "_eid": "79644130",
+          "x": 24,
+          "y": 0,
+          "width": 456,
+          "height": 200,
+          "originX": 0,
+          "originY": 0,
+          "tint": "#ffda00",
+          "values": {"name": "", "depth": 0}
+        }
+      ]
     },
     {
       "name": "FrontDecals",
