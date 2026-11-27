@@ -9,6 +9,7 @@ import { Jukebox } from "../core/igua-audio";
 import { ZIndex } from "../core/scene/z-index";
 import { DataShop } from "../data/data-shop";
 import { DramaCostco } from "../drama/drama-costco";
+import { DramaFacts } from "../drama/drama-facts";
 import { DramaInventory } from "../drama/drama-inventory";
 import { DramaMisc } from "../drama/drama-misc";
 import { dramaShop } from "../drama/drama-shop";
@@ -145,6 +146,15 @@ function enrichHotdoggerNpc(lvl: LvlType.OhioCostco) {
                     );
 
                 yield* DramaInventory.receiveItems(potionItems);
+            }
+            else if (result === 1) {
+                yield* show(
+                    "Sorry, our soda machine is on the fritz.",
+                    "So we can't offer any refills.",
+                );
+            }
+            else if (result === 2) {
+                yield* DramaFacts.memorize("Beef");
             }
         });
 

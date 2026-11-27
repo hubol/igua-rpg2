@@ -62,6 +62,10 @@ export namespace DataFact {
                 heading: "About perfect hot dog",
                 messages: ["The perfect hot dog requires ketchup, mustard, onion, and relish."],
             },
+            Beef: {
+                heading: "About beef",
+                messages: ["Beef is a food made out of chemicals, mostly."],
+            },
             "__Fallback__": {
                 heading: "About a bug",
                 messages: ["If you are reading this, it is a bug with the facts mechanic."],
