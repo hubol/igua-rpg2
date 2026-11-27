@@ -82,13 +82,19 @@ const consts = {
 function enrichHotdoggerNpc(lvl: LvlType.OhioCostco) {
     lvl.HotdoggerNpc
         .mixin(mxnCutscene, function* () {
-            yield () => playerObj.isOnGround;
+            yield () => playerObj.isOnGround && lvl.HotdoggerNpc.isOnGround;
             if (playerObj.y <= lvl.OnCounterMarker.y) {
                 yield* show("Please get off the counter.");
+                if (lvl.HotdoggerNpc.y <= lvl.OnCounterMarker.y) {
+                    yield* show(
+                        "Yes, I realize I am on the counter.",
+                        "But I work here.",
+                    );
+                }
                 return;
             }
 
-            const result = yield* ask("Hi, can I help you?", "Buy combo", "Refill", "What is beef?");
+            const result = yield* ask("Hi, can I help you?", "Buy combo", "Refill", "What is beef?", "No, thank you");
 
             if (result === 0) {
                 const maxCombosCount = Math.floor(Rpg.inventory.potions.freeSlots / 2);
