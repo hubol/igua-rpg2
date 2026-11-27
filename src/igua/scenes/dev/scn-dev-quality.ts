@@ -9,6 +9,8 @@ import { Null } from "../../../lib/types/null";
 import { ZIndex } from "../../core/scene/z-index";
 import statisticsJson from "../../dev/data/statistics.json";
 import { mxnHudModifiers } from "../../mixins/mxn-hud-modifiers";
+import { playerObj } from "../../objects/obj-player";
+import { StepOrder } from "../../objects/step-order";
 
 const oneMonthMilliseconds = 1000 * 60 * 60 * 24 * 30;
 
@@ -20,6 +22,12 @@ export function scnDevQuality() {
 
     let firstTime = Null<Integer>();
     let lastTime = -1;
+
+    objText.Large("Quality", { align: "center" })
+        .step(self => self.at(playerObj.x, 6), StepOrder.BeforeCamera)
+        .anchored(0.5, 0)
+        .zIndexed(ZIndex.BackgroundEntities - 50)
+        .show();
 
     for (const [dateString, sliceData] of Object.entries(statisticsJson)) {
         const time = new Date(dateString).getTime();
